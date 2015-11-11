@@ -1,10 +1,14 @@
 package com.nanumi.dao;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.nanumi.dto.UserDTO;
 
+@Repository("UserDAO")
 public class UserDAO {
+	@Autowired
 	private SqlSession session;
 
 	public void signUp(UserDTO user) {
@@ -18,7 +22,7 @@ public class UserDAO {
 	public UserDTO checkNickname(String nickname) {
 		return session.selectOne("nanumiNS.checkNickname", nickname);
 	}
-	
+
 	public UserDTO checkEmail(String email) {
 		return session.selectOne("nanumiNS.checkEmail", email);
 	}

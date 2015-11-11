@@ -1,10 +1,12 @@
 package com.nanumi.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.nanumi.dao.UserDAO;
 import com.nanumi.dto.UserDTO;
 
+@Service("CommonService")
 public class CommonService {
 	@Autowired
 	private UserDAO userDAO;
