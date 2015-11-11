@@ -27,15 +27,40 @@ public class CommonController {
 	private CommonService service;
 
 	@RequestMapping("SignUp.do")
-	public void signUp(@RequestParam("userid") String userid) {
+	public String signUp(@RequestParam("userid") String userid, @RequestParam("pwd") String pwd, @RequestParam("nickname") String nickname, @RequestParam("address") String address,
+			@RequestParam("email") String email) {
 		if (isDuplicateUserid(userid)) {
-			// id 중복, 가입 불가
+			return "SIGNUP_ERROR_01";
 		}
+		if (isDuplicateUserNickname(nickname)) {
+			return "SIGNUP_ERROR_02";
+		}
+		if (isDuplicateUserEmail(email)) {
+			return "SIGNUP_ERROR_03";
+		}
+		service.signUp(new UserDTO(userid, pwd, nickname, address, email));
 
+		return "SIGNUP_SUCCESS";
 	}
 
 	private boolean isDuplicateUserid(String userid) {
-		if (service.login(userid) != null) {
+		if (service.checkUserId(userid) != null) {
+			return true;
+		}
+
+		return false;
+	}
+
+	private boolean isDuplicateUserNickname(String nickname) {
+		if (service.checkNickname(nickname) != null) {
+			return true;
+		}
+
+		return false;
+	}
+
+	private boolean isDuplicateUserEmail(String email) {
+		if (service.checkEmail(email) != null) {
 			return true;
 		}
 

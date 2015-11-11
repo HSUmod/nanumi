@@ -3,5 +3,34 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="nanumiNS">
-
+    <!-- SignUp -->
+    <insert id="signUp" parameterType="User">
+	    insert into member(userid,pwd,nickname,address,email)
+		values(#{userid}, #{pwd}, #{nickname}, #{address}, #{email})
+	</insert>
+	
+    <select id="checkUserId" parameterType="String" resultType="User">
+		select userid
+		  from member
+		 where userid = #{userid}
+	</select>
+	
+	<select id="checkUserNickname" parameterType="String" resultType="User">
+		select nickname
+		  from member
+		 where nickname = #{nickname}
+	</select>
+	
+	<select id="checkEmail" parameterType="String" resultType="User">
+		select email
+		  from member
+		 where email = #{email}
+	</select>
+	
+	<!-- Login -->
+	<select id="login" parameterType="String" resultType="User">
+		select userid, pwd
+		  from member
+		 where userid = #{userid}
+	</select>
 </mapper>
