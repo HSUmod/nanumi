@@ -16,7 +16,7 @@ public class UserDAO {
 	}
 
 	public UserDTO checkUserId(String userid) {
-		return session.selectOne("nanumiNS.checkUserid", userid);
+		return session.selectOne("nanumiNS.checkUserId", userid);
 	}
 
 	public UserDTO checkNickname(String nickname) {
