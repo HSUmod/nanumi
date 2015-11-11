@@ -26,7 +26,7 @@ public class CommonController {
 	@Autowired
 	private CommonService service;
 
-	@RequestMapping("SignUp.do")
+	@RequestMapping("/SignUp.do")
 	public String signUp(@RequestParam("userid") String userid, @RequestParam("pwd") String pwd, @RequestParam("nickname") String nickname, @RequestParam("address") String address,
 			@RequestParam("email") String email) {
 		if (isDuplicateUserid(userid)) {
@@ -77,7 +77,7 @@ public class CommonController {
 	 *  LOGIN_ERROR_02: 비밀번호 틀림
 	 *  LOGIN_ERROR_03: 존재하지 않는 아이디
 	 */
-	@RequestMapping("Login.do")
+	@RequestMapping("/Login.do")
 	public String login(@RequestParam("userid") String userid, @RequestParam("pwd") String pwd, HttpSession session) {
 		if (userid == null) {
 			return "{\"fail\": \"LOGIN_ERROR_01\"}";
@@ -97,7 +97,7 @@ public class CommonController {
 		}
 	}
 
-	@RequestMapping("Logout.do")
+	@RequestMapping("/Logout.do")
 	public void logout(@RequestParam("userid") String userid, HttpSession session) {
 		session.removeAttribute("UUID_" + userid);
 	}
