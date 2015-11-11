@@ -1,0 +1,89 @@
+package com.nanumi.controller;
+
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.nanumi.dto.UserDTO;
+import com.nanumi.service.CommonService;
+
+@Controller
+public class CommonController {
+	@Autowired
+	private CommonService service;
+
+	
+	@RequestMapping("SignUp.do")
+	public void certify(HttpServletRequest request) { // 1. 인증
+		// 인증 성공한 경우
+		String user_id = request.getParameter("user_id");
+
+		if (service.checkById(user_id)) {
+			System.out.println("id존재, 가입 불가");
+		} else {
+			// 아이디가 존재하지 않는다면(가입 가능)
+			System.out.println("가입 가능");
+		}
+
+	}
+
+	
+	@RequestMapping("SignUp.do")
+	public void signUp(@RequestParam("userid") String userid) {
+		if (isDuplicateUserid(userid)) {
+		}
+
+	}
+
+	private boolean isDuplicateUserid(String userid) {
+		if (service.login(userid) != null) {
+			return true;
+		}
+
+		return false;
+	}
+
+	@RequestMapping("Login.do")
+	public String login(@RequestParam("userid") String userid, @RequestParam("pwd") String pwd, HttpSession session) {
+		if (userid == null) {
+			return "LOGIN_ERROR_01";
+		}
+
+		UserDTO user = service.login(userid);
+		try {
+			if (user.getPwd().equals(pwd)) {
+				String userUUID = generateUUID(user.getUserid()).toString(); // 濡쒓렇���깃났,
+																				// uuid
+																				// 諛쒓툒
+				session.setAttribute("UUID_" + userid, userUUID); // session��uuid
+																	// ��옣
+				return userUUID; // User device��uuid �꾩넚
+			} else {
+				return "LOGIN_ERROR_02";
+			}
+		} catch (NullPointerException e) {
+			return "LOGIN_ERROR_03";
+		}
+	}
+
+	@RequestMapping("Logout.do")
+	public void logout(@RequestParam("userid") String userid, HttpSession session) {
+		session.removeAttribute("UUID_" + userid);
+	}
+
+	/**
+	 * User ID濡�uuid �앹꽦
+	 * 
+	 * @param userid
+	 * @return uuid
+	 */
+	private UUID generateUUID(String userid) {
+		return UUID.fromString(userid);
+	}
+}

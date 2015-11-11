@@ -1,0 +1,13 @@
+2015-11-11 16:20:35,231 [Worker-0] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: MOD_WAS:MOD_WAS:0.0.1-SNAPSHOT @ C:\Users\mj\Desktop\nanumi\nanumi\MOD_WAS\pom.xml.
+2015-11-11 16:20:50,218 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2015-11-11 16:20:50,241 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\mj\Desktop\nanumi\nanumi\MOD_WAS\src\main\resources
+2015-11-11 16:20:50,255 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2015-11-11 16:20:50,259 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\mj\Desktop\nanumi\nanumi\MOD_WAS\src\test\resources
+2015-11-11 16:20:58,122 [Worker-14] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2015-11-11 16:20:58,126 [Worker-14] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\mj\Desktop\nanumi\nanumi\MOD_WAS\src\main\resources
+2015-11-11 16:20:58,164 [Worker-14] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2015-11-11 16:20:58,166 [Worker-14] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\mj\Desktop\nanumi\nanumi\MOD_WAS\src\test\resources
+2015-11-11 16:28:15,695 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2015-11-11 16:28:15,698 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\mj\Desktop\nanumi\nanumi\MOD_WAS\src\main\resources
+2015-11-11 16:28:15,705 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2015-11-11 16:28:15,707 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\mj\Desktop\nanumi\nanumi\MOD_WAS\src\test\resources

@@ -1,0 +1,26 @@
+package com.nanumi.dao;
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.nanumi.dto.UserDTO;
+
+import ac.hansung.spring.vo.MemberVO;
+
+public class UserDAO {
+	private SqlSession session;
+
+	public UserDTO login(String userid) {
+		return session.selectOne("nanumiNS.login", userid);
+	}
+
+	public boolean checkById(String id) {
+		UserDTO vo = null;
+		vo = session.selectOne("NanumiMapper.checkById", id);
+		if (vo == null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+}
