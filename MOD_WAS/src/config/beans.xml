@@ -12,7 +12,7 @@
 	<!-- ViewResolver 설정 -->	
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 	    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />  
-    	<property name="prefix" value="/WebContent/" />  
+    	<property name="prefix" value="/WEB-INF/View" />  
     	<property name="suffix" value=".jsp" />  
 	</bean>
 
