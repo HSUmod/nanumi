@@ -30,17 +30,17 @@ public class CommonController {
 	public String signUp(@RequestParam("userid") String userid, @RequestParam("pwd") String pwd, @RequestParam("nickname") String nickname, @RequestParam("address") String address,
 			@RequestParam("email") String email) {
 		if (isDuplicateUserid(userid)) {
-			return "SIGNUP_ERROR_01";
+			return "{\"fail\": \"SIGNUP_ERROR_01\"}";
 		}
 		if (isDuplicateUserNickname(nickname)) {
-			return "SIGNUP_ERROR_02";
+			return "{\"fail\": \"SIGNUP_ERROR_02\"}";
 		}
 		if (isDuplicateUserEmail(email)) {
-			return "SIGNUP_ERROR_03";
+			return "{\"fail\": \"SIGNUP_ERROR_03\"}";
 		}
 		service.signUp(new UserDTO(userid, pwd, nickname, address, email));
 
-		return "SIGNUP_SUCCESS";
+		return "{\"success\": \"SIGNUP_COMPLETE\"}";
 	}
 
 	private boolean isDuplicateUserid(String userid) {
@@ -80,7 +80,7 @@ public class CommonController {
 	@RequestMapping("Login.do")
 	public String login(@RequestParam("userid") String userid, @RequestParam("pwd") String pwd, HttpSession session) {
 		if (userid == null) {
-			return "LOGIN_ERROR_01";
+			return "{\"fail\": \"LOGIN_ERROR_01\"}";
 		}
 
 		UserDTO user = service.login(userid);
@@ -90,10 +90,10 @@ public class CommonController {
 				session.setAttribute("UUID_" + userid, userUUID); // session에 uuid 저장
 				return userUUID; // User device에 uuid 전송
 			} else {
-				return "LOGIN_ERROR_02";
+				return "{\"fail\": \"LOGIN_ERROR_02\"}";
 			}
 		} catch (NullPointerException e) {
-			return "LOGIN_ERROR_03";
+			return "{\"fail\": \"LOGIN_ERROR_03\"}";
 		}
 	}
 
