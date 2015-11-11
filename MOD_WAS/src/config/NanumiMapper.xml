@@ -21,7 +21,7 @@
 		 where nickname = #{nickname}
 	</select>
 	
-	<select id="checkEmail" parameterType="String" resultType="User">
+	<select id="checkUserEmail" parameterType="String" resultType="User">
 		select email
 		  from member
 		 where email = #{email}

@@ -20,11 +20,11 @@ public class UserDAO {
 	}
 
 	public UserDTO checkNickname(String nickname) {
-		return session.selectOne("nanumiNS.checkNickname", nickname);
+		return session.selectOne("nanumiNS.checkUserNickname", nickname);
 	}
 
 	public UserDTO checkEmail(String email) {
-		return session.selectOne("nanumiNS.checkEmail", email);
+		return session.selectOne("nanumiNS.checkUserEmail", email);
 	}
 
 	public UserDTO login(String userid) {
