@@ -41,61 +41,52 @@ public class CommonController {
 			@RequestParam("email") String email, HttpServletResponse res) throws IOException {
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = res.getWriter();
-		boolean signUpFlag = false;
 
-		if (isDuplicateUserid(userid)) {
-			pw.write("{\"result\": \"SIGNUP_ERROR_01\"}");
-		} else if (isDuplicateUserNickname(nickname)) {
-			pw.write("{\"result\": \"SIGNUP_ERROR_02\"}");
-		} else if (isDuplicateUserEmail(email)) {
-			pw.write("{\"result\": \"SIGNUP_ERROR_03\"}");
-		} else {
-			signUpFlag = !signUpFlag;
-		}
-
-		if (signUpFlag) {
-			service.signUp(new UserDTO(userid, pwd, nickname, address, email));
-			pw.write("{\"result\": \"SIGNUP_COMPLETE\"}");
-		}
+		service.signUp(new UserDTO(userid, pwd, nickname, address, email));
+		pw.write("{\"result\": \"SIGNUP_COMPLETE\"}");
 		pw.close();
 	}
-	
+
 	@RequestMapping(value = "/UserIDCheck.do", method = RequestMethod.POST)
-	public void userIdIsExist(@RequestParam("userid") String userid, HttpServletResponse res) throws IOException {
+	public void isDuplicatedUserid(@RequestParam("userid") String userid, HttpServletResponse res) throws IOException {
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = res.getWriter();
-		
+
 		if (service.checkUserId(userid) != null) {
-			pw.write("{\"result\": \"중복\"}");
+			pw.write("{\"result\": \"duplicated\"}");
 		} else {
-			pw.write("{\"result\": \"사용가능\"}");
+			pw.write("{\"result\": \"ok\"}");
 		}
-		
+
 		pw.close();
 	}
 
-	private boolean isDuplicateUserid(String userid) {
-		if (service.checkUserId(userid) != null) {
-			return true;
-		}
+	@RequestMapping(value = "/UserNicknameCheck.do", method = RequestMethod.POST)
+	private void isDuplicateUserNickname(@RequestParam("nickname") String nickname, HttpServletResponse res) throws IOException {
+		res.setContentType("application/json; charset=utf-8");
+		PrintWriter pw = res.getWriter();
 
-		return false;
-	}
-
-	private boolean isDuplicateUserNickname(String nickname) {
 		if (service.checkNickname(nickname) != null) {
-			return true;
+			pw.write("{\"result\": \"duplicated\"}");
+		} else {
+			pw.write("{\"result\": \"ok\"}");
 		}
 
-		return false;
+		pw.close();
 	}
 
-	private boolean isDuplicateUserEmail(String email) {
+	@RequestMapping(value = "/UserEmailCheck.do", method = RequestMethod.POST)
+	private void isDuplicateUserEmail(@RequestParam("email") String email, HttpServletResponse res) throws IOException {
+		res.setContentType("application/json; charset=utf-8");
+		PrintWriter pw = res.getWriter();
+
 		if (service.checkEmail(email) != null) {
-			return true;
+			pw.write("{\"result\": \"duplicated\"}");
+		} else {
+			pw.write("{\"result\": \"ok\"}");
 		}
 
-		return false;
+		pw.close();
 	}
 
 	/**
@@ -147,7 +138,7 @@ public class CommonController {
 		Map<String, List<String>> addressList = new HashMap<String, List<String>>();
 		List<CityDTO> cityList = service.getCities();
 		List<DistrictDTO> districtList = service.getDistricts();
-		
+
 		for (CityDTO city : cityList) {
 			List<String> districts = new ArrayList<String>();
 
@@ -158,7 +149,7 @@ public class CommonController {
 			}
 			addressList.put(city.getCity(), districts);
 		}
-		
+
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = res.getWriter();
 		pw.write(addressList.toString());
