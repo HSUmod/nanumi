@@ -33,4 +33,18 @@
 		  from member
 		 where userid = #{userid}
 	</select>
+	
+	<!-- Search Address -->
+	<select id="cityList" resultType="City">
+		select *
+		  from city
+		 order by citycode
+	</select>
+
+	<select id="districtList" resultType="District">
+		select *
+		  from district
+		 order by citycode
+	</select>
+	
 </mapper>
