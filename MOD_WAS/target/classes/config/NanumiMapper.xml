@@ -53,7 +53,7 @@
 	     where email = #{email}
 	</select>
 	
-	<update id="" parameterType="User">
+	<update id="modifyUserInfo" parameterType="User">
 	    update member
 	       set pwd = #{pwd},
 	           nickname = #{nickname},
