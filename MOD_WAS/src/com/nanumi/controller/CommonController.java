@@ -155,4 +155,13 @@ public class CommonController {
 		pw.write(addressList.toString());
 		pw.close();
 	}
+
+	@RequestMapping(value = "/SearchUserID.do")
+	public void searchUserid(@RequestParam("email") String email, HttpServletResponse res) throws IOException {
+		String result = service.getUserIdByEmail(email);
+		res.setContentType("application/json; charset=utf-8");
+		PrintWriter pw = res.getWriter();
+		pw.write("{\"result\": \"" + result + "\"}");
+		pw.close();
+	}
 }

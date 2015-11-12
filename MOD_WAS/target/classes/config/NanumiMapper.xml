@@ -47,4 +47,10 @@
 		 order by citycode
 	</select>
 	
+	<select id="getUserIdByEmail" parameterType="String" resultType="String">
+	    select userid
+	      from member
+	     where email = #{email}
+	</select>
+	
 </mapper>

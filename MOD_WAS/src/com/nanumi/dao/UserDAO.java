@@ -31,4 +31,7 @@ public class UserDAO {
 		return session.selectOne("nanumiNS.login", userid);
 	}
 
+	public String getUserIdByEmail(String email) {
+		return session.selectOne("nanumiNS.getUserIdByEmail", email);
+	}
 }

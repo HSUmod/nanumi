@@ -45,4 +45,8 @@ public class CommonService {
 	public List<DistrictDTO> getDistricts() {
 		return addressDAO.getDistricts();
 	}
+	
+	public String getUserIdByEmail(String email) {
+		return userDAO.getUserIdByEmail(email);
+	}
 }
