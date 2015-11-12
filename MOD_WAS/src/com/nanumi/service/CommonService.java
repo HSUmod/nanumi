@@ -49,4 +49,8 @@ public class CommonService {
 	public String getUserIdByEmail(String email) {
 		return userDAO.getUserIdByEmail(email);
 	}
+	
+	public void modifyUserInfo(UserDTO user) {
+		userDAO.modifyInfo(user);
+	}
 }

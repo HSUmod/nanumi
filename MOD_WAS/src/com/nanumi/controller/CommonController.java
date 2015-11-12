@@ -23,12 +23,12 @@ import com.nanumi.dto.UserDTO;
 import com.nanumi.service.CommonService;
 
 /**
- * 가입
- * 찾기 - 아이디, 비밀번호
- * 수정
- * 탈퇴
- * 로그인
- * 로그아웃
+ * 가입 O
+ * 찾기 - 아이디 O, 비밀번호
+ * 수정 O
+ * 탈퇴 
+ * 로그인 O 
+ * 로그아웃 O
  * 관심상품 - 등록, 삭제
  */
 @Controller
@@ -156,12 +156,22 @@ public class CommonController {
 		pw.close();
 	}
 
-	@RequestMapping(value = "/SearchUserID.do")
+	@RequestMapping(value = "/SearchUserID.do", method = RequestMethod.POST)
 	public void searchUserid(@RequestParam("email") String email, HttpServletResponse res) throws IOException {
 		String result = service.getUserIdByEmail(email);
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = res.getWriter();
 		pw.write("{\"result\": \"" + result + "\"}");
+		pw.close();
+	}
+
+	@RequestMapping(value = "/ModifyUserInfo", method = RequestMethod.POST)
+	public void modifyUserInfo(@RequestParam("userid") String userid, @RequestParam("pwd") String pwd, @RequestParam("nickname") String nickname, @RequestParam("address") String address,
+			@RequestParam("email") String email, HttpServletResponse res) throws IOException {
+		service.modifyUserInfo(new UserDTO(userid, pwd, nickname, address, email));
+		res.setContentType("application/json; charset=utf-8");
+		PrintWriter pw = res.getWriter();
+		pw.write("{\"result\": \"MODIFY_COMPLETE\"}");
 		pw.close();
 	}
 }

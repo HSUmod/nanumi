@@ -34,4 +34,8 @@ public class UserDAO {
 	public String getUserIdByEmail(String email) {
 		return session.selectOne("nanumiNS.getUserIdByEmail", email);
 	}
+
+	public void modifyInfo(UserDTO user) {
+		session.update("nanumiNS.modifyUserInfo", user);
+	}
 }

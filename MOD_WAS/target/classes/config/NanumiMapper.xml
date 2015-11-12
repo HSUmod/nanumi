@@ -53,4 +53,13 @@
 	     where email = #{email}
 	</select>
 	
+	<update id="" parameterType="User">
+	    update member
+	       set pwd = #{pwd},
+	           nickname = #{nickname},
+	           address = #{address},
+	           email = #{email}
+	     where userid = #{userid}
+	</update>
+	
 </mapper>
