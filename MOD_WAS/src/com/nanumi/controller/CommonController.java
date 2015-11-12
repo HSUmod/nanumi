@@ -51,6 +51,7 @@ public class CommonController {
 			service.signUp(new UserDTO(userid, pwd, nickname, address, email));
 			pw.write("{\"success\": \"SIGNUP_COMPLETE\"}");
 		}
+		pw.close();
 	}
 
 	private boolean isDuplicateUserid(String userid) {
@@ -102,6 +103,8 @@ public class CommonController {
 			}
 		} catch (NullPointerException e) {
 			pw.write("{\"fail\": \"LOGIN_ERROR_02\"}");
+		} finally {
+			pw.close();
 		}
 	}
 
@@ -117,5 +120,15 @@ public class CommonController {
 	 */
 	private String generateUUID(String userid) {
 		return userid + "-" + UUID.randomUUID();
+	}
+
+	@RequestMapping(value = "/SearchAddress.do", method = RequestMethod.POST)
+	public void searchAddress(HttpServletResponse res) throws IOException {
+		res.setContentType("application/json; charset=utf-8");
+		PrintWriter pw = res.getWriter();
+		
+		
+		
+		pw.close();
 	}
 }
