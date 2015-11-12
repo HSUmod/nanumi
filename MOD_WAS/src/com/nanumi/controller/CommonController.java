@@ -35,19 +35,22 @@ public class CommonController {
 			@RequestParam("email") String email, HttpServletResponse res) throws IOException {
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = res.getWriter();
+		boolean signUpFlag = false;
 
 		if (isDuplicateUserid(userid)) {
 			pw.write("{\"fail\": \"SIGNUP_ERROR_01\"}");
-		}
-		if (isDuplicateUserNickname(nickname)) {
+		} else if (isDuplicateUserNickname(nickname)) {
 			pw.write("{\"fail\": \"SIGNUP_ERROR_02\"}");
-		}
-		if (isDuplicateUserEmail(email)) {
+		} else if (isDuplicateUserEmail(email)) {
 			pw.write("{\"fail\": \"SIGNUP_ERROR_03\"}");
+		} else {
+			signUpFlag = !signUpFlag;
 		}
-		service.signUp(new UserDTO(userid, pwd, nickname, address, email));
 
-		pw.write("{\"success\": \"SIGNUP_COMPLETE\"}");
+		if (signUpFlag) {
+			service.signUp(new UserDTO(userid, pwd, nickname, address, email));
+			pw.write("{\"success\": \"SIGNUP_COMPLETE\"}");
+		}
 	}
 
 	private boolean isDuplicateUserid(String userid) {
@@ -80,18 +83,13 @@ public class CommonController {
 	 * Success
 	 *  uuid
 	 * Fail
-	 *  LOGIN_ERROR_01: 아이디 입력 안 함
-	 *  LOGIN_ERROR_02: 비밀번호 틀림
-	 *  LOGIN_ERROR_03: 존재하지 않는 아이디 
+	 *  LOGIN_ERROR_01: 비밀번호 틀림
+	 *  LOGIN_ERROR_02: 존재하지 않는 아이디 
 	 */
 	@RequestMapping(value = "/Login.do", method = RequestMethod.POST)
 	public void login(@RequestParam("userid") String userid, @RequestParam("pwd") String pwd, HttpSession session, HttpServletResponse res) throws IOException {
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = res.getWriter();
-		
-		if (userid == null) {
-			pw.write("{\"fail\": \"LOGIN_ERROR_01\"}");
-		}
 
 		UserDTO user = service.login(userid);
 		try {
@@ -100,10 +98,10 @@ public class CommonController {
 				session.setAttribute("UUID-", userUUID); // session에 uuid 저장
 				pw.write(userUUID);
 			} else {
-				pw.write("{\"fail\": \"LOGIN_ERROR_02\"}");
+				pw.write("{\"fail\": \"LOGIN_ERROR_01\"}");
 			}
 		} catch (NullPointerException e) {
-			pw.write("{\"fail\": \"LOGIN_ERROR_03\"}");
+			pw.write("{\"fail\": \"LOGIN_ERROR_02\"}");
 		}
 	}
 
