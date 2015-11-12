@@ -37,17 +37,17 @@ public class CommonController {
 		PrintWriter pw = res.getWriter();
 
 		if (isDuplicateUserid(userid)) {
-			pw.print("{\"fail\": \"SIGNUP_ERROR_01\"}");
+			pw.write("{\"fail\": \"SIGNUP_ERROR_01\"}");
 		}
 		if (isDuplicateUserNickname(nickname)) {
-			pw.print("{\"fail\": \"SIGNUP_ERROR_02\"}");
+			pw.write("{\"fail\": \"SIGNUP_ERROR_02\"}");
 		}
 		if (isDuplicateUserEmail(email)) {
-			pw.print("{\"fail\": \"SIGNUP_ERROR_03\"}");
+			pw.write("{\"fail\": \"SIGNUP_ERROR_03\"}");
 		}
 		service.signUp(new UserDTO(userid, pwd, nickname, address, email));
 
-		pw.print("{\"success\": \"SIGNUP_COMPLETE\"}");
+		pw.write("{\"success\": \"SIGNUP_COMPLETE\"}");
 	}
 
 	private boolean isDuplicateUserid(String userid) {
@@ -90,7 +90,7 @@ public class CommonController {
 		PrintWriter pw = res.getWriter();
 		
 		if (userid == null) {
-			pw.print("{\"fail\": \"LOGIN_ERROR_01\"}");
+			pw.write("{\"fail\": \"LOGIN_ERROR_01\"}");
 		}
 
 		UserDTO user = service.login(userid);
@@ -98,12 +98,12 @@ public class CommonController {
 			if (user.getPwd().equals(pwd)) {
 				String userUUID = generateUUID(user.getUserid()); // 로그인 성공, uuid 발급
 				session.setAttribute("UUID-", userUUID); // session에 uuid 저장
-				pw.print(userUUID);
+				pw.write(userUUID);
 			} else {
-				pw.print("{\"fail\": \"LOGIN_ERROR_02\"}");
+				pw.write("{\"fail\": \"LOGIN_ERROR_02\"}");
 			}
 		} catch (NullPointerException e) {
-			pw.print("{\"fail\": \"LOGIN_ERROR_03\"}");
+			pw.write("{\"fail\": \"LOGIN_ERROR_03\"}");
 		}
 	}
 
