@@ -59,6 +59,20 @@ public class CommonController {
 		}
 		pw.close();
 	}
+	
+	@RequestMapping(value = "/UserIDCheck.do", method = RequestMethod.POST)
+	public void userIdIsExist(@RequestParam("userid") String userid, HttpServletResponse res) throws IOException {
+		res.setContentType("application/json; charset=utf-8");
+		PrintWriter pw = res.getWriter();
+		
+		if (service.checkUserId(userid) != null) {
+			pw.write("{\"result\": \"중복\"}");
+		} else {
+			pw.write("{\"result\": \"사용가능\"}");
+		}
+		
+		pw.close();
+	}
 
 	private boolean isDuplicateUserid(String userid) {
 		if (service.checkUserId(userid) != null) {
