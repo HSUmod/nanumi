@@ -165,7 +165,7 @@ public class CommonController {
 		pw.close();
 	}
 
-	@RequestMapping(value = "/ModifyUserInfo", method = RequestMethod.POST)
+	@RequestMapping(value = "/ModifyUserInfo.do", method = RequestMethod.POST)
 	public void modifyUserInfo(@RequestParam("userid") String userid, @RequestParam("pwd") String pwd, @RequestParam("nickname") String nickname, @RequestParam("address") String address,
 			@RequestParam("email") String email, HttpServletResponse res) throws IOException {
 		service.modifyUserInfo(new UserDTO(userid, pwd, nickname, address, email));
