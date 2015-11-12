@@ -2,6 +2,10 @@ package com.nanumi.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.nanumi.dto.CityDTO;
+import com.nanumi.dto.DistrictDTO;
 import com.nanumi.dto.UserDTO;
 import com.nanumi.service.CommonService;
 
@@ -51,6 +57,7 @@ public class CommonController {
 			service.signUp(new UserDTO(userid, pwd, nickname, address, email));
 			pw.write("{\"success\": \"SIGNUP_COMPLETE\"}");
 		}
+		pw.close();
 	}
 
 	private boolean isDuplicateUserid(String userid) {
@@ -102,6 +109,8 @@ public class CommonController {
 			}
 		} catch (NullPointerException e) {
 			pw.write("{\"fail\": \"LOGIN_ERROR_02\"}");
+		} finally {
+			pw.close();
 		}
 	}
 
@@ -117,5 +126,28 @@ public class CommonController {
 	 */
 	private String generateUUID(String userid) {
 		return userid + "-" + UUID.randomUUID();
+	}
+
+	@RequestMapping(value = "/SearchAddress.do")
+	public void searchAddress(HttpServletResponse res) throws IOException {
+		Map<String, List<String>> addressList = new HashMap<String, List<String>>();
+		List<CityDTO> cityList = service.getCities();
+		List<DistrictDTO> districtList = service.getDistricts();
+		
+		for (CityDTO city : cityList) {
+			List<String> districts = new ArrayList<String>();
+
+			for (DistrictDTO district : districtList) {
+				if (city.getCitycode() == district.getCitycode()) {
+					districts.add(district.getDistrict());
+				}
+			}
+			addressList.put(city.getCity(), districts);
+		}
+		
+		res.setContentType("application/json; charset=utf-8");
+		PrintWriter pw = res.getWriter();
+		pw.write(addressList.toString());
+		pw.close();
 	}
 }
