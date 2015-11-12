@@ -1,7 +1,10 @@
 package com.nanumi.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,20 +31,23 @@ public class CommonController {
 	private CommonService service;
 
 	@RequestMapping(value = "/SignUp.do", method = RequestMethod.POST)
-	public String signUp(@RequestParam("userid") String userid, @RequestParam("pwd") String pwd, @RequestParam("nickname") String nickname, @RequestParam("address") String address,
-			@RequestParam("email") String email) {
+	public void signUp(@RequestParam("userid") String userid, @RequestParam("pwd") String pwd, @RequestParam("nickname") String nickname, @RequestParam("address") String address,
+			@RequestParam("email") String email, HttpServletResponse res) throws IOException {
+		res.setContentType("application/json; charset=utf-8");
+		PrintWriter pw = res.getWriter();
+
 		if (isDuplicateUserid(userid)) {
-			return "{\"fail\": \"SIGNUP_ERROR_01\"}";
+			pw.print("{\"fail\": \"SIGNUP_ERROR_01\"}");
 		}
 		if (isDuplicateUserNickname(nickname)) {
-			return "{\"fail\": \"SIGNUP_ERROR_02\"}";
+			pw.print("{\"fail\": \"SIGNUP_ERROR_02\"}");
 		}
 		if (isDuplicateUserEmail(email)) {
-			return "{\"fail\": \"SIGNUP_ERROR_03\"}";
+			pw.print("{\"fail\": \"SIGNUP_ERROR_03\"}");
 		}
 		service.signUp(new UserDTO(userid, pwd, nickname, address, email));
 
-		return "{\"success\": \"SIGNUP_COMPLETE\"}";
+		pw.print("{\"success\": \"SIGNUP_COMPLETE\"}");
 	}
 
 	private boolean isDuplicateUserid(String userid) {
@@ -76,12 +82,15 @@ public class CommonController {
 	 * Fail
 	 *  LOGIN_ERROR_01: 아이디 입력 안 함
 	 *  LOGIN_ERROR_02: 비밀번호 틀림
-	 *  LOGIN_ERROR_03: 존재하지 않는 아이디
+	 *  LOGIN_ERROR_03: 존재하지 않는 아이디 
 	 */
 	@RequestMapping(value = "/Login.do", method = RequestMethod.POST)
-	public String login(@RequestParam("userid") String userid, @RequestParam("pwd") String pwd, HttpSession session) {
+	public void login(@RequestParam("userid") String userid, @RequestParam("pwd") String pwd, HttpSession session, HttpServletResponse res) throws IOException {
+		res.setContentType("application/json; charset=utf-8");
+		PrintWriter pw = res.getWriter();
+		
 		if (userid == null) {
-			return "{\"fail\": \"LOGIN_ERROR_01\"}";
+			pw.print("{\"fail\": \"LOGIN_ERROR_01\"}");
 		}
 
 		UserDTO user = service.login(userid);
@@ -89,12 +98,12 @@ public class CommonController {
 			if (user.getPwd().equals(pwd)) {
 				String userUUID = generateUUID(user.getUserid()); // 로그인 성공, uuid 발급
 				session.setAttribute("UUID-", userUUID); // session에 uuid 저장
-				return userUUID; // User device에 uuid 전송
+				pw.print(userUUID);
 			} else {
-				return "{\"fail\": \"LOGIN_ERROR_02\"}";
+				pw.print("{\"fail\": \"LOGIN_ERROR_02\"}");
 			}
 		} catch (NullPointerException e) {
-			return "{\"fail\": \"LOGIN_ERROR_03\"}";
+			pw.print("{\"fail\": \"LOGIN_ERROR_03\"}");
 		}
 	}
 
