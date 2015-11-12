@@ -9,13 +9,14 @@
 	<context:annotation-config />
 	<context:component-scan base-package="com.nanumi" />
 
-	<!-- ViewResolver 설정 -->	
+	<!-- ViewResolver 설정 -->
+	<!--  
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 	    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />  
     	<property name="prefix" value="/WEB-INF/View" />  
     	<property name="suffix" value=".jsp" />  
 	</bean>
-
+-->
 	<!-- DataSource 설정 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		p:driverClassName="oracle.jdbc.driver.OracleDriver" p:url="jdbc:oracle:thin:@127.0.0.1:1521:orcl"
