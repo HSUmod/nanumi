@@ -31,7 +31,7 @@ public class CommonService {
 	}
 
 	public UserDTO checkEmail(String email) {
-		return userDAO.checkNickname(email);
+		return userDAO.checkEmail(email);
 	}
 
 	public UserDTO login(String userid) {
