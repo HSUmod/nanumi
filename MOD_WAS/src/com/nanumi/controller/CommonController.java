@@ -44,18 +44,18 @@ public class CommonController {
 		boolean signUpFlag = false;
 
 		if (isDuplicateUserid(userid)) {
-			pw.write("{\"fail\": \"SIGNUP_ERROR_01\"}");
+			pw.write("{\"result\": \"SIGNUP_ERROR_01\"}");
 		} else if (isDuplicateUserNickname(nickname)) {
-			pw.write("{\"fail\": \"SIGNUP_ERROR_02\"}");
+			pw.write("{\"result\": \"SIGNUP_ERROR_02\"}");
 		} else if (isDuplicateUserEmail(email)) {
-			pw.write("{\"fail\": \"SIGNUP_ERROR_03\"}");
+			pw.write("{\"result\": \"SIGNUP_ERROR_03\"}");
 		} else {
 			signUpFlag = !signUpFlag;
 		}
 
 		if (signUpFlag) {
 			service.signUp(new UserDTO(userid, pwd, nickname, address, email));
-			pw.write("{\"success\": \"SIGNUP_COMPLETE\"}");
+			pw.write("{\"result\": \"SIGNUP_COMPLETE\"}");
 		}
 		pw.close();
 	}
@@ -103,12 +103,12 @@ public class CommonController {
 			if (user.getPwd().equals(pwd)) {
 				String userUUID = generateUUID(user.getUserid()); // 로그인 성공, uuid 발급
 				session.setAttribute("UUID-", userUUID); // session에 uuid 저장
-				pw.write(userUUID);
+				pw.write("{\"result\": " + userUUID + "\"}");
 			} else {
-				pw.write("{\"fail\": \"LOGIN_ERROR_01\"}");
+				pw.write("{\"result\": \"LOGIN_ERROR_01\"}");
 			}
 		} catch (NullPointerException e) {
-			pw.write("{\"fail\": \"LOGIN_ERROR_02\"}");
+			pw.write("{\"result\": \"LOGIN_ERROR_02\"}");
 		} finally {
 			pw.close();
 		}
