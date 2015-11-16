@@ -62,4 +62,13 @@
 	     where userid = #{userid}
 	</update>
 	
+	<insert id="writingGoods">
+	    insert into GOODS(articleNum, userid, image1, image2, image3, image4, image5,
+	                      city, district, major, sub, contents, hashtag, selectionWay, postingTime)
+		values(SEQ_1.nextval, #{userid},
+		#{image1,jdbcType=VARCHAR}, #{image2,jdbcType=VARCHAR}, #{image3,jdbcType=VARCHAR},
+		#{image4,jdbcType=VARCHAR}, #{image5,jdbcType=VARCHAR},
+		#{city}, #{district}, #{major}, #{sub},
+		#{contents}, #{hashtag}, #{selectionWay}, sysdate,)
+	</insert>
 </mapper>
