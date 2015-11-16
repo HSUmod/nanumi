@@ -19,7 +19,7 @@ public class GoodsController {
 	@Autowired
 	private GoodsService service;
 
-	@RequestMapping(value = "/WritingGoods", method = RequestMethod.POST)
+	@RequestMapping(value = "/WritingGoods.do", method = RequestMethod.POST)
 	public void writingGoods(@RequestParam("userid") String userid, @RequestParam("contents") String contents, @RequestParam("city") String city, @RequestParam("district") String district,
 			@RequestParam("major") String major, @RequestParam("sub") String sub, @RequestParam("selectionWay") int selectionWay, HttpServletResponse res) throws IOException {
 		res.setContentType("application/json; charset=utf-8");
