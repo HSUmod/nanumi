@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.nanumi.common.CommonUtils;
 import com.nanumi.dto.CityDTO;
 import com.nanumi.dto.DistrictDTO;
 import com.nanumi.dto.UserDTO;
@@ -106,7 +106,7 @@ public class CommonController {
 		UserDTO user = service.login(userid);
 		try {
 			if (user.getPwd().equals(pwd)) {
-				String userUUID = generateUUID(user.getUserid()); // 로그인 성공, uuid 발급
+				String userUUID = CommonUtils.generateUUID(user.getUserid()); // 로그인 성공, uuid 발급
 				session.setAttribute("UUID-", userUUID); // session에 uuid 저장
 				pw.write("{\"result\": " + userUUID + "\"}");
 			} else {
@@ -122,15 +122,6 @@ public class CommonController {
 	@RequestMapping(value = "/Logout.do", method = RequestMethod.POST)
 	public void logout(@RequestParam("userid") String userid, HttpSession session) {
 		session.removeAttribute("UUID_" + userid);
-	}
-
-	/**
-	 * User ID로 uuid 생성
-	 * @param userid
-	 * @return uuid
-	 */
-	private String generateUUID(String userid) {
-		return userid + "-" + UUID.randomUUID();
 	}
 
 	@RequestMapping(value = "/SearchAddress.do")

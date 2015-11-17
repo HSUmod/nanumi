@@ -1,7 +1,7 @@
 package com.nanumi.dto;
 
 public class GoodsDTO {
-	private int articleNum;
+	private String articleNum;
 	private String userid;
 	private String image1, image2, image3, image4, image5;
 	private String contents, hashtag;
@@ -24,11 +24,11 @@ public class GoodsDTO {
 		this.selectionWay = selectionWay;
 	}
 
-	public int getArticleNum() {
+	public String getArticleNum() {
 		return articleNum;
 	}
 
-	public void setArticleNum(int articleNum) {
+	public void setArticleNum(String articleNum) {
 		this.articleNum = articleNum;
 	}
 
