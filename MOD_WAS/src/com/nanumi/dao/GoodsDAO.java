@@ -19,6 +19,6 @@ public class GoodsDAO {
 	}
 
 	public void insertFile(Map<String, Object> map) throws Exception {
-		session.insert("sample.insertFile", map);
+		session.insert("nanumiNS.insertFile", map);
 	}
 }
