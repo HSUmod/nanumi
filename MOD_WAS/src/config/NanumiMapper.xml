@@ -63,13 +63,10 @@
 	</update>
 	
 	<insert id="writingGoods">
-	    insert into GOODS(articleNum, userid, image1, image2, image3, image4, image5,
-	                      city, district, major, sub, contents, hashtag, selectionWay, postingTime)
-		values(SEQ_1.nextval, #{userid},
-		#{image1,jdbcType=VARCHAR}, #{image2,jdbcType=VARCHAR}, #{image3,jdbcType=VARCHAR},
-		#{image4,jdbcType=VARCHAR}, #{image5,jdbcType=VARCHAR},
-		#{city}, #{district}, #{major}, #{sub},
-		#{contents}, #{hashtag}, #{selectionWay}, sysdate,)
+	    insert into GOODS(articleNum, userid, city, district, major, sub,
+	                      contents, hashtag, selectionWay, postingTime)
+		values(SEQ_1.nextval, #{userid}, #{city}, #{district}, #{major}, #{sub},
+		       #{contents}, #{hashtag}, #{selectionWay}, sysdate)
 	</insert>
 	
 	<insert id="insertFile" parameterType="hashmap" useGeneratedKeys="true" keyProperty="IDX">
@@ -77,24 +74,10 @@
         SELECT SEQ_TB_BOARD_IDX.NEXTVAL FROM DUAL
     </selectKey>
     <![CDATA[
-        INSERT INTO TB_FILE
-        (
-            IDX,
-            BOARD_IDX,
-            ORIGINAL_FILE_NAME,
-            STORED_FILE_NAME,
-            FILE_SIZE,
-            CREA_ID
-        )
-        VALUES
-        (
-            SEQ_TB_FILE_IDX.NEXTVAL,
-            #{BOARD_IDX},
-            #{ORIGINAL_FILE_NAME},
-            #{STORED_FILE_NAME},
-            #{FILE_SIZE},
-            'Admin'
-        )
+        INSERT INTO TB_FILE(IDX, BOARD_IDX, ORIGINAL_FILE_NAME, STORED_FILE_NAME,
+                            FILE_SIZE, CREA_ID)
+        VALUES(SEQ_TB_FILE_IDX.NEXTVAL, #{BOARD_IDX}, #{ORIGINAL_FILE_NAME},
+               #{STORED_FILE_NAME}, #{FILE_SIZE}, 'Admin')
     ]]>
 	</insert>
 </mapper>

@@ -3,7 +3,6 @@ package com.nanumi.dto;
 public class GoodsDTO {
 	private String articleNum;
 	private String userid;
-	private String image1, image2, image3, image4, image5;
 	private String contents, hashtag;
 	private int citycode, districtcode, majorcode, subcode;
 	private String city, district, major, sub;
@@ -38,46 +37,6 @@ public class GoodsDTO {
 
 	public void setUserid(String userid) {
 		this.userid = userid;
-	}
-
-	public String getImage1url() {
-		return image1;
-	}
-
-	public void setImage1url(String image1url) {
-		this.image1 = image1url;
-	}
-
-	public String getImage2url() {
-		return image2;
-	}
-
-	public void setImage2url(String image2url) {
-		this.image2 = image2url;
-	}
-
-	public String getImage3url() {
-		return image3;
-	}
-
-	public void setImage3url(String image3url) {
-		this.image3 = image3url;
-	}
-
-	public String getImage4url() {
-		return image4;
-	}
-
-	public void setImage4url(String image4url) {
-		this.image4 = image4url;
-	}
-
-	public String getImage5url() {
-		return image5;
-	}
-
-	public void setImage5url(String image5url) {
-		this.image5 = image5url;
 	}
 
 	public String getContents() {
