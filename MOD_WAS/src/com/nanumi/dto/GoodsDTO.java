@@ -13,7 +13,7 @@ public class GoodsDTO {
 	public GoodsDTO() {
 	}
 
-	public GoodsDTO(String userid, String contents, String city, String district, String major, String sub, String selectionWay) {
+	public GoodsDTO(String userid, String contents, String city, String district, String major, String sub, String selectionWay, String hashtag) {
 		this.userid = userid;
 		this.contents = contents;
 		this.city = city;
@@ -21,6 +21,7 @@ public class GoodsDTO {
 		this.major = major;
 		this.sub = sub;
 		this.selectionWay = selectionWay;
+		this.hashtag = hashtag;
 	}
 
 	public String getArticleNum() {
