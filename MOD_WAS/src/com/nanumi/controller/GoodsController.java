@@ -21,7 +21,7 @@ public class GoodsController {
 
 	@RequestMapping(value = "/WritingGoods.do", method = RequestMethod.POST)
 	public void writingGoods(@RequestParam("userid") String userid, @RequestParam("contents") String contents, @RequestParam("city") String city, @RequestParam("district") String district,
-			@RequestParam("major") String major, @RequestParam("sub") String sub, @RequestParam("selectionWay") int selectionWay, HttpServletRequest request, HttpServletResponse res)
+			@RequestParam("major") String major, @RequestParam("sub") String sub, @RequestParam("selectionWay") String selectionWay, HttpServletRequest request, HttpServletResponse res)
 					throws Exception {
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = res.getWriter();

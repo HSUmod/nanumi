@@ -5,15 +5,15 @@ public class GoodsDTO {
 	private String userid;
 	private String contents, hashtag;
 	private int citycode, districtcode, majorcode, subcode;
-	private String city, district, major, sub;
-	private int selectionWay, shareState;
+	private String city, district, major, sub, selectionWay;
+	private int shareState;
 	private String postingTime;
 	private String ruserid;
 
 	public GoodsDTO() {
 	}
 
-	public GoodsDTO(String userid, String contents, String city, String district, String major, String sub, int selectionWay) {
+	public GoodsDTO(String userid, String contents, String city, String district, String major, String sub, String selectionWay) {
 		this.userid = userid;
 		this.contents = contents;
 		this.city = city;
@@ -119,11 +119,11 @@ public class GoodsDTO {
 		this.sub = sub;
 	}
 
-	public int getSelectionWay() {
+	public String getSelectionWay() {
 		return selectionWay;
 	}
 
-	public void setSelectionWay(int selectionWay) {
+	public void setSelectionWay(String selectionWay) {
 		this.selectionWay = selectionWay;
 	}
 
