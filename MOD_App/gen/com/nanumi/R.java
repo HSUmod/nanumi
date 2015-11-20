@@ -369,20 +369,30 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int vpi__tab_unselected_pressed_holo=0x7f020007;
     }
     public static final class id {
-        public static final int action_settings=0x7f0c000d;
+        public static final int action_login=0x7f0c0017;
+        public static final int action_settings=0x7f0c0016;
         public static final int bottom=0x7f0c0003;
-        public static final int fragBtn1=0x7f0c0006;
-        public static final int fragBtn2=0x7f0c0007;
-        public static final int fragBtn3=0x7f0c0008;
-        public static final int fragBtn4=0x7f0c0009;
-        public static final int fragSelectorArea=0x7f0c0005;
-        public static final int indicator=0x7f0c000a;
+        public static final int btLogin=0x7f0c0007;
+        public static final int drawerLayout=0x7f0c0008;
+        public static final int etId=0x7f0c0005;
+        public static final int etPw=0x7f0c0006;
+        public static final int fragBtn1=0x7f0c000a;
+        public static final int fragBtn2=0x7f0c000b;
+        public static final int fragBtn3=0x7f0c000c;
+        public static final int fragBtn4=0x7f0c000d;
+        public static final int fragSelectorArea=0x7f0c0009;
+        public static final int indicator=0x7f0c000e;
+        public static final int naviStudyType=0x7f0c0011;
+        public static final int navigation=0x7f0c0010;
         public static final int none=0x7f0c0000;
-        public static final int textView1=0x7f0c000c;
+        public static final int radio0=0x7f0c0013;
+        public static final int radio1=0x7f0c0014;
+        public static final int radioGroup1=0x7f0c0012;
+        public static final int textView1=0x7f0c0015;
         public static final int top=0x7f0c0004;
         public static final int triangle=0x7f0c0001;
         public static final int underline=0x7f0c0002;
-        public static final int viewPagerArea=0x7f0c000b;
+        public static final int viewPagerArea=0x7f0c000f;
     }
     public static final class integer {
         public static final int default_circle_indicator_orientation=0x7f070000;
@@ -392,14 +402,16 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int default_underline_indicator_fade_length=0x7f070004;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
-        public static final int activity_splash=0x7f030001;
-        public static final int frament_sub=0x7f030002;
+        public static final int activity_login=0x7f030000;
+        public static final int activity_main=0x7f030001;
+        public static final int activity_splash=0x7f030002;
+        public static final int frament_sub=0x7f030003;
     }
     public static final class menu {
         public static final int main=0x7f0b0000;
     }
     public static final class string {
+        public static final int action_login=0x7f0a0003;
         public static final int action_settings=0x7f0a0002;
         public static final int app_name=0x7f0a0000;
         public static final int hello_world=0x7f0a0001;

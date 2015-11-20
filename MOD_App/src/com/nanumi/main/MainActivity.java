@@ -1,19 +1,27 @@
 package com.nanumi.main;
 
 import com.nanumi.R;
+import com.nanumi.sub.LoginTestActivity;
 import com.viewpagerindicator.UnderlinePageIndicator;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 public class MainActivity extends FragmentActivity {
 	private Button btn1, btn2, btn3, btn4;
 	private ViewPager mPager;
 	private UnderlinePageIndicator mIndicator;
+	private DrawerLayout drawer;
+	private LinearLayout navigation;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +31,35 @@ public class MainActivity extends FragmentActivity {
 		setButton();
 		setPager();
 		setIndicator();
+
+		// drawer setting
+		drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
+		navigation = (LinearLayout) findViewById(R.id.navigation);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.action_settings:
+			if (drawer.isDrawerOpen(navigation)) {
+				drawer.closeDrawer(navigation);
+			} else {
+				drawer.openDrawer(navigation);
+			}
+			break;
+		case R.id.action_login:
+			Intent intent = new Intent(MainActivity.this, LoginTestActivity.class);
+			startActivity(intent);
+			break;
+		}
+		
+		return true;
 	}
 
 	private void setButton() {
