@@ -131,10 +131,10 @@ public class CommonController {
 		try {
 			session.removeAttribute("UUID-" + uuid);
 			System.out.println("Logout success: " + uuid);
-			pw.write("{\"result\": \"Success\"");
+			pw.write("{\"result\": \"Success\"}");
 		} catch (IllegalStateException e) {
 			System.out.println("Logout fail: " + uuid);
-			pw.write("{\"result\": \"Fail\"");
+			pw.write("{\"result\": \"Fail\"}");
 		} finally {
 			pw.close();
 		}
