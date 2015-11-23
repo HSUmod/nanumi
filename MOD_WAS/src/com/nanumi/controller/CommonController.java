@@ -108,7 +108,7 @@ public class CommonController {
 		try {
 			if (user.getPwd().equals(pwd)) {
 				String userUUID = CommonUtils.generateUUID(user.getUserid()); // 로그인 성공, uuid 발급
-				session.setAttribute("UUID-" + userid, userUUID); // session에 uuid 저장
+				session.setAttribute("UUID-", userUUID); // session에 uuid 저장
 				pw.write("{\"result\": \"Success\", \"value\": \"" + userUUID + "\"}");
 				System.out.println("Login success: " + userUUID);
 			} else {
@@ -124,20 +124,20 @@ public class CommonController {
 	}
 
 	@RequestMapping(value = "/Logout.do", method = RequestMethod.POST)
-	public void logout(@RequestParam("userid") String userid, HttpSession session, HttpServletResponse res) throws IOException {
+	public void logout(@RequestParam("uuid") String uuid, HttpSession session, HttpServletResponse res) throws IOException {
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = res.getWriter();
-		
+
 		try {
-			session.removeAttribute("UUID-" + userid);
-			System.out.println("Logout success: " + userid);
+			session.removeAttribute("UUID-" + uuid);
+			System.out.println("Logout success: " + uuid);
 			pw.write("{\"result\": \"Success\"");
-		} catch(IllegalStateException e) {
-			System.out.println("Logout fail: " + userid);
+		} catch (IllegalStateException e) {
+			System.out.println("Logout fail: " + uuid);
 			pw.write("{\"result\": \"Fail\"");
 		} finally {
 			pw.close();
-		}		
+		}
 	}
 
 	@RequestMapping(value = "/SearchAddress.do")
