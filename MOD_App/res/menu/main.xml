@@ -3,15 +3,13 @@
     tools:context="com.nanumi.MainActivity" >
 
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
+        android:id="@+id/btnLeftNavi"
         android:showAsAction="always"
-        android:title="@string/action_settings"/>
+        android:title="@string/menuLeftNavi"/>
     
     <item
-        android:id="@+id/action_login"
-        android:orderInCategory="100"
+        android:id="@+id/btnRightNavi"
         android:showAsAction="always"
-        android:title="@string/action_login"/>
+        android:title="@string/menuRightNavi"/>
 
 </menu>

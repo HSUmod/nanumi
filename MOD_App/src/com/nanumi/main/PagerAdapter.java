@@ -1,5 +1,6 @@
 package com.nanumi.main;
 
+import com.nanumi.sub.GoodsFragment;
 import com.nanumi.sub.SubFragment;
 
 import android.support.v4.app.Fragment;
@@ -27,7 +28,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
 		case 0:
 			return SubFragment.newInstance();
 		case 1:
-			return SubFragment.newInstance();
+			return GoodsFragment.newInstance();
 		case 2:
 			return SubFragment.newInstance();
 		case 3:

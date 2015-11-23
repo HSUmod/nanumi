@@ -369,30 +369,43 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int vpi__tab_unselected_pressed_holo=0x7f020007;
     }
     public static final class id {
-        public static final int action_login=0x7f0c0017;
-        public static final int action_settings=0x7f0c0016;
         public static final int bottom=0x7f0c0003;
-        public static final int btLogin=0x7f0c0007;
-        public static final int drawerLayout=0x7f0c0008;
-        public static final int etId=0x7f0c0005;
-        public static final int etPw=0x7f0c0006;
-        public static final int fragBtn1=0x7f0c000a;
-        public static final int fragBtn2=0x7f0c000b;
-        public static final int fragBtn3=0x7f0c000c;
-        public static final int fragBtn4=0x7f0c000d;
-        public static final int fragSelectorArea=0x7f0c0009;
-        public static final int indicator=0x7f0c000e;
-        public static final int naviStudyType=0x7f0c0011;
-        public static final int navigation=0x7f0c0010;
+        public static final int btLogin=0x7f0c000b;
+        public static final int btnLeftNavi=0x7f0c0023;
+        public static final int btnLogout=0x7f0c001a;
+        public static final int btnRightNavi=0x7f0c0024;
+        public static final int button1=0x7f0c0005;
+        public static final int button2=0x7f0c0007;
+        public static final int button3=0x7f0c0008;
+        public static final int drawerLayout=0x7f0c000c;
+        public static final int editText1=0x7f0c0006;
+        public static final int etId=0x7f0c0009;
+        public static final int etPw=0x7f0c000a;
+        public static final int fragBtn1=0x7f0c000e;
+        public static final int fragBtn2=0x7f0c000f;
+        public static final int fragBtn3=0x7f0c0010;
+        public static final int fragBtn4=0x7f0c0011;
+        public static final int fragSelectorArea=0x7f0c000d;
+        public static final int goodsListView=0x7f0c001b;
+        public static final int imageView1=0x7f0c0020;
+        public static final int imageView2=0x7f0c001c;
+        public static final int indicator=0x7f0c0012;
+        public static final int leftNavi=0x7f0c0014;
+        public static final int naviStudyType=0x7f0c0015;
         public static final int none=0x7f0c0000;
-        public static final int radio0=0x7f0c0013;
-        public static final int radio1=0x7f0c0014;
-        public static final int radioGroup1=0x7f0c0012;
-        public static final int textView1=0x7f0c0015;
+        public static final int radio0=0x7f0c0017;
+        public static final int radio1=0x7f0c0018;
+        public static final int radioGroup1=0x7f0c0016;
+        public static final int rightNavi=0x7f0c0019;
+        public static final int textView1=0x7f0c0021;
+        public static final int textView2=0x7f0c001d;
+        public static final int textView3=0x7f0c001e;
+        public static final int textView4=0x7f0c001f;
+        public static final int textView5=0x7f0c0022;
         public static final int top=0x7f0c0004;
         public static final int triangle=0x7f0c0001;
         public static final int underline=0x7f0c0002;
-        public static final int viewPagerArea=0x7f0c000f;
+        public static final int viewPagerArea=0x7f0c0013;
     }
     public static final class integer {
         public static final int default_circle_indicator_orientation=0x7f070000;
@@ -402,19 +415,24 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int default_underline_indicator_fade_length=0x7f070004;
     }
     public static final class layout {
-        public static final int activity_login=0x7f030000;
-        public static final int activity_main=0x7f030001;
-        public static final int activity_splash=0x7f030002;
-        public static final int frament_sub=0x7f030003;
+        public static final int actionbar=0x7f030000;
+        public static final int activity_login=0x7f030001;
+        public static final int activity_main=0x7f030002;
+        public static final int activity_splash=0x7f030003;
+        public static final int fragment_goods_list=0x7f030004;
+        public static final int fragment_goods_list_item=0x7f030005;
+        public static final int frament_sub=0x7f030006;
     }
     public static final class menu {
         public static final int main=0x7f0b0000;
     }
     public static final class string {
-        public static final int action_login=0x7f0a0003;
-        public static final int action_settings=0x7f0a0002;
         public static final int app_name=0x7f0a0000;
         public static final int hello_world=0x7f0a0001;
+        /**  action bar 
+         */
+        public static final int menuLeftNavi=0x7f0a0002;
+        public static final int menuRightNavi=0x7f0a0003;
     }
     public static final class style {
         /** 

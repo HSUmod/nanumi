@@ -3,7 +3,9 @@
 
     <string name="app_name">MOD_App</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="action_login">Login</string>
+    
+    <!-- action bar -->
+    <string name="menuLeftNavi">Left</string>
+    <string name="menuRightNavi">Right</string>
 
 </resources>

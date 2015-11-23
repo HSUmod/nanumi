@@ -2,6 +2,7 @@ package com.nanumi.sub;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -18,69 +19,96 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.nanumi.R;
+import com.nanumi.main.MainActivity;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-/**
- * 1. 로그인 처리
- * 2. uuid 받아오기
- * 3. uuid preferences에 저장하기
- * 
- * ---- 우선순위 하
- * 1. 로그인 예외 처리
- * 
- * @author saehyun
- *
- */
-public class LoginTestActivity extends Activity {
+public class LoginActivity extends Activity {
 	private EditText etId, etPw;
 	private Button btLogin;
+	private boolean loginFlag = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 
+		setInputText();
+		setButton();
+	}
+
+	private void setInputText() {
 		etId = (EditText) findViewById(R.id.etId);
 		etPw = (EditText) findViewById(R.id.etPw);
+	}
+
+	private void setButton() {
 		btLogin = (Button) findViewById(R.id.btLogin);
 		btLogin.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				String inputId = etId.getText().toString();
 				String inputPw = etPw.getText().toString();
-				
 				LoginReq loginReq = new LoginReq();
-				loginReq.execute(inputId, inputPw);
+
+				try {
+					String uuid = loginReq.execute(inputId, inputPw).get();
+					if (!uuid.equals("fail")) {
+						SharedPreferences pref = getSharedPreferences("Login", 0);
+						SharedPreferences.Editor edit = pref.edit();
+						edit.putString("uuid", uuid);
+						edit.commit();
+						loginFlag = !loginFlag;
+					} else {
+						// 예외 처리
+					}
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				} catch (ExecutionException e) {
+					e.printStackTrace();
+				}
+
+				if (loginFlag) {
+					Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+					startActivity(intent);
+					finish();
+				}
 			}
 		});
-
 	}
 
-	class LoginReq extends AsyncTask<String, Void, Boolean> {
+	@Override
+	public void finish() {
+		super.finish();
+		overridePendingTransition(R.anim.fade, R.anim.hold);
+	}
+
+	class LoginReq extends AsyncTask<String, Void, String> {
 		@Override
-		protected Boolean doInBackground(String... param) {
+		protected String doInBackground(String... param) {
 			JSONObject json = null;
-			boolean flag = false;
+			String result = null;
 
 			try {
+				HttpClient client = new DefaultHttpClient();
+				String postURL = "http://223.194.141.168/MOD_WAS/Login.do";
+				HttpPost post = new HttpPost(postURL);
+
 				ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
 				params.add(new BasicNameValuePair("userid", param[0]));
 				params.add(new BasicNameValuePair("pwd", param[1]));
 
 				UrlEncodedFormEntity encodeEntity = new UrlEncodedFormEntity(params, HTTP.UTF_8);
-				String postURL = "http://223.194.141.168/MOD_WAS/Login.do";
-				HttpPost post = new HttpPost(postURL);
 				post.setEntity(encodeEntity);
 
-				HttpClient client = new DefaultHttpClient();
 				HttpResponse resPost = client.execute(post);
 				HttpEntity resEntity = resPost.getEntity();
 
@@ -93,23 +121,19 @@ public class LoginTestActivity extends Activity {
 				}
 
 				try {
-					if (json.getString("result").startsWith("LOGIN_ERROR")) {
-						Log.d("Login Fail", json.getString("result"));
-						flag = true;
+					if (json.getString("result").equals("Success")) {
+						result = json.getString("value");
 					} else {
-						String uuid = json.getString("result");
-						Log.d("Login Success", uuid);
-						flag = false;
+						result = "fail";
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			return flag;
 
+			return result;
 		}
 	}
 }

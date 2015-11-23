@@ -23,7 +23,7 @@
         </activity>
         <activity android:name=".main.MainActivity" >
         </activity>
-        <activity android:name=".sub.LoginTestActivity"></activity>
+        <activity android:name=".sub.LoginActivity"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
