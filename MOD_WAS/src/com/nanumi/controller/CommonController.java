@@ -36,7 +36,6 @@ import com.nanumi.service.CommonService;
 public class CommonController {
 	@Autowired
 	private CommonService service;
-	private Log log;
 
 	@RequestMapping(value = "/SignUp.do", method = RequestMethod.POST)
 	public void signUp(@RequestParam("userid") String userid, @RequestParam("pwd") String pwd, @RequestParam("nickname") String nickname, @RequestParam("address") String address,
@@ -111,14 +110,14 @@ public class CommonController {
 				String userUUID = CommonUtils.generateUUID(user.getUserid()); // 로그인 성공, uuid 발급
 				session.setAttribute("UUID-", userUUID); // session에 uuid 저장
 				pw.write("{\"result\": \"Success\", \"" + userUUID + "\": \"1\"}");
-				log.info("Login success" + userUUID);
+				System.out.println("Login success" + userUUID);
 			} else {
 				pw.write("{\"result\": \"Fail\", \"value\": \"1\"}");
-				log.info("Login fail 01");
+				System.out.println("Login fail 01");
 			}
 		} catch (NullPointerException e) {
 			pw.write("{\"result\": \"Fail\", \"value\": \"2\"}");
-			log.info("Login fail 02");
+			System.out.println("Login fail 02");
 		} finally {
 			pw.close();
 		}
