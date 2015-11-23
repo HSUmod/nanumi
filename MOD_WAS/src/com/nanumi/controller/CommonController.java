@@ -109,7 +109,7 @@ public class CommonController {
 			if (user.getPwd().equals(pwd)) {
 				String userUUID = CommonUtils.generateUUID(user.getUserid()); // 로그인 성공, uuid 발급
 				session.setAttribute("UUID-", userUUID); // session에 uuid 저장
-				pw.write("{\"result\": \"Success\", \"" + userUUID + "\": \"1\"}");
+				pw.write("{\"result\": \"Success\", \"value\": \"" + userUUID + "\"}");
 				System.out.println("Login success" + userUUID);
 			} else {
 				pw.write("{\"result\": \"Fail\", \"value\": \"1\"}");
