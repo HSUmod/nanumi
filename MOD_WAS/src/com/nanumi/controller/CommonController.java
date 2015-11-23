@@ -124,9 +124,20 @@ public class CommonController {
 	}
 
 	@RequestMapping(value = "/Logout.do", method = RequestMethod.POST)
-	public void logout(@RequestParam("userid") String userid, HttpSession session) {
-		session.removeAttribute("UUID-" + userid);
-		System.out.println("Logout success: " + userid);
+	public void logout(@RequestParam("userid") String userid, HttpSession session, HttpServletResponse res) throws IOException {
+		res.setContentType("application/json; charset=utf-8");
+		PrintWriter pw = res.getWriter();
+		
+		try {
+			session.removeAttribute("UUID-" + userid);
+			System.out.println("Logout success: " + userid);
+			pw.write("{\"result\": \"Success\"");
+		} catch(IllegalStateException e) {
+			System.out.println("Logout fail: " + userid);
+			pw.write("{\"result\": \"Fail\"");
+		} finally {
+			pw.close();
+		}		
 	}
 
 	@RequestMapping(value = "/SearchAddress.do")
