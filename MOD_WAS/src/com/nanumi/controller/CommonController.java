@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,7 @@ import com.nanumi.service.CommonService;
 public class CommonController {
 	@Autowired
 	private CommonService service;
+	private Log log;
 
 	@RequestMapping(value = "/SignUp.do", method = RequestMethod.POST)
 	public void signUp(@RequestParam("userid") String userid, @RequestParam("pwd") String pwd, @RequestParam("nickname") String nickname, @RequestParam("address") String address,
@@ -108,12 +110,15 @@ public class CommonController {
 			if (user.getPwd().equals(pwd)) {
 				String userUUID = CommonUtils.generateUUID(user.getUserid()); // 로그인 성공, uuid 발급
 				session.setAttribute("UUID-", userUUID); // session에 uuid 저장
-				pw.write("{\"result\": " + userUUID + "\"}");
+				pw.write("{\"result\": \"Success\", \"" + userUUID + "\": \"1\"}");
+				log.info("Login success" + userUUID);
 			} else {
-				pw.write("{\"result\": \"LOGIN_ERROR_01\"}");
+				pw.write("{\"result\": \"Fail\", \"value\": \"1\"}");
+				log.info("Login fail 01");
 			}
 		} catch (NullPointerException e) {
-			pw.write("{\"result\": \"LOGIN_ERROR_02\"}");
+			pw.write("{\"result\": \"Fail\", \"value\": \"2\"}");
+			log.info("Login fail 02");
 		} finally {
 			pw.close();
 		}
