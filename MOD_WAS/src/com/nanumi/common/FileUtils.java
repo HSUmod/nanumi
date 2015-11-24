@@ -17,7 +17,7 @@ import com.nanumi.dto.GoodsDTO;
 
 @Component("fileUtils")
 public class FileUtils {
-	private static final String filePath = "C:\\dev\\file\\";
+	private String filePath = "C:\\dev\\file\\";
 
 	public List<Map<String, Object>> parseInsertFileInfo(GoodsDTO goods, HttpServletRequest request) throws Exception {
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
@@ -33,7 +33,8 @@ public class FileUtils {
 
 		String articleNum = goods.getArticleNum();
 
-		File file = new File(filePath + goods.getUserid() + "\\");
+		filePath += "goods.getUserId()" + "\\";
+		File file = new File(filePath);
 		if (file.exists() == false) {
 			file.mkdirs();
 		}
