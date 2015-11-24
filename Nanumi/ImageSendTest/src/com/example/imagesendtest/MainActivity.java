@@ -20,12 +20,10 @@ import org.apache.http.params.HttpParams;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -39,11 +37,10 @@ public class MainActivity extends Activity implements OnClickListener {
 	private static final String SERVER_ADDRESS = "http://223.194.141.168/MOD_WAS/";
 	private static String imageName = null;// =
 	private static String imagePath = null;
-	// Environment.getExternalStorageDirectory().getAbsolutePath();
+
 	ImageView imageToUpload, downloadedImage;
 	Button bUploadImage, bDownloadImage, sendBtn;
 	EditText uploadImageName, downloadImageName;
-
 	EditText userid, contents, city, district, major, sub, selectionWay, hashtag;
 
 	@Override
@@ -72,18 +69,11 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		// imageToUpload.setOnClickListener(this);
 		bUploadImage.setOnClickListener(this);
-
-		// bDownloadImage.setOnClickListener(this);
+		bDownloadImage.setOnClickListener(this);
 
 		sendBtn.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				// UploadImage send = new UploadImage();
-
-				// Bitmap image =
-				// //imageToUpload.getDrawable()).getBitmap();
 				new UploadImage().execute(userid.getText().toString(), contents.getText().toString(),
 						city.getText().toString(), district.getText().toString(), major.getText().toString(),
 						sub.getText().toString(), selectionWay.getText().toString(), hashtag.getText().toString());
@@ -93,7 +83,6 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	private class UploadImage extends AsyncTask<String, Void, Void> {
-		Bitmap image;
 		// String name;
 
 		public UploadImage() {
@@ -102,22 +91,16 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		@Override
 		protected Void doInBackground(String... params) {
-
-			System.out.println("호출1");
 			HttpClient client = new DefaultHttpClient();
 			String url = SERVER_ADDRESS + "WritingGoods.do";
 			HttpPost post = new HttpPost(url);
 
-			System.out.println("호출2");
-			// filebod객체를 ㅇ용해 ㅍ ㅏ일을 ㅏㅂㄷ아옴
 			File file = new File(imagePath);
 			FileBody bin = new FileBody(file);
 			System.out.println("풀 경로 : " + imagePath);
-			System.out.println("호출3");
 			MultipartEntityBuilder multipart = MultipartEntityBuilder.create();
 			multipart.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
 
-			System.out.println("호출4");
 			multipart.addPart("image", bin);
 			multipart.addTextBody("userid", params[0]);
 			multipart.addTextBody("contents", params[1]);
@@ -127,14 +110,11 @@ public class MainActivity extends Activity implements OnClickListener {
 			multipart.addTextBody("sub", params[5]);
 			multipart.addTextBody("selectionWay", params[6]);
 			multipart.addTextBody("hashtag", params[7]);
-
-			System.out.println("호출5");
 			post.setEntity(multipart.build());
 
 			InputStream inputStream = null;
 			try {
 
-				System.out.println("호출6");
 				HttpResponse httpResponse = client.execute(post);
 
 				System.out.println("호출7");
@@ -161,6 +141,36 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	}
 
+	private class DownloadImage extends AsyncTask<Void, Void, String> {
+		public DownloadImage() {
+			super();
+
+		}
+
+		@Override
+		protected String doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			
+			
+			
+			
+			
+			
+			//
+			
+			
+
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+		}
+
+	}
+
 	private HttpParams getHttpRequestParams() {
 		HttpParams httpRequestParams = new BasicHttpParams();
 		HttpConnectionParams.setConnectionTimeout(httpRequestParams, 1000 * 30);
@@ -175,30 +185,17 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		switch (v.getId()) {
 		case R.id.imageToUpload:
-			/*
-			 * Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-			 * MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-			 * startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
-			 */Log.d("MAin", "업로드됨");
+			break;
 		case R.id.bUploadImage:
-
 			Intent intent = new Intent(Intent.ACTION_PICK);
 			intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
 			intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 			startActivityForResult(intent, RESULT_LOAD_IMAGE);
+			break;
+		case R.id.bDownloadImage:
+			new DownloadImage().execute();
 
 			break;
-
-		case R.id.bDownloadImage:
-			/*
-			 * Bitmap image = ((BitmapDrawable)
-			 * imageToUpload.getDrawable()).getBitmap(); new UploadImage(image,
-			 * uploadImageName.getText().toString()).execute(userid.getText().
-			 * toString(), contents.getText().toString(),
-			 * city.getText().toString(), district.getText().toString(),
-			 * major.getText().toString(), sub.getText().toString(),
-			 * selectionWay.getText().toString());
-			 */ break;
 		default:
 			break;
 		}
@@ -209,11 +206,9 @@ public class MainActivity extends Activity implements OnClickListener {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-
 		if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
 			Uri selectedImage = data.getData();
 			imageName = getImageNameToUri(data.getData());
-
 			imageToUpload.setImageURI(selectedImage);
 
 		}
@@ -223,9 +218,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		String[] proj = { MediaStore.Images.Media.DATA };
 		Cursor cursor = managedQuery(data, proj, null, null, null);
 		int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-
 		cursor.moveToFirst();
-
 		imagePath = cursor.getString(column_index);
 		String imgName = imagePath.substring(imagePath.lastIndexOf("/") + 1);
 
