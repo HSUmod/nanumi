@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 public class PagerAdapter extends FragmentPagerAdapter {
-	private static int NUM_ITEMS = 4;
+	private static int NUM_ITEMS = 2;
 
 	public PagerAdapter(FragmentManager fragmentManager) {
 		super(fragmentManager);
@@ -29,10 +29,6 @@ public class PagerAdapter extends FragmentPagerAdapter {
 			return SubFragment.newInstance();
 		case 1:
 			return GoodsFragment.newInstance();
-		case 2:
-			return SubFragment.newInstance();
-		case 3:
-			return SubFragment.newInstance();
 		default:
 			return null;
 		}

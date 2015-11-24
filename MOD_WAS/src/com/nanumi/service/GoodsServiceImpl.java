@@ -35,11 +35,11 @@ public class GoodsServiceImpl implements GoodsService {
 		while (iterator.hasNext()) {
 			multipartFile = multipartHttpServletRequest.getFile(iterator.next());
 			if (multipartFile.isEmpty() == false) {
-				log.debug("------------- file start -------------");
-				log.debug("name : " + multipartFile.getName());
-				log.debug("filename : " + multipartFile.getOriginalFilename());
-				log.debug("size : " + multipartFile.getSize());
-				log.debug("-------------- file end --------------\n");
+				log.info("------------- file start -------------");
+				log.info("name : " + multipartFile.getName());
+				log.info("filename : " + multipartFile.getOriginalFilename());
+				log.info("size : " + multipartFile.getSize());
+				log.info("-------------- file end --------------\n");
 			}
 		}
 		List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(goods, request);

@@ -102,14 +102,14 @@ public class CommonController {
 				String userUUID = CommonUtils.generateUUID(user.getUserid()); // 로그인 성공, uuid 발급
 				session.setAttribute("UUID-", userUUID); // session에 uuid 저장
 				pw.write("{\"result\": \"Success\", \"value\": \"" + userUUID + "\"}");
-				log.debug("Login success: " + userUUID);
+				log.info("Login success: " + userUUID);
 			} else {
 				pw.write("{\"result\": \"Fail\", \"value\": \"1\"}");
-				log.debug("Login fail: 01 " + userid);
+				log.info("Login fail: 01 " + userid);
 			}
 		} catch (NullPointerException e) {
 			pw.write("{\"result\": \"Fail\", \"value\": \"2\"}");
-			log.debug("Login fail: 02 " + userid);
+			log.info("Login fail: 02 " + userid);
 		} finally {
 			pw.close();
 		}
@@ -123,10 +123,10 @@ public class CommonController {
 		try {
 			session.removeAttribute("UUID-" + uuid);
 			
-			log.debug("Logout success: " + uuid);
+			log.info("Logout success: " + uuid);
 			pw.write("{\"result\": \"Success\"}");
 		} catch (IllegalStateException e) {
-			log.debug("Logout fail: " + uuid);
+			log.info("Logout fail: " + uuid);
 			pw.write("{\"result\": \"Fail\"}");
 		} finally {
 			pw.close();

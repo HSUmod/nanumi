@@ -53,7 +53,7 @@
 		<level value="DEBUG" />
 	</logger>
 	<logger name="org.springframework">
-		<level value="DEBUG" />
+		<level value="CONSOLE" />
 		<appender-ref ref="springFile" />
 	</logger>
 	<logger name="java.sql">
