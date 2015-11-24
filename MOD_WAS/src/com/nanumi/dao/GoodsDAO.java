@@ -17,6 +17,8 @@ public class GoodsDAO {
 	public void writingGoods(GoodsDTO goods) {
 		session.update("nanumiNS.writingGoods", goods);
 	}
+	
+//	public void getArticleNum(GoodsDTO )
 
 	public void insertFile(Map<String, Object> map) throws Exception {
 		session.insert("nanumiNS.insertFile", map);

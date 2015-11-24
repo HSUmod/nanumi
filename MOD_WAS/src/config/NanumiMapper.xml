@@ -62,19 +62,15 @@
 	     where userid = #{userid}
 	</update>
 	
-	<insert id="writingGoods" useGeneratedKeys="true" keyProperty="IDX">
-	    <selectKey keyProperty="IDX" resultType="string" order="BEFORE">
-        	select SEQ_GOODS.NEXTVAL
-        	  from GOODS
-    	</selectKey>
+	<insert id="writingGoods">
 	    insert into GOODS(articleNum, userid, city, district, major, sub,
 	                      contents, hashtag, selectionWay, postingTime)
-		values(#{IDX}, #{userid}, #{city}, #{district}, #{major}, #{sub},
+		values(SEQ_GOODS.NEXTVAL, #{userid}, #{city}, #{district}, #{major}, #{sub},
 		       #{contents}, #{hashtag}, #{selectionWay}, sysdate)
 	</insert>
 	
 	<insert id="insertFile" parameterType="hashmap">
         insert into GOODS_FILE(idx, articleNum, original_file_name, stored_file_name, file_size, crea_dtm)
-        values(SEQ_GOODS_FILE.NEXTVAL, #{articleNum}, #{original_file_name}, #{stored_file_name}, #{file_size}, sysdate)
+        values(SEQ_GOODS_FILE.NEXTVAL, SEQ_GOODS.CURRVAL, #{original_file_name}, #{stored_file_name}, #{file_size}, sysdate)
 	</insert>
 </mapper>
