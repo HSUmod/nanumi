@@ -10,7 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,17 +23,9 @@ import com.nanumi.dto.DistrictDTO;
 import com.nanumi.dto.UserDTO;
 import com.nanumi.service.CommonService;
 
-/**
- * 가입 O
- * 찾기 - 아이디 O, 비밀번호
- * 수정 O
- * 탈퇴 
- * 로그인 O 
- * 로그아웃 O
- * 관심상품 - 등록, 삭제
- */
 @Controller
 public class CommonController {
+	Logger log = Logger.getLogger(this.getClass());
 	@Autowired
 	private CommonService service;
 
@@ -110,14 +102,14 @@ public class CommonController {
 				String userUUID = CommonUtils.generateUUID(user.getUserid()); // 로그인 성공, uuid 발급
 				session.setAttribute("UUID-", userUUID); // session에 uuid 저장
 				pw.write("{\"result\": \"Success\", \"value\": \"" + userUUID + "\"}");
-				System.out.println("Login success: " + userUUID);
+				log.debug("Login success: " + userUUID);
 			} else {
 				pw.write("{\"result\": \"Fail\", \"value\": \"1\"}");
-				System.out.println("Login fail: 01");
+				log.debug("Login fail: 01 " + userid);
 			}
 		} catch (NullPointerException e) {
 			pw.write("{\"result\": \"Fail\", \"value\": \"2\"}");
-			System.out.println("Login fail: 02");
+			log.debug("Login fail: 02 " + userid);
 		} finally {
 			pw.close();
 		}
@@ -130,10 +122,10 @@ public class CommonController {
 
 		try {
 			session.removeAttribute("UUID-" + uuid);
-			System.out.println("Logout success: " + uuid);
+			log.debug("Logout success: " + uuid);
 			pw.write("{\"result\": \"Success\"}");
 		} catch (IllegalStateException e) {
-			System.out.println("Logout fail: " + uuid);
+			log.debug("Logout fail: " + uuid);
 			pw.write("{\"result\": \"Fail\"}");
 		} finally {
 			pw.close();
