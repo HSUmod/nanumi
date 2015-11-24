@@ -42,16 +42,53 @@
         android:hint="result" />
 
     <Button
-        android:id="@+id/sendBtn"
+        android:id="@+id/registerBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="보내기" />
-    
-    
+        android:onClick="memberInfo"
+        android:text="가입" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/checkId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:onClick="myCheck"
+            android:text="아이디 중복 체크" />
+
+        <Button
+            android:id="@+id/checkNickName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:onClick="myCheck"
+            android:text="닉네임 중복 체크" />
+
+        <Button
+            android:id="@+id/checkEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+             android:onClick="myCheck"
+            android:text="이메일 중복 체크" />
+    </LinearLayout>
+
     <Button
-        android:id="@+id/checkBtn"
+        android:id="@+id/updateBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="아이디 중복 체크" />
+        android:onClick="memberInfo"
+        android:text="회원정보 수정" />
+
+    <Button
+        android:id="@+id/deleteBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="회원 탈퇴" />
 
 </LinearLayout>

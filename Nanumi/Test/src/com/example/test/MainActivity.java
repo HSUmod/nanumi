@@ -37,8 +37,13 @@ public class MainActivity extends Activity {
 	EditText email;
 
 	TextView result;
-	Button sendBtn;
-	Button checkBtn;
+	Button registerBtn;
+
+	Button checkIdBtn;
+	Button checkNickNameBtn;
+	Button checkEmailBtn;
+	Button updateBtn;
+	Button deleteBtn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,83 +57,136 @@ public class MainActivity extends Activity {
 		email = (EditText) findViewById(R.id.email);
 
 		result = (TextView) findViewById(R.id.result);
-		sendBtn = (Button) findViewById(R.id.sendBtn);
-		checkBtn = (Button) findViewById(R.id.checkBtn);
+		registerBtn = (Button) findViewById(R.id.registerBtn);
 
-		sendBtn.setOnClickListener(new OnClickListener() {
+		checkIdBtn = (Button) findViewById(R.id.checkId);
+		checkNickNameBtn = (Button) findViewById(R.id.checkNickName);
+		checkEmailBtn = (Button) findViewById(R.id.checkEmail);
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				UserJsp jsp = new UserJsp();
-
-				try {
-					jsp.execute(userid.getText().toString(), pwd.getText().toString(), nickname.getText().toString(),
-							address.getText().toString(), email.getText().toString()).get();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ExecutionException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-		});
-
-		checkBtn.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				IDCheck id = new IDCheck();
-
-				try {
-					if (id.execute(userid.getText().toString()).get()) {
-						Toast.makeText(getApplicationContext(), "아이디 중복됨", Toast.LENGTH_SHORT).show();
-					} else {
-						Toast.makeText(getApplicationContext(), "아이디 사용 가능", Toast.LENGTH_SHORT).show();
-					}
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ExecutionException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-		});
+		updateBtn = (Button) findViewById(R.id.updateBtn);
+		deleteBtn = (Button) findViewById(R.id.deleteBtn);
 
 	}
 
-	class UserJsp extends AsyncTask<String, Void, String> {
+	// 회원 가입 or 수정
+	public void memberInfo(View v) {
+		// TODO Auto-generated method stub
+		MemberInfo info = new MemberInfo();
+
+		switch (v.getId()) {
+		case R.id.registerBtn:
+			try {
+				info.execute("SignUp.do", userid.getText().toString(), pwd.getText().toString(),
+						nickname.getText().toString(), address.getText().toString(), email.getText().toString()).get();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			break;
+		case R.id.updateBtn:
+			try {
+				info.execute("ModifyUserInfo.do", userid.getText().toString(), pwd.getText().toString(),
+						nickname.getText().toString(), address.getText().toString(), email.getText().toString()).get();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			break;
+		default:
+			break;
+
+		}
+
+	}
+
+	// 아이디, 닉네임, 이메일 중복체크
+	public void myCheck(View v) {
+
+		// TODO Auto-generated method stub
+		MyCheck check = new MyCheck();
+
+		switch (v.getId()) {
+		case R.id.checkId:
+			try {
+				if (check.execute("UserIDCheck.do", userid.getText().toString()).get()) {
+					Toast.makeText(getApplicationContext(), "아이디 중복됨", Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(getApplicationContext(), "아이디 사용 가능", Toast.LENGTH_SHORT).show();
+				}
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case R.id.checkNickName:
+			try {
+				if (check.execute("UserNicknameCheck.do", nickname.getText().toString()).get()) {
+					Toast.makeText(getApplicationContext(), "닉네임 중복됨", Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(getApplicationContext(), "닉네임 사용 가능", Toast.LENGTH_SHORT).show();
+				}
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case R.id.checkEmail:
+			try {
+				if (check.execute("UserEmailCheck.do", email.getText().toString()).get()) {
+					Toast.makeText(getApplicationContext(), "이메일 중복됨", Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(getApplicationContext(), "이메일 사용 가능", Toast.LENGTH_SHORT).show();
+				}
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		default:
+			break;
+		}
+
+	}
+
+	// 가입, 수정 AS.class
+	class MemberInfo extends AsyncTask<String, Void, Void> {
 		@Override
-		protected String doInBackground(String... param) {
+		protected Void doInBackground(String... param) {
+
 			// TODO Auto-generated method stub
 			try {
-				System.out.println("돌아갑니다.2");
-
-				// param[];
 				HttpClient client = new DefaultHttpClient();
-				String postURL = "http://223.194.141.168/MOD_WAS/SignUp.do";
+				String postURL = "http://223.194.141.168/MOD_WAS/" + param[0];
 				HttpPost post = new HttpPost(postURL);
 
 				ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
 
-				params.add(new BasicNameValuePair("userid", param[0]));
-
-				params.add(new BasicNameValuePair("pwd", param[1]));
-				params.add(new BasicNameValuePair("nickname", param[2]));
-				params.add(new BasicNameValuePair("address", param[3]));
-				params.add(new BasicNameValuePair("email", param[4]));
-				System.out.println("돌아갑니다.3");
-
+				params.add(new BasicNameValuePair("userid", param[1]));
+				params.add(new BasicNameValuePair("pwd", param[2]));
+				params.add(new BasicNameValuePair("nickname", param[3]));
+				params.add(new BasicNameValuePair("address", param[4]));
+				params.add(new BasicNameValuePair("email", param[5]));
 				UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params, HTTP.UTF_8);
 				post.setEntity(ent);
 
 				HttpResponse responsePOST = client.execute(post);
-
 				HttpEntity resEntity = responsePOST.getEntity();
 
 				if (resEntity != null) {
@@ -138,25 +196,34 @@ public class MainActivity extends Activity {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			return null;
 
-			return "aa";
 		}
 	}
 
-	class IDCheck extends AsyncTask<String, Void, Boolean> {
+	// 아이디, 닉네임, 이메일 중복 체크 AS.class
+	class MyCheck extends AsyncTask<String, Void, Boolean> {
 		@Override
 		protected Boolean doInBackground(String... param) {
 			// TODO Auto-generated method stub
-
 			JSONObject json = null;
 			boolean flag = false;
+			String str = "";
+			if (param[0].equals("UserIDCheck.do")) {
+				str = "userid";
+			} else if (param[0].equals("UserNicknameCheck.do")) {
+				str = "nickname";
+			} else if (param[0].equals("UserEmailCheck.do")) {
+				str = "email";
+			}
 
 			try {
 				HttpClient client = new DefaultHttpClient();
-				String postURL = "http://223.194.141.168/MOD_WAS/UserIDCheck.do";
+				String postURL = "http://223.194.141.168/MOD_WAS/" + param[0];
 				HttpPost post = new HttpPost(postURL);
 				ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
-				params.add(new BasicNameValuePair("userid", param[0]));
+
+				params.add(new BasicNameValuePair(str, param[1]));
 				UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params, HTTP.UTF_8);
 				post.setEntity(ent);
 
@@ -165,7 +232,6 @@ public class MainActivity extends Activity {
 
 				// result: SIGNUP_ERROR_01 or SIGNUP_COMPLETE
 
-				System.out.println("엥?1");
 				try {
 					json = new JSONObject(EntityUtils.toString(resEntity));
 				} catch (ParseException e1) {
@@ -177,15 +243,15 @@ public class MainActivity extends Activity {
 				}
 
 				try {
-					if (json.getString("result").equals("중복")) {
+					if (json.getString("result").equals("duplicated")) {
 						// fail
 						System.out.println("true");
-						Log.d("중복됨", "zzzzzzzzzzzzzzzz");
+						Log.d("MyCheck.class", "아이디 중복됨");
 						flag = true;
 					} else {
 						// success
 
-						Log.d("아이디 사용 가능", "zzzzzzzzzzzzzzzz");
+						Log.d("MyCheck.calss", "아이디 사용 가능");
 						flag = false;
 					}
 				} catch (JSONException e) {
