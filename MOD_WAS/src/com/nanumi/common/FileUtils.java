@@ -47,12 +47,11 @@ public class FileUtils {
 
 				file = new File(filePath + storedFileName);
 				multipartFile.transferTo(file);  // save in server
-
 				listMap = new HashMap<String, Object>();
 				listMap.put("articleNum", articleNum);
-				listMap.put("ORIGINAL_FILE_NAME", originalFileName);
-				listMap.put("STORED_FILE_NAME", storedFileName);
-				listMap.put("FILE_SIZE", multipartFile.getSize());
+				listMap.put("original_file_name", originalFileName);
+				listMap.put("stored_file_name", storedFileName);
+				listMap.put("file_size", multipartFile.getSize());
 				list.add(listMap);
 			}
 		}
