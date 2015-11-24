@@ -62,10 +62,14 @@
 	     where userid = #{userid}
 	</update>
 	
-	<insert id="writingGoods">
+	<insert id="writingGoods" useGeneratedKeys="true" keyProperty="IDX">
+	    <selectKey keyProperty="IDX" resultType="string" order="BEFORE">
+        	select SEQ_GOODS.NEXTVAL
+        	  from GOODS
+    	</selectKey>
 	    insert into GOODS(articleNum, userid, city, district, major, sub,
 	                      contents, hashtag, selectionWay, postingTime)
-		values(SEQ_GOODS.nextval, #{userid}, #{city}, #{district}, #{major}, #{sub},
+		values(#{IDX}, #{userid}, #{city}, #{district}, #{major}, #{sub},
 		       #{contents}, #{hashtag}, #{selectionWay}, sysdate)
 	</insert>
 	
