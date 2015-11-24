@@ -33,7 +33,7 @@ public class FileUtils {
 
 		String articleNum = goods.getArticleNum();
 
-		filePath += "goods.getUserId()" + "\\";
+		filePath += goods.getUserid() + "\\";
 		File file = new File(filePath);
 		if (file.exists() == false) {
 			file.mkdirs();
