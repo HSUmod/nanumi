@@ -71,7 +71,8 @@
 	
 	<insert id="insertFile" parameterType="hashmap" useGeneratedKeys="true" keyProperty="IDX">
     <selectKey keyProperty="IDX" resultType="string" order="BEFORE">
-        SELECT SEQ_TB_BOARD_IDX.NEXTVAL FROM DUAL
+        SELECT SEQ_1.NEXTVAL
+          FROM GOODS
     </selectKey>
     <![CDATA[
         INSERT INTO TB_FILE(IDX, BOARD_IDX, ORIGINAL_FILE_NAME, STORED_FILE_NAME,
