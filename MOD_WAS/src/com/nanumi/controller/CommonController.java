@@ -122,6 +122,7 @@ public class CommonController {
 
 		try {
 			session.removeAttribute("UUID-" + uuid);
+			
 			log.debug("Logout success: " + uuid);
 			pw.write("{\"result\": \"Success\"}");
 		} catch (IllegalStateException e) {

@@ -38,6 +38,8 @@
 	<root>
 		<priority value="off" />
 		<appender-ref ref="console" />
+		<appender-ref ref="stdout" />
+		<appender-ref ref="debug" />
 	</root>
 
 </log4j:configuration>
