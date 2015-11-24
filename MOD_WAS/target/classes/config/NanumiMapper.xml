@@ -65,20 +65,12 @@
 	<insert id="writingGoods">
 	    insert into GOODS(articleNum, userid, city, district, major, sub,
 	                      contents, hashtag, selectionWay, postingTime)
-		values(SEQ_1.nextval, #{userid}, #{city}, #{district}, #{major}, #{sub},
+		values(SEQ_GOODS.nextval, #{userid}, #{city}, #{district}, #{major}, #{sub},
 		       #{contents}, #{hashtag}, #{selectionWay}, sysdate)
 	</insert>
 	
-	<insert id="insertFile" parameterType="hashmap" useGeneratedKeys="true" keyProperty="IDX">
-    <selectKey keyProperty="IDX" resultType="string" order="BEFORE">
-        SELECT SEQ_1.NEXTVAL
-          FROM GOODS
-    </selectKey>
-    <![CDATA[
-        INSERT INTO TB_FILE(IDX, BOARD_IDX, ORIGINAL_FILE_NAME, STORED_FILE_NAME,
-                            FILE_SIZE, CREA_ID)
-        VALUES(SEQ_TB_FILE_IDX.NEXTVAL, #{BOARD_IDX}, #{ORIGINAL_FILE_NAME},
-               #{STORED_FILE_NAME}, #{FILE_SIZE}, 'Admin')
-    ]]>
+	<insert id="insertFile" parameterType="hashmap">
+        insert into GOODS_FILE(idx, articleNum, original_file_name, stored_file_name, file_size)
+        values(SEQ_GOODS_FILE.NEXTVAL, #{articleNum}, #{original_file_name}, #{stored_file_name}, #{file_size})
 	</insert>
 </mapper>

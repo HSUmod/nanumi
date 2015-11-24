@@ -31,7 +31,7 @@ public class FileUtils {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		Map<String, Object> listMap = null;
 
-		String boardIdx = goods.getArticleNum();
+		String articleNum = goods.getArticleNum();
 
 		File file = new File(filePath);
 		if (file.exists() == false) {
@@ -49,7 +49,7 @@ public class FileUtils {
 				multipartFile.transferTo(file);  // save in server
 
 				listMap = new HashMap<String, Object>();
-				listMap.put("BOARD_IDX", boardIdx);
+				listMap.put("articleNum", articleNum);
 				listMap.put("ORIGINAL_FILE_NAME", originalFileName);
 				listMap.put("STORED_FILE_NAME", storedFileName);
 				listMap.put("FILE_SIZE", multipartFile.getSize());
