@@ -42,8 +42,9 @@ public class GoodsController {
 		StringBuilder json = new StringBuilder();
 
 		json.append("{\"result\": \"READ_COMPLETE\", ");
+		json.append("\"goods\": [");
 		for (GoodsDTO item : goodsList) {
-			json.append("\"goods\": [{");
+			json.append("{");
 			json.append("\"articleNum\": \"" + item.getArticleNum() + "\",");
 			json.append("\"userid\": \"" + item.getUserid() + "\",");
 			json.append("\"city\": \"" + item.getCity() + "\",");
