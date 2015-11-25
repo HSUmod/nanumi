@@ -55,7 +55,7 @@ public class GoodsController {
 			json.append("\"contents\": \"" + item.getContents() + "\",");
 			json.append("\"hashtag\": \"" + item.getHashtag() + "\",");
 			json.append("\"selectionWay\": \"" + item.getSelectionWay() + "\",");
-			json.append("\"postingTime\": \"" + item.getPostingTime() + "\"");
+			json.append("\"postingTime\": \"" + item.getPostingTime() + "\",");
 			json.append("\"image\": \"" + getGoodsImg(item.getArticleNum(), item.getUserid()) + "\"");
 			json.append("},");
 		}
