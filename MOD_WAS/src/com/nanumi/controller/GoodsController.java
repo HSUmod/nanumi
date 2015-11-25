@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -68,26 +71,16 @@ public class GoodsController {
 		pw.close();
 	}
 
-	@RequestMapping(value = "/getGoodsImg.do", method = RequestMethod.POST)
-	public byte[] getGoodsImg(String articleNum, String userid) throws Exception {
+	public HttpEntity<byte[]> getGoodsImg(String articleNum, String userid) throws Exception {
 		FileDTO file  = service.selectFileInfo(articleNum);
 		String storedFileName = file.getStored_file_name();		
 		byte fileByte[] = FileUtils.readFileToByteArray(new File("C:\\dev\\file\\" + userid + "\\" + storedFileName));
 		
-		log.info("==================");
-		log.info(fileByte);
-		log.info("==================");
+		HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_PNG);
+        headers.setContentLength(fileByte.length);
 		
-		return fileByte;
-
-		//		res.setContentType("application/octet-stream");
-		//		res.setContentLength(fileByte.length);
-		//		res.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(originalFileName, "UTF-8") + "\";");
-		//		res.setHeader("Content-Transfer-Encoding", "binary");
-		//		res.getOutputStream().write(fileByte);
-		//
-		//		res.getOutputStream().flush();
-		//		res.getOutputStream().close();
+        return new HttpEntity<byte[]>(fileByte, headers);
 	}
 
 	@RequestMapping(value = "/ReadTest.do", method = RequestMethod.POST)
