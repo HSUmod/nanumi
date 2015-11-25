@@ -76,7 +76,7 @@
 	
 	<select id="selectAllGoods" resultType="Goods">
 	    select *
-	      from goods;
+	      from goods
 	</select>
 	
 	<select id="selectFileInfo" parameterType="String" resultType="hashmap">

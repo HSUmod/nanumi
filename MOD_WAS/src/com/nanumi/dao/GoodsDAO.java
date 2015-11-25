@@ -1,5 +1,6 @@
 package com.nanumi.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +25,11 @@ public class GoodsDAO {
 	}
 	
 	public List<GoodsDTO> readGoods() {
-		return session.selectList("selectAllGoods");
+		List<GoodsDTO> goodsList = new ArrayList<GoodsDTO>();
+		
+		goodsList = session.selectList("selectAllGoods");
+		
+		return goodsList;
 	}
 
 	public Map<String, Object> selectFileInfo(String articleNum) {
