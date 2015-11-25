@@ -76,19 +76,17 @@ public class GoodsController {
 		pw.close();
 	}
 
-	public byte[] getGoodsImg(String articleNum, String userid) throws Exception {
+	public ResponseEntity<byte[]> getGoodsImg(String articleNum, String userid) throws Exception {
 		FileDTO file = service.selectFileInfo(articleNum);
 
 		Path path = Paths.get("C:\\dev\\file\\" + userid + "\\" + file.getStored_file_name());
 		byte[] data = Files.readAllBytes(path);
-		
-		return data;
 
-//		HttpHeaders headers = new HttpHeaders();
-//		headers.setContentType(MediaType.IMAGE_PNG);
-//		headers.setContentLength(data.length);
-//
-//		return new ResponseEntity<byte[]>(data, headers, HttpStatus.CREATED);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.IMAGE_PNG);
+		headers.setContentLength(data.length);
+
+		return new ResponseEntity<byte[]>(data, headers, HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/ReadTest.do", method = RequestMethod.POST)
