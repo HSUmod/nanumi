@@ -83,4 +83,21 @@ public class GoodsController {
 		res.getOutputStream().close();
 	}
 
+	@RequestMapping(value = "/ReadTest.do", method = RequestMethod.POST)
+	public void readTest(HttpServletResponse res) throws Exception {
+		res.setContentType("application/json; charset=utf-8");
+		PrintWriter pw = res.getWriter();
+		pw.write("{test text1}");
+		pw.write("{test text2}");
+		pw.write("{test text3}");
+		pw.write("{test text4}");
+		pw.write("{test text5}");
+		pw.write("{test text6}");
+		pw.write("{test text7}");
+		pw.write("{test text8}");
+		pw.write("{test text9}");
+		pw.write("{test text10}");
+		pw.close();
+	}
+
 }
