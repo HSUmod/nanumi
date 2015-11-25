@@ -73,7 +73,7 @@ public class GoodsController {
 		String storedFileName = (String) map.get("stored_file_name");
 		String originalFileName = (String) map.get("original_file_name");
 
-		byte fileByte[] = FileUtils.readFileToByteArray(new File("C:\\dev\\file\\" + userid + "\\" + originalFileName));
+		byte fileByte[] = FileUtils.readFileToByteArray(new File("C:\\dev\\file\\" + userid + "\\" + storedFileName));
 		return fileByte;
 
 //		res.setContentType("application/octet-stream");
