@@ -73,4 +73,15 @@
         insert into GOODS_FILE(idx, articleNum, original_file_name, stored_file_name, file_size, crea_dtm)
         values(SEQ_GOODS_FILE.NEXTVAL, SEQ_GOODS.CURRVAL, #{original_file_name}, #{stored_file_name}, #{file_size}, sysdate)
 	</insert>
+	
+	<select id="selectAllGoods" resultType="Goods">
+	    select *
+	      from goods;
+	</select>
+	
+	<select id="selectFileInfo" parameterType="String" resultType="hashmap">
+        select stored_file_name, original_file_name
+          from goods_file
+         where articleNum = #{articleNum}
+	</select>
 </mapper>

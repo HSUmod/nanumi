@@ -1,10 +1,15 @@
 package com.nanumi.controller;
 
+import java.io.File;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,4 +35,52 @@ public class GoodsController {
 		pw.write("{\"result\": \"WRITING_COMPLETE\"}");
 		pw.close();
 	}
+
+	@RequestMapping(value = "/ReadGoods.do", method = RequestMethod.POST)
+	public void readGoods(HttpServletResponse res) throws Exception {
+		List<GoodsDTO> goodsList = service.readGoods();
+		StringBuilder json = new StringBuilder();
+
+		json.append("{\"result\": \"READ_COMPLETE\", ");
+		for (GoodsDTO item : goodsList) {
+			json.append("\"goods\": [{");
+			json.append("\"" + item.getArticleNum() + "\",");
+			json.append("\"" + item.getUserid() + "\",");
+			json.append("\"" + item.getCity() + "\",");
+			json.append("\"" + item.getDistrict() + "\",");
+			json.append("\"" + item.getMajor() + "\",");
+			json.append("\"" + item.getSub() + "\",");
+			json.append("\"" + item.getContents() + "\",");
+			json.append("\"" + item.getHashtag() + "\",");
+			json.append("\"" + item.getSelectionWay() + "\",");
+			json.append("\"" + item.getPostingTime() + "\"");
+			json.append("},");
+		}
+		json.delete(json.length() - 1, json.length()); // last comma delete
+		json.append("]}");
+
+		res.setContentType("application/json; charset=utf-8");
+		PrintWriter pw = res.getWriter();
+		pw.write(json.toString());
+		pw.close();
+	}
+
+	@RequestMapping(value = "/getGoodsImg.do", method = RequestMethod.POST)
+	public void getGoodsImg(@RequestParam("articleNum") String articleNum, @RequestParam("userid") String userid, HttpServletResponse res) throws Exception {
+		Map<String, Object> map = service.selectFileInfo(articleNum);
+		String storedFileName = (String) map.get("stored_file_name");
+		String originalFileName = (String) map.get("original_file_name");
+
+		byte fileByte[] = FileUtils.readFileToByteArray(new File("C:\\dev\\file\\" + userid + "\\" + storedFileName));
+
+		res.setContentType("application/octet-stream");
+		res.setContentLength(fileByte.length);
+		res.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(originalFileName, "UTF-8") + "\";");
+		res.setHeader("Content-Transfer-Encoding", "binary");
+		res.getOutputStream().write(fileByte);
+
+		res.getOutputStream().flush();
+		res.getOutputStream().close();
+	}
+
 }

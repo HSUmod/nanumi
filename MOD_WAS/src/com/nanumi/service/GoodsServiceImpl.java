@@ -47,4 +47,14 @@ public class GoodsServiceImpl implements GoodsService {
 			goodsDAO.insertFile(list.get(i));
 		}
 	}
+
+	@Override
+	public List<GoodsDTO> readGoods() {
+		return goodsDAO.readGoods();
+	}
+
+	@Override
+	public Map<String, Object> selectFileInfo(String articleNum) {
+		return goodsDAO.selectFileInfo(articleNum);
+	}
 }

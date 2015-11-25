@@ -1,5 +1,6 @@
 package com.nanumi.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,10 +18,16 @@ public class GoodsDAO {
 	public void writingGoods(GoodsDTO goods) {
 		session.update("nanumiNS.writingGoods", goods);
 	}
-	
-//	public void getArticleNum(GoodsDTO )
 
 	public void insertFile(Map<String, Object> map) throws Exception {
 		session.insert("nanumiNS.insertFile", map);
+	}
+	
+	public List<GoodsDTO> readGoods() {
+		return session.selectList("selectAllGoods");
+	}
+
+	public Map<String, Object> selectFileInfo(String articleNum) {
+		return session.selectOne("nanumiNS.selectFileInfo", articleNum);
 	}
 }
