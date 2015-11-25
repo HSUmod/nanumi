@@ -79,9 +79,9 @@
 	      from goods
 	</select>
 	
-	<select id="selectFileInfo" parameterType="String" resultType="hashmap">
+	<select id="selectFileInfo" resultType="hashmap">
         select stored_file_name, original_file_name
           from goods_file
-         where articleNum = #{articleNum}
+         where articleNum = #{articleNum, jdbcType=VARCHAR}
 	</select>
 </mapper>

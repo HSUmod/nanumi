@@ -2,7 +2,6 @@ package com.nanumi.controller;
 
 import java.io.File;
 import java.io.PrintWriter;
-import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +21,7 @@ import com.nanumi.service.GoodsService;
 
 @Controller
 public class GoodsController {
+	Logger log = Logger.getLogger(this.getClass());
 	@Autowired
 	private GoodsService service;
 
@@ -71,19 +72,23 @@ public class GoodsController {
 	public byte[] getGoodsImg(String articleNum, String userid) throws Exception {
 		Map<String, Object> map = service.selectFileInfo(articleNum);
 		String storedFileName = (String) map.get("stored_file_name");
-		String originalFileName = (String) map.get("original_file_name");
+		log.info("-----------------");
+		log.info(map.get("stored_file_name"));
+		log.info("-----------------");
+//		String originalFileName = (String) map.get("original_file_name");
+		
 
 		byte fileByte[] = FileUtils.readFileToByteArray(new File("C:\\dev\\file\\" + userid + "\\" + storedFileName));
 		return fileByte;
 
-//		res.setContentType("application/octet-stream");
-//		res.setContentLength(fileByte.length);
-//		res.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(originalFileName, "UTF-8") + "\";");
-//		res.setHeader("Content-Transfer-Encoding", "binary");
-//		res.getOutputStream().write(fileByte);
-//
-//		res.getOutputStream().flush();
-//		res.getOutputStream().close();
+		//		res.setContentType("application/octet-stream");
+		//		res.setContentLength(fileByte.length);
+		//		res.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(originalFileName, "UTF-8") + "\";");
+		//		res.setHeader("Content-Transfer-Encoding", "binary");
+		//		res.getOutputStream().write(fileByte);
+		//
+		//		res.getOutputStream().flush();
+		//		res.getOutputStream().close();
 	}
 
 	@RequestMapping(value = "/ReadTest.do", method = RequestMethod.POST)
