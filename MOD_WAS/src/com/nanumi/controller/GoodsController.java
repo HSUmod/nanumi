@@ -71,10 +71,13 @@ public class GoodsController {
 	@RequestMapping(value = "/getGoodsImg.do", method = RequestMethod.POST)
 	public byte[] getGoodsImg(String articleNum, String userid) throws Exception {
 		FileDTO file  = service.selectFileInfo(articleNum);
-		String storedFileName = file.getStored_file_name();
-		
-
+		String storedFileName = file.getStored_file_name();		
 		byte fileByte[] = FileUtils.readFileToByteArray(new File("C:\\dev\\file\\" + userid + "\\" + storedFileName));
+		
+		log.info("==================");
+		log.info(fileByte);
+		log.info("==================");
+		
 		return fileByte;
 
 		//		res.setContentType("application/octet-stream");
