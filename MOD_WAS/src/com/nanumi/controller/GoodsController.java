@@ -44,16 +44,16 @@ public class GoodsController {
 		json.append("{\"result\": \"READ_COMPLETE\", ");
 		for (GoodsDTO item : goodsList) {
 			json.append("\"goods\": [{");
-			json.append("\"" + item.getArticleNum() + "\",");
-			json.append("\"" + item.getUserid() + "\",");
-			json.append("\"" + item.getCity() + "\",");
-			json.append("\"" + item.getDistrict() + "\",");
-			json.append("\"" + item.getMajor() + "\",");
-			json.append("\"" + item.getSub() + "\",");
-			json.append("\"" + item.getContents() + "\",");
-			json.append("\"" + item.getHashtag() + "\",");
-			json.append("\"" + item.getSelectionWay() + "\",");
-			json.append("\"" + item.getPostingTime() + "\"");
+			json.append("\"articleNum\" ,\"" + item.getArticleNum() + "\",");
+			json.append("\"userid\" ,\"" + item.getUserid() + "\",");
+			json.append("\"city\" ,\"" + item.getCity() + "\",");
+			json.append("\"district\" ,\"" + item.getDistrict() + "\",");
+			json.append("\"major\" ,\"" + item.getMajor() + "\",");
+			json.append("\"sub\" ,\"" + item.getSub() + "\",");
+			json.append("\"contents\" ,\"" + item.getContents() + "\",");
+			json.append("\"hashtag\" ,\"" + item.getHashtag() + "\",");
+			json.append("\"selectionWay\" ,\"" + item.getSelectionWay() + "\",");
+			json.append("\"postingTime\" ,\"" + item.getPostingTime() + "\"");
 			json.append("},");
 		}
 		json.delete(json.length() - 1, json.length()); // last comma delete
