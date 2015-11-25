@@ -12,7 +12,9 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -71,16 +73,15 @@ public class GoodsController {
 		pw.close();
 	}
 
-	public HttpEntity<byte[]> getGoodsImg(String articleNum, String userid) throws Exception {
+	public ResponseEntity<byte[]> getGoodsImg(String articleNum, String userid) throws Exception {
 		FileDTO file  = service.selectFileInfo(articleNum);
-		String storedFileName = file.getStored_file_name();		
-		byte fileByte[] = FileUtils.readFileToByteArray(new File("C:\\dev\\file\\" + userid + "\\" + storedFileName));
+		byte fileByte[] = FileUtils.readFileToByteArray(new File("C:\\dev\\file\\" + userid + "\\" + file.getStored_file_name()));
 		
 		HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_PNG);
         headers.setContentLength(fileByte.length);
 		
-        return new HttpEntity<byte[]>(fileByte, headers);
+        return new ResponseEntity<byte[]>(fileByte, headers,HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/ReadTest.do", method = RequestMethod.POST)
