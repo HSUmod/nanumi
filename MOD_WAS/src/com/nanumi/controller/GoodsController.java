@@ -55,6 +55,7 @@ public class GoodsController {
 			json.append("\"hashtag\": \"" + item.getHashtag() + "\",");
 			json.append("\"selectionWay\": \"" + item.getSelectionWay() + "\",");
 			json.append("\"postingTime\": \"" + item.getPostingTime() + "\"");
+			json.append("\"image\": \"" + getGoodsImg(item.getArticleNum(), item.getUserid()) + "\"");
 			json.append("},");
 		}
 		json.delete(json.length() - 1, json.length()); // last comma delete
@@ -67,21 +68,22 @@ public class GoodsController {
 	}
 
 	@RequestMapping(value = "/getGoodsImg.do", method = RequestMethod.POST)
-	public void getGoodsImg(@RequestParam("articleNum") String articleNum, @RequestParam("userid") String userid, HttpServletResponse res) throws Exception {
+	public byte[] getGoodsImg(String articleNum, String userid) throws Exception {
 		Map<String, Object> map = service.selectFileInfo(articleNum);
 		String storedFileName = (String) map.get("stored_file_name");
 		String originalFileName = (String) map.get("original_file_name");
 
-		byte fileByte[] = FileUtils.readFileToByteArray(new File("C:\\dev\\file\\" + userid + "\\" + storedFileName));
+		byte fileByte[] = FileUtils.readFileToByteArray(new File("C:\\dev\\file\\" + userid + "\\" + originalFileName));
+		return fileByte;
 
-		res.setContentType("application/octet-stream");
-		res.setContentLength(fileByte.length);
-		res.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(originalFileName, "UTF-8") + "\";");
-		res.setHeader("Content-Transfer-Encoding", "binary");
-		res.getOutputStream().write(fileByte);
-
-		res.getOutputStream().flush();
-		res.getOutputStream().close();
+//		res.setContentType("application/octet-stream");
+//		res.setContentLength(fileByte.length);
+//		res.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(originalFileName, "UTF-8") + "\";");
+//		res.setHeader("Content-Transfer-Encoding", "binary");
+//		res.getOutputStream().write(fileByte);
+//
+//		res.getOutputStream().flush();
+//		res.getOutputStream().close();
 	}
 
 	@RequestMapping(value = "/ReadTest.do", method = RequestMethod.POST)
