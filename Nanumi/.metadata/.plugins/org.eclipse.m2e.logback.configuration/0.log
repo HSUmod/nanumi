@@ -349,3 +349,7 @@ java.lang.NullPointerException: null
 2015-11-24 10:57:00,422 [Worker-64] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\mj\Desktop\김명준\1차 프로젝트\source\진기족 프로젝트\CeylonTea\src\main\resources
 2015-11-24 10:57:00,437 [Worker-64] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
 2015-11-24 10:57:00,437 [Worker-64] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\mj\Desktop\김명준\1차 프로젝트\source\진기족 프로젝트\CeylonTea\src\test\resources
+2015-11-25 10:21:44,194 [Worker-4] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2015-11-25 10:21:44,201 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\mj\Desktop\김명준\1차 프로젝트\source\진기족 프로젝트\CeylonTea\src\main\resources
+2015-11-25 10:21:44,203 [Worker-4] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2015-11-25 10:21:44,204 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\mj\Desktop\김명준\1차 프로젝트\source\진기족 프로젝트\CeylonTea\src\test\resources

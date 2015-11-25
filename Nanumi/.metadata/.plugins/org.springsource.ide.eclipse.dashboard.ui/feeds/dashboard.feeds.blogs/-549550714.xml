@@ -5,7 +5,31 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-11-20T17:38:41Z</updated>
+  <updated>2015-11-24T11:00:00Z</updated>
+  <entry>
+    <title>This Week in Spring - November 23, 2015</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/11/24/this-week-in-spring-november-23-2015" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2015-11-24:2305</id>
+    <updated>2015-11-24T11:00:00Z</updated>
+    <content type="html">&lt;p&gt;Welcome to another installation of &lt;em&gt;This Week in Spring&lt;/em&gt;! Here in the US it&amp;rsquo;s the week of Thanksgiving, where - hopefully - we take a moment to note the many things for which we&amp;rsquo;re thankful. I&amp;rsquo;m sure I speak for the whole team here at Pivotal when I say: we&amp;rsquo;re thankful for you, dear community. Thank you.&lt;/p&gt;
+&lt;p&gt;And so, as usual, we&amp;rsquo;ve got a lot to get to it. All the better, in fact, for the lazy hours after turkey! &lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Dr. Mark Pollack has just announced the release &lt;a href="http://spring.io/blog/2015/11/19/spring-xd-1-3-ga-and-flo-for-spring-xd-1-0-ga-released"&gt;of Spring XD 1.3 GA and Spring Flo for Spring XD 1.0&lt;/a&gt;. This is a &lt;em&gt;huge&lt;/em&gt; release! Spring XD 1.3.0 supports job composition DSLs, Spring Flo for Spring XD, an improved Admin UI, Spark 1.3.1, updates to the Spring Data and Spring for Hadoop distributions, a Cassandra Sink and &lt;em&gt;much&lt;/em&gt; more! It is also the last in the line before Spring XD completes its journey to the archhitecture already partially laid out in Spring Cloud Stream and Spring Cloud Dataflow! This is an exciting evolution of the technology!&lt;/li&gt;
+  &lt;li&gt;Spring Security and Spring Session lead &lt;a href="http://spring.io/blog/2015/11/17/spring-session-1-1-0-m1-released"&gt;Rob Winch has just announced Spring Session 1.1.0.M1&lt;/a&gt; complete with a lot of new features: searching HTTP sessions by username, &lt;code&gt;HttpSessionListener&lt;/code&gt; support, customized &lt;code&gt;Cookie&lt;/code&gt; creation, overriding the default &lt;code&gt;RedisSerializer&lt;/code&gt;, and Hazelcast configuration and support.&lt;/li&gt;
+  &lt;li&gt;the amazing Andy Wilkinson just &lt;a href="http://spring.io/blog/2015/11/18/spring-io-platform-2-0-0-release"&gt;announced the Spring IO Platform 2.0.0.RELEASE&lt;/a&gt;! The Spring IO platform is a great way to mange your dependencies, in the same way that the Spring Boot dependency management section does, but with an eye towards supporting a) longer terms of stability and b) supporting &lt;em&gt;all&lt;/em&gt; Spring projects, not just those supported by Spring Boot. It&amp;rsquo;s a &lt;em&gt;wonderful&lt;/em&gt; solution for managing applications.&lt;/li&gt;
+  &lt;li&gt;Spring Statemachine lead Janne Valkealahti has &lt;a href="http://spring.io/blog/2015/11/20/spring-statemachine-1-0-1-released"&gt;just announced 1.0.1&lt;/a&gt; which includes a new &lt;code&gt;@EnableStateMachine&lt;/code&gt; annotation, updates to 4.2.2, and several fixes.&lt;/li&gt;
+  &lt;li&gt;friend to the Pivotal community Dan Vega talks about &lt;a href="http://therealdanvega.com/blog/2015/11/17/spring-boot-introduction-course"&gt;his just released Udemy course on using Spring Boot&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Mattias Severson&amp;rsquo;s post explains how to use the Gradle Spring Boot plugin to ensure that a project a project - &lt;a href="http://www.jayway.com/2015/11/23/reusing-spring-boots-dependency-management/"&gt;that doesn&amp;rsquo;t otherwise use or depend on Spring Boot - gets the same versions as if it did&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;This slide deck &lt;a href="https://speakerdeck.com/toedter/cool-web-apps-with-spring-boot-angularjs-and-typescript"&gt;&lt;em&gt;Cool Web Apps with Spring Boot, AngularJS &amp;amp; TypeScript&lt;/em&gt; by Kai Toedter seemed pretty interesting!&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;the Stormpath Java developer evangelist &lt;a href="https://www.youtube.com/watch?v=5Cs6GahGSjE"&gt;Micah Silverman just blogged about their new Stormpath Spring Boot auto-configuration&lt;/a&gt;. &lt;a href="http://www.slideshare.net/stormpath/stormpath-101-spring-boot-spring-security"&gt;The slides are available online, as well&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://activiti.org"&gt;Activiti&lt;/a&gt; ninja Joram Barrez blogged about the &lt;a href="http://www.jorambarrez.be/blog/category/spring-2/"&gt;recent addition of the Activiti auto-configuration&lt;/a&gt; to the &lt;a href="http://start.spring.io"&gt;Spring Initializr&lt;/a&gt;, complete with a cool demo!&lt;/li&gt;
+  &lt;li&gt;Dan also did a nice video about one of the features &lt;a href="https://www.youtube.com/watch?v=JAOsHylYj9o&amp;feature=youtu.be&amp;a"&gt;in Spring Boot 1.3 that&amp;rsquo;s sweeping the nation: the color ASCII art banners&lt;/a&gt;!&lt;/li&gt;
+&lt;/ul&gt;</content>
+  </entry>
   <entry>
     <title>Spring Statemachine 1.0.1 Released</title>
     <link rel="alternate" href="https://spring.io/blog/2015/11/20/spring-statemachine-1-0-1-released" />
@@ -1184,45 +1208,5 @@ You updated the UI to show an employee&amp;#8217;s manager and also display erro
 &lt;div class="paragraph"&gt;&#xD;
 &lt;p&gt;This concludes the blog series on the Spring Boot Dashboard, a new feature in the Spring Tool Suite since its 3.7.1 release. Let us know about your experiences using the dashboard.&lt;/p&gt;&#xD;
 &lt;/div&gt;</content>
-  </entry>
-  <entry>
-    <title>This Week in Spring ( SpringOne2GX replay / Pieter Humphrey edition!) - October 21, 2015</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/10/21/this-week-in-spring-springone2gx-replay-pieter-humphrey-edition-october-21-2015" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2015-10-21:2284</id>
-    <updated>2015-10-21T08:32:30Z</updated>
-    <content type="html">&lt;p&gt;Welcome to another installation of &lt;em&gt;This Week in Spring&lt;/em&gt;! This week is the first week (of many) where the &lt;em&gt;crazy awesome&lt;/em&gt; [https://twitter.com/pieterhumphrey](Pieter Humphrey) has released scores of &lt;a href="http://SpringOne2gx.com"&gt;SpringOne2GX&lt;/a&gt; 2015 videos for our binge watching enjoyment! Most of this week&amp;rsquo;s bountiful roundup is thanks to Pieter&amp;rsquo;s meticulous transcoding, uploading and posting videos from SpringOne2GX 2015 - thanks Pieter! So without further ado, let&amp;rsquo;s take a look at some of this week&amp;rsquo;s selection including a LOT of content from SpringOne2GX, including..&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;..&lt;a href="http://spring.io/blog/2015/10/19/springone2gx-2015-replay-modern-java-component-design-with-spring-framework-4-2"&gt;Juergen Holler and Stephane Nicoll&amp;rsquo;s talk presenting the updates to Spring framework 4.2&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;..&lt;a href="http://spring.io/blog/2015/10/19/springone2gx-2015-replay-day-1-keynote-cloud-native-enterprise"&gt;the SpringOne2GX day 1 keynote&lt;/a&gt; featuring James Watters, Dr. David Syer, Scott Frederick, Juergen Hoeller and yours truly&lt;/li&gt;
-  &lt;li&gt;..&lt;a href="http://spring.io/blog/2015/10/19/springone2gx-2015-replay-day-2-technical-keynote-cloud-native-enterprise"&gt;the SpringOne2GX day 2 keynote&lt;/a&gt; featuring Guillaume LaForge, Graeme Rocher, Dr. David Syer, Mark Fisher, Scott Frederick and yours truly&lt;/li&gt;
-  &lt;li&gt;..the talk that Spring Boot and Spring Cloud co-founder Dr. Dave Syer and I, aided by a &lt;em&gt;VERY&lt;/em&gt; gracious guest appearance by Spring creator and hero &lt;a href="http://twitter.com/springrod"&gt;Dr. Rod Johnson&lt;/a&gt;, gave &lt;a href="http://spring.io/blog/2015/10/19/springone2gx-2015-replay-getting-started-with-spring-cloud"&gt;introducing Spring Cloud&lt;/a&gt; (I&amp;rsquo;ve &lt;em&gt;never been so privileged&lt;/em&gt; as I was to be a part of this talk and I &lt;em&gt;truly&lt;/em&gt; hope you enjoy this one)&lt;/li&gt;
-  &lt;li&gt;..Netflix&amp;rsquo;s Jon Schneider and Taylor Wicksell &lt;a href="http://spring.io/blog/2015/10/19/springone2gx-2015-replay-spring-cloud-at-netflix"&gt;showing - live - how they build cloud native applications using Spring Boot and Spring Cloud at Netflix&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;..Matt Stine&amp;rsquo;s talk introducing &lt;a href="http://spring.io/blog/2015/10/19/springone2gx-2015-replay-lattice-a-cloud-native-platform-for-your-spring-applications"&gt;some of the powerful new features in Lattice&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;.. Grails lead &lt;a href="http://spring.io/blog/2015/10/19/springone2gx-2015-replay-grails-3-x-update"&gt;Graeme Rocher&amp;rsquo;s Grails 3 update&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;..Spencer Gibb&amp;rsquo;s talk &lt;a href="http://spring.io/blog/2015/10/19/springone2gx-2015-replay-spring-cloud-exploring-alternative-spring-cloud-implementations"&gt;introducing some of the various extensibility planes of Spring Cloud&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;..John Field and Shawn McKinney&amp;rsquo;s talk &lt;a href="http://spring.io/blog/2015/10/19/springone2gx-2015-replay-a-how-to-guide-to-security-in-the-paas-cloud"&gt;discussing some of the security concerns when moving applications to a PaaS&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;..Will Tran&amp;rsquo;s talk on &lt;a href="http://spring.io/blog/2015/10/19/springone2gx-2015-replay-securing-microservices-with-spring-cloud-security"&gt;securing microservices with Spring Cloud Security&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;..Google&amp;rsquo;s Ray Tsang introducing how &lt;a href="http://spring.io/blog/2015/10/19/springone2gx-2015-replay-spring-boot-micro-services-containers-and-kubernetes-how-to"&gt;to run Spring Boot-based microservices on Kubernetes&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;..Nicholas Frankel&amp;rsquo;s &lt;a href="http://spring.io/blog/2015/10/19/springone2gx-2015-replay-spring-boot-for-devops"&gt;talk introducing devops with Spring Boot&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;..Cornelia Davis&amp;rsquo; talk on &lt;a href="http://spring.io/blog/2015/10/19/springone2gx-2015-replay-12-factor-or-cloud-native-apps-for-spring-developers"&gt;12 factor Spring applications&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;..AppDynamics&amp;rsquo;s Dustin Whittle&amp;rsquo;s talk &lt;a href="http://spring.io/blog/2015/10/19/springone2gx-2015-replay-modern-frontend-engineering"&gt;about modern frontend engineering&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;..VMWare&amp;rsquo;s Emad Benjamin&amp;rsquo;s talk &lt;a href="http://spring.io/blog/2015/10/19/springone2gx-2015-replay-building-and-tuning-high-performance-java-platforms"&gt;about building and tunng high performance Java platforms&lt;/a&gt; in a world of virtual machines and the cloud&lt;/li&gt;
-  &lt;li&gt;..Colin Harrington&amp;rsquo;s talk on using Grails to &lt;a href="http://spring.io/blog/2015/10/19/springone2gx-2015-replay-booting-iot-with-grails"&gt;support Internet-of-Things use cases&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;..the amazing &lt;a href="http://spring.io/blog/2015/10/19/springone2gx-2015-replay-bringing-javax-cache-ing-to-your-application"&gt;incomparable Jeff Brown&amp;rsquo;s talk introducing &lt;code&gt;javax.cache&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;..and Jeff&amp;rsquo;s &lt;a href="http://spring.io/blog/2015/10/19/springone2gx-2015-replay-restful-grails-3"&gt;talk on RESTful Grails 3&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;..and Jeff&amp;rsquo;s talk on building a &lt;a href="http://spring.io/blog/2015/10/19/springone2gx-2015-replay-microservice-architecture-with-grails"&gt;microservice architecture with Grails&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;Whew! That&amp;rsquo;s &lt;em&gt;at least&lt;/em&gt; a week&amp;rsquo;s worth of watching! That&amp;rsquo;s all thanks to Pieter Humphrey working overtime to get this all available as early and abundantly as possible. Pieter is &lt;em&gt;also&lt;/em&gt; responsible for working very hard over the last few years to ensure that &lt;em&gt;all&lt;/em&gt; talks are recorded and available so to be able to binge watch everything so quickly after the show is a &lt;em&gt;true&lt;/em&gt; privilege. Thank you, Pieter! We still have some &lt;em&gt;news&lt;/em&gt; to catch up on, as well! So..&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Spring and Spring Boot ninja St?phane Nicoll just announced &lt;a href="http://spring.io/blog/2015/10/16/spring-boot-1-2-7-available-now"&gt;that Spring Boot 1.2.7 is now available&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data ninja Thomas Risberg just announced &lt;a href="http://spring.io/blog/2015/10/15/spring-for-apache-hadoop-2-3-release-candidate-1-released"&gt;that Spring for Apache Hadoop RC1 has been released&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;SN has also just announced &lt;a href="http://spring.io/blog/2015/10/15/spring-framework-4-2-2-4-1-8-and-3-2-15-available-now"&gt;that Spring framework 4.2.2, 4.1.8, and 3.2.15 - complete with lots of bug fixes, are all now available as well&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Martin Lippert&amp;rsquo;s just posted the second part &lt;a href="http://spring.io/blog/2015/10/15/the-spring-boot-dashboard-in-sts-part-2-working-with-cloud-foundry"&gt;of his series on using the Spring Boot Dashboard in Spring Tool Suite&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring lead and co-founder Juergen Hoeller put together a nice &lt;a href="http://spring.io/blog/2015/10/14/spring-on-glassfish-4-1-1-and-wildfly-10-undertow-1-3"&gt;post on the compatible Java EE 7 implementations and Spring&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Janne Valkealahti just announced &lt;a href="http://spring.io/blog/2015/10/13/spring-statemachine-1-0-0-released"&gt;Spring Statemachine 1.0.0 has been released&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content>
   </entry>
 </feed>
