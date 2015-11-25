@@ -9,7 +9,7 @@ import android.widget.TextView;
 //부분화면 정의
 public class MainItemView extends LinearLayout {
 
-	TextView writtenText, hashText;
+	TextView contentsText, hashtagText;
 
 	public MainItemView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -25,17 +25,16 @@ public class MainItemView extends LinearLayout {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		inflater.inflate(R.layout.item_main, this, true);
 
-		writtenText = (TextView) findViewById(R.id.writtenText);
-		hashText = (TextView) findViewById(R.id.hashText);
+		contentsText = (TextView) findViewById(R.id.writtenText);
+		hashtagText = (TextView) findViewById(R.id.hashText);
 	}
 
-
-	public void setWrittenText(String writtenText) {
-		this.writtenText.setText(writtenText);
+	public void setContentsText(String contentsText) {
+		this.contentsText.setText(contentsText);
 	}
 
-	public void setHashText(String	 hashText) {
-		this.hashText.setText(hashText);
+	public void setHashText(String hashText) {
+		this.hashtagText.setText(hashText);
 	}
 
 }

@@ -1,0 +1,34 @@
+class MemberInfo extends AsyncTask<String, Void, Void> {
+		@Override
+		protected Void doInBackground(String... param) {
+
+			// TODO Auto-generated method stub
+			try {
+				HttpClient client = new DefaultHttpClient();
+				String postURL = "http://223.194.141.168/MOD_WAS/" + param[0];
+				HttpPost post = new HttpPost(postURL);
+
+				ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
+
+				params.add(new BasicNameValuePair("userid", param[1]));
+				params.add(new BasicNameValuePair("pwd", param[2]));
+				params.add(new BasicNameValuePair("nickname", param[3]));
+				params.add(new BasicNameValuePair("address", param[4]));
+				params.add(new BasicNameValuePair("email", param[5]));
+				UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params, HTTP.UTF_8);
+				post.setEntity(ent);
+
+				HttpResponse responsePOST = client.execute(post);
+				HttpEntity resEntity = responsePOST.getEntity();
+
+				if (resEntity != null) {
+					Log.i("RESPONSE", EntityUtils.toString(resEntity));
+				}
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return null;
+
+		}
+	}
