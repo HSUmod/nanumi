@@ -1,0 +1,18 @@
+package com.example.mainview;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.widget.LinearLayout;
+
+public class MainView extends LinearLayout{
+
+	
+	public MainView(Context context, MainItem inflater) {
+		super(context);
+	//	this.inflater = inflater;
+	}
+
+	LayoutInflater inflater = (LayoutInflater)Context.
+	
+
+}
