@@ -1,6 +1,7 @@
 package com.nanumi.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +34,10 @@ public class GoodsDAO {
 	}
 
 	public Map<String, Object> selectFileInfo(String articleNum) {
-		return session.selectOne("nanumiNS.selectFileInfo", articleNum);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map = session.selectMap("nanumiNS.selectFileInfo", articleNum);
+		
+		return map;
 	}
 }
