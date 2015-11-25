@@ -3,7 +3,6 @@ package com.nanumi.controller;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.nanumi.dto.FileDTO;
 import com.nanumi.dto.GoodsDTO;
 import com.nanumi.service.GoodsService;
 
@@ -70,12 +70,8 @@ public class GoodsController {
 
 	@RequestMapping(value = "/getGoodsImg.do", method = RequestMethod.POST)
 	public byte[] getGoodsImg(String articleNum, String userid) throws Exception {
-		Map<String, Object> map = service.selectFileInfo(articleNum);
-		String storedFileName = (String) map.get("stored_file_name");
-		log.info("-----------------");
-		log.info(map.get("stored_file_name"));
-		log.info("-----------------");
-//		String originalFileName = (String) map.get("original_file_name");
+		FileDTO file  = service.selectFileInfo(articleNum);
+		String storedFileName = file.getStored_file_name();
 		
 
 		byte fileByte[] = FileUtils.readFileToByteArray(new File("C:\\dev\\file\\" + userid + "\\" + storedFileName));

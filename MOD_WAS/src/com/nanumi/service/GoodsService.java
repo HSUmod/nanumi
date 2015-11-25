@@ -1,10 +1,10 @@
 package com.nanumi.service;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.nanumi.dto.FileDTO;
 import com.nanumi.dto.GoodsDTO;
 
 public interface GoodsService {
@@ -12,5 +12,5 @@ public interface GoodsService {
 
 	public List<GoodsDTO> readGoods();
 
-	public Map<String, Object> selectFileInfo(String articleNum);
+	public FileDTO selectFileInfo(String articleNum);
 }

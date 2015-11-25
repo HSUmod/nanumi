@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.nanumi.common.FileUtils;
 import com.nanumi.dao.GoodsDAO;
+import com.nanumi.dto.FileDTO;
 import com.nanumi.dto.GoodsDTO;
 
 @Service("GoodsService")
@@ -54,7 +55,7 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public Map<String, Object> selectFileInfo(String articleNum) {
+	public FileDTO selectFileInfo(String articleNum) {
 		return goodsDAO.selectFileInfo(articleNum);
 	}
 }
