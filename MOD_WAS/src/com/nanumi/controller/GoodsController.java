@@ -1,16 +1,16 @@
 package com.nanumi.controller;
 
-import java.io.File;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -62,6 +62,9 @@ public class GoodsController {
 			json.append("\"selectionWay\": \"" + item.getSelectionWay() + "\",");
 			json.append("\"postingTime\": \"" + item.getPostingTime() + "\",");
 			json.append("\"image\": \"" + getGoodsImg(item.getArticleNum(), item.getUserid()) + "\"");
+			log.info("===========");
+			log.info(getGoodsImg(item.getArticleNum(), item.getUserid()));
+			log.info("===========");
 			json.append("},");
 		}
 		json.delete(json.length() - 1, json.length()); // last comma delete
@@ -73,15 +76,19 @@ public class GoodsController {
 		pw.close();
 	}
 
-	public ResponseEntity<byte[]> getGoodsImg(String articleNum, String userid) throws Exception {
-		FileDTO file  = service.selectFileInfo(articleNum);
-		byte fileByte[] = FileUtils.readFileToByteArray(new File("C:\\dev\\file\\" + userid + "\\" + file.getStored_file_name()));
+	public byte[] getGoodsImg(String articleNum, String userid) throws Exception {
+		FileDTO file = service.selectFileInfo(articleNum);
+
+		Path path = Paths.get("C:\\dev\\file\\" + userid + "\\" + file.getStored_file_name());
+		byte[] data = Files.readAllBytes(path);
 		
-		HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_PNG);
-        headers.setContentLength(fileByte.length);
-		
-        return new ResponseEntity<byte[]>(fileByte, headers,HttpStatus.CREATED);
+		return data;
+
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.setContentType(MediaType.IMAGE_PNG);
+//		headers.setContentLength(data.length);
+//
+//		return new ResponseEntity<byte[]>(data, headers, HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/ReadTest.do", method = RequestMethod.POST)
