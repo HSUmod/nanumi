@@ -24,6 +24,19 @@ public class GoodsDTO {
 		this.hashtag = hashtag;
 	}
 
+	public GoodsDTO(String articleNum, String userid, String contents, String city, String district, String major, String sub, String selectionWay, String hashtag, String postingTime) {
+		this.articleNum = articleNum;
+		this.userid = userid;
+		this.city = city;
+		this.district = district;
+		this.major = major;
+		this.sub = sub;
+		this.contents = contents;
+		this.hashtag = hashtag;
+		this.selectionWay = selectionWay;
+		this.postingTime = postingTime;
+	}
+
 	public String getArticleNum() {
 		return articleNum;
 	}
