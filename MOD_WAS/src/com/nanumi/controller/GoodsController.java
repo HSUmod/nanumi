@@ -1,8 +1,6 @@
 package com.nanumi.controller;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -90,7 +89,7 @@ public class GoodsController {
 		res.getOutputStream().close();
 	}
 
-	private byte[] getImgByte(String articleNum, String userid) throws IOException {
+	private String getImgByte(String articleNum, String userid) throws IOException {
 		FileDTO file = service.selectFileInfo(articleNum);
 		File imgPath = new File("C:\\dev\\file\\" + userid + "\\" + file.getStored_file_name());
 		BufferedImage bufferedImage = ImageIO.read(imgPath);
@@ -100,14 +99,17 @@ public class GoodsController {
 		baos.flush();
 		byte[] imageInByte = baos.toByteArray();
 		baos.close();
-		
+
 		log.info("======================================");
 		log.info("======================================");
 		log.info(imageInByte);
 		log.info("======================================");
 		log.info("======================================");
 
-		return imageInByte;
+		String str = Base64.encodeBase64String(imageInByte);
+		byte[] backToBytes = Base64.decodeBase64(str);
+
+		return str;
 	}
 
 	@RequestMapping(value = "/ReadTest.do", method = RequestMethod.POST)
