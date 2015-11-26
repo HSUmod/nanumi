@@ -3,6 +3,7 @@ package com.nanumi.controller;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -94,10 +95,19 @@ public class GoodsController {
 		File imgPath = new File("C:\\dev\\file\\" + userid + "\\" + file.getStored_file_name());
 		BufferedImage bufferedImage = ImageIO.read(imgPath);
 
-		WritableRaster raster = bufferedImage.getRaster();
-		DataBufferByte data = (DataBufferByte) raster.getDataBuffer();
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ImageIO.write(bufferedImage, "jpg", baos);
+		baos.flush();
+		byte[] imageInByte = baos.toByteArray();
+		baos.close();
+		
+		log.info("======================================");
+		log.info("======================================");
+		log.info(imageInByte);
+		log.info("======================================");
+		log.info("======================================");
 
-		return (data.getData());
+		return imageInByte;
 	}
 
 	@RequestMapping(value = "/ReadTest.do", method = RequestMethod.POST)
