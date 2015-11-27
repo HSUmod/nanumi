@@ -6,11 +6,10 @@ public class GoodsDTO {
 	private String ruserid;
 
 	public GoodsDTO() {
-		
+
 	}
 
-	public GoodsDTO(String articleNum, String userid, String city, String district, String major, String sub, String contents, String hashtag, String selectionWay, String state, String postingTime) {
-		this.articleNum = articleNum;
+	public GoodsDTO(String userid, String city, String district, String major, String sub, String contents, String hashtag, String selectionWay) {
 		this.userid = userid;
 		this.city = city;
 		this.district = district;
@@ -19,8 +18,6 @@ public class GoodsDTO {
 		this.contents = contents;
 		this.hashtag = hashtag;
 		this.selectionWay = selectionWay;
-		this.state = state;
-		this.postingTime = postingTime;
 	}
 
 	public String getArticleNum() {

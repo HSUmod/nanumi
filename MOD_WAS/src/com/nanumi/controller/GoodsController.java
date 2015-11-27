@@ -31,33 +31,31 @@ public class GoodsController {
 	private GoodsService service;
 
 	@RequestMapping(value = "/WritingGoods.do", method = RequestMethod.POST)
-	public void writingGoods(@RequestParam("userid") String userid, @RequestParam("contents") String contents, @RequestParam("city") String city, @RequestParam("district") String district,
-			@RequestParam("major") String major, @RequestParam("sub") String sub, @RequestParam("selectionWay") String selectionWay, @RequestParam("hashtag") String hashtag,
+	public void writingGoods(@RequestParam("userid") String userid, @RequestParam("city") String city, @RequestParam("district") String district, @RequestParam("major") String major,
+			@RequestParam("sub") String sub, @RequestParam("contents") String contents, @RequestParam("hashtag") String hashtag, @RequestParam("selectionWay") String selectionWay,
 			HttpServletRequest request, HttpServletResponse res) throws Exception {
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = res.getWriter();
 
-//		service.writingGoods(new GoodsDTO(userid, contents, city, district, major, sub, selectionWay, hashtag), request);
+		service.writingGoods(new GoodsDTO(userid, city, district, major, sub, contents, hashtag, selectionWay), request);
 		pw.write("{\"result\": \"WRITING_COMPLETE\"}");
 		pw.close();
 	}
-	
+
 	@RequestMapping(value = "/getUserAddress.do", method = RequestMethod.POST)
 	public void getUserAddress(@RequestParam("userid") String userid, HttpServletResponse res) throws Exception {
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = res.getWriter();
-		
+
 		UserDTO user = service.getUserAddress(userid);
 		pw.write("{\"result\": \"READ_COMPLETE\", ");
 		pw.write("\"address\": [{");
 		pw.write("\"city\": \"" + user.getCity() + "\", ");
 		pw.write("\"district\": \"" + user.getDistrict() + "\"");
 		pw.write("}]}");
-		
+
 		pw.close();
 	}
-	
-	
 
 	@RequestMapping(value = "/ReadGoods.do", method = RequestMethod.POST)
 	public void readGoods(HttpServletResponse res) throws Exception {
@@ -94,7 +92,7 @@ public class GoodsController {
 		FileDTO file = service.selectFileInfo(articleNum);
 		BufferedImage bufferedImage = ImageIO.read(new File("C:\\dev\\file\\" + userid + "\\" + file.getStored_file_name()));
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		
+
 		ImageIO.write(bufferedImage, "jpg", baos);
 		baos.flush();
 		byte[] imageInByte = baos.toByteArray();
