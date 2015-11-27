@@ -140,10 +140,10 @@ public class CommonController {
 		json.append("\"value\": [");
 		for (CityDTO city : cityList) {
 			json.append("{\"city\": \"" + city.getCity() + "\", ");
-			json.append("\"distirct\": [");
+			json.append("\"district\": [");
 			for (DistrictDTO district : districtList) {
 				if (city.getCitycode().equals(district.getCitycode())) {
-					json.append("\"" + district.getDistrict() + " \", ");
+					json.append("\"" + district.getDistrict() + "\", ");
 				}
 			}
 			json.delete(json.length() - 1, json.length());
