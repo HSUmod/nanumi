@@ -26,7 +26,6 @@ INDEX VERSION 1.127+C:\Users\mj\Desktop\nanumi\mj\Nanumi\.metadata\.plugins\org.
 3233967566.index
 986407835.index
 1605848065.index
-2349243296.index
 1894646622.index
 1985463821.index
 4094714631.index
