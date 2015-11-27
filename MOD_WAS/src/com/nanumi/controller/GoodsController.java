@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.nanumi.dto.ApplicationDTO;
 import com.nanumi.dto.FileDTO;
 import com.nanumi.dto.GoodsDTO;
 import com.nanumi.dto.UserDTO;
@@ -101,6 +102,28 @@ public class GoodsController {
 
 		return Base64.encodeBase64String(imageInByte);
 	}
-	
-	
+
+	@RequestMapping(value = "/ApplicationList.do", method = RequestMethod.POST)
+	public void getApplicationListByUserid(@RequestParam("userid") String userid, HttpServletResponse res) throws Exception {
+		List<ApplicationDTO> applicationList = service.getMyApplicationList(userid);
+		StringBuilder json = new StringBuilder();
+
+		json.append("{\"result\": \"ok\", ");
+		json.append("\"value\": [");
+		for (ApplicationDTO item : applicationList) {
+			json.append("{");
+			json.append("\"articleNum\": \"" + item.getArticleNum() + "\",");
+			json.append("\"userid\": \"" + item.getUserid() + "\",");
+			json.append("\"state\": \"" + item.getState() + "\"");
+			json.append("},");
+		}
+		json.delete(json.length() - 1, json.length()); // last comma delete
+		json.append("]}");
+
+		res.setContentType("application/json; charset=utf-8");
+		PrintWriter pw = res.getWriter();
+		pw.write(json.toString());
+		pw.close();
+	}
+
 }
