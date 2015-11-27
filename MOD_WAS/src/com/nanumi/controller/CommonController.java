@@ -33,7 +33,7 @@ public class CommonController {
 		PrintWriter pw = res.getWriter();
 
 		service.signUp(new UserDTO(userid, pwd, nickname, city, district, phone, email));
-		pw.write("{\"result\": \"SIGNUP_COMPLETE\"}");
+		pw.write("{\"result\": \"ok\"}");
 		pw.close();
 	}
 
@@ -43,7 +43,7 @@ public class CommonController {
 		PrintWriter pw = res.getWriter();
 
 		if (service.checkUserId(userid) != null) {
-			pw.write("{\"result\": \"duplicated\"}");
+			pw.write("{\"result\": \"fail\", \"value\": \"duplicated\"}");
 		} else {
 			pw.write("{\"result\": \"ok\"}");
 		}
@@ -57,7 +57,7 @@ public class CommonController {
 		PrintWriter pw = res.getWriter();
 
 		if (service.checkNickname(nickname) != null) {
-			pw.write("{\"result\": \"duplicated\"}");
+			pw.write("{\"result\": \"fail\", \"value\": \"duplicated\"}");
 		} else {
 			pw.write("{\"result\": \"ok\"}");
 		}
@@ -71,7 +71,7 @@ public class CommonController {
 		PrintWriter pw = res.getWriter();
 
 		if (service.checkEmail(email) != null) {
-			pw.write("{\"result\": \"duplicated\"}");
+			pw.write("{\"result\": \"fail\", \"value\": \"duplicated\"}");
 		} else {
 			pw.write("{\"result\": \"ok\"}");
 		}
@@ -83,7 +83,7 @@ public class CommonController {
 	 * 
 	 * @return
 	 * Success
-	 *  uuid
+	 *  UUID
 	 * Fail
 	 *  LOGIN_ERROR_01: 비밀번호 틀림
 	 *  LOGIN_ERROR_02: 존재하지 않는 아이디 
@@ -98,14 +98,14 @@ public class CommonController {
 			if (user.getPwd().equals(pwd)) {
 				String userUUID = CommonUtils.generateUUID(user.getUserid()); // 로그인 성공, uuid 발급
 				session.setAttribute("UUID-", userUUID); // session에 uuid 저장
-				pw.write("{\"result\": \"Success\", \"value\": \"" + userUUID + "\"}");
+				pw.write("{\"result\": \"ok\", \"value\": \"" + userUUID + "\"}");
 				log.info("Login success: " + userUUID);
 			} else {
-				pw.write("{\"result\": \"Fail\", \"value\": \"1\"}");
+				pw.write("{\"result\": \"fail\", \"value\": \"1\"}");
 				log.info("Login fail: 01 " + userid);
 			}
 		} catch (NullPointerException e) {
-			pw.write("{\"result\": \"Fail\", \"value\": \"2\"}");
+			pw.write("{\"result\": \"fail\", \"value\": \"2\"}");
 			log.info("Login fail: 02 " + userid);
 		} finally {
 			pw.close();
@@ -121,10 +121,10 @@ public class CommonController {
 			session.removeAttribute("UUID-" + uuid);
 
 			log.info("Logout success: " + uuid);
-			pw.write("{\"result\": \"Success\"}");
+			pw.write("{\"result\": \"ok\"}");
 		} catch (IllegalStateException e) {
 			log.info("Logout fail: " + uuid);
-			pw.write("{\"result\": \"Fail\"}");
+			pw.write("{\"result\": \"fail\"}");
 		} finally {
 			pw.close();
 		}
@@ -136,8 +136,8 @@ public class CommonController {
 		List<DistrictDTO> districtList = service.getDistricts();
 		StringBuilder json = new StringBuilder();
 
-		json.append("{\"result\": \"SEARCH_COMPLETE\", ");
-		json.append("\"address\": [");
+		json.append("{\"result\": \"ok\", ");
+		json.append("\"value\": [");
 		for (CityDTO city : cityList) {
 			json.append("{\"city\": \"" + city.getCity() + "\", ");
 			json.append("\"distirct\": [");
@@ -146,10 +146,10 @@ public class CommonController {
 					json.append("\"" + district.getDistrict() + " \", ");
 				}
 			}
-			json.delete(json.length() - 1, json.length()); // last comma delete
+			json.delete(json.length() - 1, json.length());
 			json.append("]},");
 		}
-		json.delete(json.length() - 1, json.length()); // last comma delete
+		json.delete(json.length() - 1, json.length());
 		json.append("]}");
 
 		res.setContentType("application/json; charset=utf-8");
@@ -161,9 +161,10 @@ public class CommonController {
 	@RequestMapping(value = "/SearchUserID.do", method = RequestMethod.POST)
 	public void searchUserid(@RequestParam("email") String email, HttpServletResponse res) throws IOException {
 		String result = service.getUserIdByEmail(email);
+
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = res.getWriter();
-		pw.write("{\"result\": \"" + result + "\"}");
+		pw.write("{\"result\": \"ok\", \"value\": \"" + result + "\"}");
 		pw.close();
 	}
 
@@ -173,7 +174,7 @@ public class CommonController {
 		service.modifyUserInfo(new UserDTO(userid, pwd, nickname, city, district, phone, email));
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = res.getWriter();
-		pw.write("{\"result\": \"MODIFY_COMPLETE\"}");
+		pw.write("{\"result\": \"ok\"}");
 		pw.close();
 	}
 }

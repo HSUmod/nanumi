@@ -1,27 +1,18 @@
 package com.nanumi.dto;
 
 public class CityDTO {
-	private int citycode, districtcode;
-	private String city, district;
+	private String citycode, city;
 
 	public CityDTO() {
 
 	}
 
-	public int getCitycode() {
+	public String getCitycode() {
 		return citycode;
 	}
 
-	public void setCitycode(int citycode) {
+	public void setCitycode(String citycode) {
 		this.citycode = citycode;
-	}
-
-	public int getDistrictcode() {
-		return districtcode;
-	}
-
-	public void setDistrictcode(int districtcode) {
-		this.districtcode = districtcode;
 	}
 
 	public String getCity() {
@@ -30,14 +21,6 @@ public class CityDTO {
 
 	public void setCity(String city) {
 		this.city = city;
-	}
-
-	public String getDistrict() {
-		return district;
-	}
-
-	public void setDistrict(String district) {
-		this.district = district;
 	}
 
 }

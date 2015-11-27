@@ -37,7 +37,7 @@ public class GoodsController {
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = res.getWriter();
 
-		service.writingGoods(new GoodsDTO(userid, contents, city, district, major, sub, selectionWay, hashtag), request);
+//		service.writingGoods(new GoodsDTO(userid, contents, city, district, major, sub, selectionWay, hashtag), request);
 		pw.write("{\"result\": \"WRITING_COMPLETE\"}");
 		pw.close();
 	}

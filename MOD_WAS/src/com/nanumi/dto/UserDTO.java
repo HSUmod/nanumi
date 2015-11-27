@@ -4,6 +4,7 @@ public class UserDTO {
 	private String userid, pwd, nickname, city, district, phone, email;
 
 	public UserDTO() {
+
 	}
 
 	public UserDTO(String userid, String pwd, String nickname, String city, String district, String phone, String email) {

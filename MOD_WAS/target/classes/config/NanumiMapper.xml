@@ -5,8 +5,8 @@
 <mapper namespace="nanumiNS">
     <!-- SignUp -->
     <insert id="signUp" parameterType="User">
-	    insert into member(userid,pwd,nickname,address,email)
-		values(#{userid}, #{pwd}, #{nickname}, #{address}, #{email})
+	    insert into member(userid, pwd, nickname, city, district, phone, email)
+		values(#{userid}, #{pwd}, #{nickname}, #{city}, #{district}, #{phone}, #{email})
 	</insert>
 	
     <select id="checkUserId" parameterType="String" resultType="User">
@@ -89,5 +89,19 @@
         select stored_file_name, original_file_name
           from goods_file
          where articleNum = #{articleNum}
+	</select>
+	
+	<!-- 신청자 입장 -->
+	<select id="getMyApplicationList" resultType="Application">
+	    select *
+	      from application_list
+	     where  userid = #{userid}
+	</select>
+	
+	<!-- 등록자 입장 -->
+	<select id="getMyGoodsApplicationList" resultType="Application">
+	    select *
+	      from application_list
+	     where articleNum = #{articleNum}
 	</select>
 </mapper>

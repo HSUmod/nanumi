@@ -8,7 +8,6 @@ public class FileDTO {
 	}
 
 	public FileDTO(String idx, String articleNum, String original_file_name, String stored_file_name, String file_size, String crea_dtm) {
-		super();
 		this.idx = idx;
 		this.articleNum = articleNum;
 		this.original_file_name = original_file_name;
