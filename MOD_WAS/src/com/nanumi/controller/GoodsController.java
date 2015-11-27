@@ -62,7 +62,7 @@ public class GoodsController {
 		List<GoodsDTO> goodsList = service.readGoods();
 		StringBuilder json = new StringBuilder();
 
-		json.append("{\"result\": \"READ_COMPLETE\", ");
+		json.append("{\"result\": \"ok\", ");
 		json.append("\"goods\": [");
 		for (GoodsDTO item : goodsList) {
 			json.append("{");
@@ -75,6 +75,7 @@ public class GoodsController {
 			json.append("\"contents\": \"" + item.getContents() + "\",");
 			json.append("\"hashtag\": \"" + item.getHashtag() + "\",");
 			json.append("\"selectionWay\": \"" + item.getSelectionWay() + "\",");
+			json.append("\"state\": \"" + item.getState() + "\",");
 			json.append("\"postingTime\": \"" + item.getPostingTime() + "\",");
 			json.append("\"image\": \"" + getImgData(item.getArticleNum(), item.getUserid()) + "\"");
 			json.append("},");
@@ -100,4 +101,6 @@ public class GoodsController {
 
 		return Base64.encodeBase64String(imageInByte);
 	}
+	
+	
 }

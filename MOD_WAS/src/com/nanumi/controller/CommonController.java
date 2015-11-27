@@ -142,7 +142,7 @@ public class CommonController {
 			json.append("{\"city\": \"" + city.getCity() + "\", ");
 			json.append("\"distirct\": [");
 			for (DistrictDTO district : districtList) {
-				if (city.getCitycode() == district.getCitycode()) {
+				if (city.getCitycode().equals(district.getCitycode())) {
 					json.append("\"" + district.getDistrict() + " \", ");
 				}
 			}

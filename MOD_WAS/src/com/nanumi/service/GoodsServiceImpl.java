@@ -14,7 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.nanumi.common.FileUtils;
+import com.nanumi.dao.ApplicationDAO;
 import com.nanumi.dao.GoodsDAO;
+import com.nanumi.dto.ApplicationDTO;
 import com.nanumi.dto.FileDTO;
 import com.nanumi.dto.GoodsDTO;
 import com.nanumi.dto.UserDTO;
@@ -26,6 +28,7 @@ public class GoodsServiceImpl implements GoodsService {
 	private FileUtils fileUtils;
 	@Autowired
 	private GoodsDAO goodsDAO;
+	private ApplicationDAO applicationDAO;
 
 	@Override
 	public void writingGoods(GoodsDTO goods, HttpServletRequest request) throws Exception {
@@ -50,10 +53,11 @@ public class GoodsServiceImpl implements GoodsService {
 		}
 	}
 
+	@Override
 	public UserDTO getUserAddress(String userid) {
 		return goodsDAO.getUserAddress(userid);
 	}
-	
+
 	@Override
 	public List<GoodsDTO> readGoods() {
 		return goodsDAO.readGoods();
@@ -62,5 +66,15 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public FileDTO selectFileInfo(String articleNum) {
 		return goodsDAO.selectFileInfo(articleNum);
+	}
+
+	@Override
+	public List<ApplicationDTO> getMyApplicationList(String userid) {
+		return applicationDAO.getMyApplicationList(userid);
+	}
+
+	@Override
+	public List<ApplicationDTO> getMyGoodsApplicationList(String aritcleNum) {
+		return applicationDAO.getMyGoodsApplicationList(aritcleNum);
 	}
 }
