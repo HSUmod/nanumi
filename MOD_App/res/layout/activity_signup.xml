@@ -2,84 +2,253 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:padding="20dp" >
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/userid"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="UserID" >
+        android:layout_height="40dp"
+        android:hint="UserID"
+        android:textSize="15dp" >
     </EditText>
 
-    <EditText
-        android:id="@+id/editText2"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword" />
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/userid_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="아이디 입력"
+            android:textColor="#FF2222"
+            android:textSize="10dp"
+            android:visibility="invisible" />
+    </LinearLayout>
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:ems="10"
         android:hint="Password"
-        android:inputType="textPassword" />
-
-    <EditText
-        android:id="@+id/editText4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Nickname" />
+        android:inputType="textPassword"
+        android:textSize="15dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical" >
 
-        <EditText
-            android:id="@+id/editText5"
+        <TextView
+            android:id="@+id/password_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Address"
-            android:inputType="textPostalAddress" />
+            android:text="비밀번호 입력"
+            android:textColor="#FF2222"
+            android:textSize="10dp"
+            android:visibility="invisible" />
+    </LinearLayout>
 
-        <Button
-            android:id="@+id/button1"
+    <EditText
+        android:id="@+id/repassword"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textSize="15dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/repassword_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Button" />
+            android:text="비밀번호 재입력"
+            android:textColor="#FF2222"
+            android:textSize="10dp"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/nickname"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:hint="Nickname"
+        android:textSize="15dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/nickname_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="닉네임 입력"
+            android:textColor="#FF2222"
+            android:textSize="10dp"
+            android:visibility="invisible" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <EditText
-            android:id="@+id/editText6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Email Address"
-            android:inputType="textEmailAddress" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
         <Spinner
-            android:id="@+id/spinner1"
+            android:id="@+id/city"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="city"
+            android:inputType="textPostalAddress"
+            android:textSize="15dp" />
+
+        <Spinner
+            android:id="@+id/district"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="district"
+            android:inputType="textPostalAddress"
+            android:textSize="15dp" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button2"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign Up" />
+        android:orientation="horizontal"
+        android:weightSum="2" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/city_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="city 선택"
+                android:textColor="#FF2222"
+                android:textSize="10dp"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/district_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="district 입력"
+                android:textColor="#FF2222"
+                android:textSize="10dp"
+                android:visibility="invisible" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/email_address"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Email_Address"
+            android:inputType="textPostalAddress"
+            android:textSize="15dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/email_address_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이메일 입력"
+                android:textColor="#FF2222"
+                android:textSize="10dp"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Phone_Number"
+            android:inputType="phone"
+            android:textSize="15dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/phone_number_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="전화번호 입력"
+                android:textColor="#FF2222"
+                android:textSize="10dp"
+                android:visibility="invisible" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical|center"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/signupBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClickSignUpBtn"
+            android:text="Sign Up" />
+    </LinearLayout>
 
 </LinearLayout>
