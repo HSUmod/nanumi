@@ -2,10 +2,7 @@ package com.nanumi.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -30,12 +27,12 @@ public class CommonController {
 	private CommonService service;
 
 	@RequestMapping(value = "/SignUp.do", method = RequestMethod.POST)
-	public void signUp(@RequestParam("userid") String userid, @RequestParam("pwd") String pwd, @RequestParam("nickname") String nickname, @RequestParam("address") String address,
-			@RequestParam("email") String email, HttpServletResponse res) throws IOException {
+	public void signUp(@RequestParam("userid") String userid, @RequestParam("pwd") String pwd, @RequestParam("nickname") String nickname, @RequestParam("city") String city,
+			@RequestParam("district") String district, @RequestParam("phone") String phone, @RequestParam("email") String email, HttpServletResponse res) throws IOException {
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = res.getWriter();
 
-		service.signUp(new UserDTO(userid, pwd, nickname, address, email));
+		service.signUp(new UserDTO(userid, pwd, nickname, city, district, phone, email));
 		pw.write("{\"result\": \"SIGNUP_COMPLETE\"}");
 		pw.close();
 	}
@@ -122,7 +119,7 @@ public class CommonController {
 
 		try {
 			session.removeAttribute("UUID-" + uuid);
-			
+
 			log.info("Logout success: " + uuid);
 			pw.write("{\"result\": \"Success\"}");
 		} catch (IllegalStateException e) {
@@ -135,24 +132,29 @@ public class CommonController {
 
 	@RequestMapping(value = "/SearchAddress.do")
 	public void searchAddress(HttpServletResponse res) throws IOException {
-		Map<String, List<String>> addressList = new HashMap<String, List<String>>();
 		List<CityDTO> cityList = service.getCities();
 		List<DistrictDTO> districtList = service.getDistricts();
+		StringBuilder json = new StringBuilder();
 
+		json.append("{\"result\": \"SEARCH_COMPLETE\", ");
+		json.append("\"address\": [");
 		for (CityDTO city : cityList) {
-			List<String> districts = new ArrayList<String>();
-
+			json.append("{\"city\": \"" + city.getCity() + "\", ");
+			json.append("\"distirct\": [");
 			for (DistrictDTO district : districtList) {
 				if (city.getCitycode() == district.getCitycode()) {
-					districts.add(district.getDistrict());
+					json.append("\"" + district.getDistrict() + " \", ");
 				}
 			}
-			addressList.put(city.getCity(), districts);
+			json.delete(json.length() - 1, json.length()); // last comma delete
+			json.append("]},");
 		}
+		json.delete(json.length() - 1, json.length()); // last comma delete
+		json.append("]}");
 
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = res.getWriter();
-		pw.write(addressList.toString());
+		pw.write(json.toString());
 		pw.close();
 	}
 
@@ -166,9 +168,9 @@ public class CommonController {
 	}
 
 	@RequestMapping(value = "/ModifyUserInfo.do", method = RequestMethod.POST)
-	public void modifyUserInfo(@RequestParam("userid") String userid, @RequestParam("pwd") String pwd, @RequestParam("nickname") String nickname, @RequestParam("address") String address,
-			@RequestParam("email") String email, HttpServletResponse res) throws IOException {
-		service.modifyUserInfo(new UserDTO(userid, pwd, nickname, address, email));
+	public void modifyUserInfo(@RequestParam("userid") String userid, @RequestParam("pwd") String pwd, @RequestParam("nickname") String nickname, @RequestParam("city") String city,
+			@RequestParam("district") String district, @RequestParam("phone") String phone, @RequestParam("email") String email, HttpServletResponse res) throws IOException {
+		service.modifyUserInfo(new UserDTO(userid, pwd, nickname, city, district, phone, email));
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = res.getWriter();
 		pw.write("{\"result\": \"MODIFY_COMPLETE\"}");

@@ -1,7 +1,6 @@
 package com.nanumi.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.nanumi.dto.FileDTO;
 import com.nanumi.dto.GoodsDTO;
+import com.nanumi.dto.UserDTO;
 
 @Repository("GoodsDAO")
 public class GoodsDAO {
@@ -32,6 +32,10 @@ public class GoodsDAO {
 		goodsList = session.selectList("selectAllGoods");
 
 		return goodsList;
+	}
+	
+	public UserDTO getUserAddress(String userid) {
+		return session.selectOne("nanumiNS.getUserAddress", userid);
 	}
 
 	public FileDTO selectFileInfo(String articleNum) {

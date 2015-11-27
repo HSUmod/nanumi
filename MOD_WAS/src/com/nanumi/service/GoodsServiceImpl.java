@@ -17,6 +17,7 @@ import com.nanumi.common.FileUtils;
 import com.nanumi.dao.GoodsDAO;
 import com.nanumi.dto.FileDTO;
 import com.nanumi.dto.GoodsDTO;
+import com.nanumi.dto.UserDTO;
 
 @Service("GoodsService")
 public class GoodsServiceImpl implements GoodsService {
@@ -49,6 +50,10 @@ public class GoodsServiceImpl implements GoodsService {
 		}
 	}
 
+	public UserDTO getUserAddress(String userid) {
+		return goodsDAO.getUserAddress(userid);
+	}
+	
 	@Override
 	public List<GoodsDTO> readGoods() {
 		return goodsDAO.readGoods();

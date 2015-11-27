@@ -5,14 +5,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URLEncoder;
 import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nanumi.dto.FileDTO;
 import com.nanumi.dto.GoodsDTO;
+import com.nanumi.dto.UserDTO;
 import com.nanumi.service.GoodsService;
 
 @Controller
@@ -42,6 +41,23 @@ public class GoodsController {
 		pw.write("{\"result\": \"WRITING_COMPLETE\"}");
 		pw.close();
 	}
+	
+	@RequestMapping(value = "/getUserAddress.do", method = RequestMethod.POST)
+	public void getUserAddress(@RequestParam("userid") String userid, HttpServletResponse res) throws Exception {
+		res.setContentType("application/json; charset=utf-8");
+		PrintWriter pw = res.getWriter();
+		
+		UserDTO user = service.getUserAddress(userid);
+		pw.write("{\"result\": \"READ_COMPLETE\", ");
+		pw.write("\"address\": [{");
+		pw.write("\"city\": \"" + user.getCity() + "\", ");
+		pw.write("\"district\": \"" + user.getDistrict() + "\"");
+		pw.write("}]}");
+		
+		pw.close();
+	}
+	
+	
 
 	@RequestMapping(value = "/ReadGoods.do", method = RequestMethod.POST)
 	public void readGoods(HttpServletResponse res) throws Exception {
@@ -62,7 +78,7 @@ public class GoodsController {
 			json.append("\"hashtag\": \"" + item.getHashtag() + "\",");
 			json.append("\"selectionWay\": \"" + item.getSelectionWay() + "\",");
 			json.append("\"postingTime\": \"" + item.getPostingTime() + "\",");
-			json.append("\"image\": \"" + getImgByte(item.getArticleNum(), item.getUserid()) + "\"");
+			json.append("\"image\": \"" + getImgData(item.getArticleNum(), item.getUserid()) + "\"");
 			json.append("},");
 		}
 		json.delete(json.length() - 1, json.length()); // last comma delete
@@ -74,59 +90,16 @@ public class GoodsController {
 		pw.close();
 	}
 
-	@RequestMapping(value = "/ReadGoodsImg.do", method = RequestMethod.POST)
-	public void getGoodsImg(String articleNum, String userid, HttpServletResponse res) throws Exception {
+	private String getImgData(String articleNum, String userid) throws IOException {
 		FileDTO file = service.selectFileInfo(articleNum);
-		byte fileByte[] = FileUtils.readFileToByteArray(new File("C:\\dev\\file\\" + userid + "\\" + file.getStored_file_name()));
-
-		res.setContentType("application/octet-stream");
-		res.setContentLength(fileByte.length);
-		res.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(file.getOriginal_file_name(), "UTF-8") + "\";");
-		res.setHeader("Content-Transfer-Encoding", "binary");
-		res.getOutputStream().write(fileByte);
-
-		res.getOutputStream().flush();
-		res.getOutputStream().close();
-	}
-
-	private String getImgByte(String articleNum, String userid) throws IOException {
-		FileDTO file = service.selectFileInfo(articleNum);
-		File imgPath = new File("C:\\dev\\file\\" + userid + "\\" + file.getStored_file_name());
-		BufferedImage bufferedImage = ImageIO.read(imgPath);
-
+		BufferedImage bufferedImage = ImageIO.read(new File("C:\\dev\\file\\" + userid + "\\" + file.getStored_file_name()));
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		
 		ImageIO.write(bufferedImage, "jpg", baos);
 		baos.flush();
 		byte[] imageInByte = baos.toByteArray();
 		baos.close();
 
-		log.info("======================================");
-		log.info("======================================");
-		log.info(imageInByte);
-		log.info("======================================");
-		log.info("======================================");
-
-		String str = Base64.encodeBase64String(imageInByte);
-		byte[] backToBytes = Base64.decodeBase64(str);
-
-		return str;
+		return Base64.encodeBase64String(imageInByte);
 	}
-
-	@RequestMapping(value = "/ReadTest.do", method = RequestMethod.POST)
-	public void readTest(HttpServletResponse res) throws Exception {
-		res.setContentType("application/json; charset=utf-8");
-		PrintWriter pw = res.getWriter();
-		pw.write("{test text1}");
-		pw.write("{test text2}");
-		pw.write("{test text3}");
-		pw.write("{test text4}");
-		pw.write("{test text5}");
-		pw.write("{test text6}");
-		pw.write("{test text7}");
-		pw.write("{test text8}");
-		pw.write("{test text9}");
-		pw.write("{test text10}");
-		pw.close();
-	}
-
 }

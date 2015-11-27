@@ -1,16 +1,18 @@
 package com.nanumi.dto;
 
 public class UserDTO {
-	private String userid, pwd, nickname, address, email;
+	private String userid, pwd, nickname, city, district, phone, email;
 
 	public UserDTO() {
 	}
 
-	public UserDTO(String userid, String pwd, String nickname, String address, String email) {
+	public UserDTO(String userid, String pwd, String nickname, String city, String district, String phone, String email) {
 		this.userid = userid;
 		this.pwd = pwd;
 		this.nickname = nickname;
-		this.address = address;
+		this.city = city;
+		this.district = district;
+		this.phone = phone;
 		this.email = email;
 	}
 
@@ -38,12 +40,28 @@ public class UserDTO {
 		this.nickname = nickname;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getCity() {
+		return city;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public String getEmail() {
