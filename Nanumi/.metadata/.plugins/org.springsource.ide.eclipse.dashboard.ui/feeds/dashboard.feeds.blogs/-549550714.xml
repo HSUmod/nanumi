@@ -5,7 +5,288 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-11-24T11:00:00Z</updated>
+  <updated>2015-11-25T15:16:00Z</updated>
+  <entry>
+    <title>News for Spring Data JDBC Extensions Project</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/11/25/news-for-spring-data-jdbc-extensions-project" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Thomas Risberg</name>
+    </author>
+    <id>tag:spring.io,2015-11-25:2309</id>
+    <updated>2015-11-25T15:16:00Z</updated>
+    <content type="html">&lt;p&gt;We are pleased to announce the 1.2 release of the Spring Data JDBC Extensions project. This release updates the Querydsl dependency to 3.6.9 and adds an option to retrieve &lt;code&gt;SearchResults&lt;/code&gt; using the &lt;code&gt;QueryDslTemplate&lt;/code&gt;. See &lt;a href="http://docs.spring.io/spring-data/jdbc/docs/1.2.1.RELEASE/changelog.txt"&gt;changelog for 1.2.1.RELEASE&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We are also pleased to announce the first milestone of the 2.0 version of the Spring Data JDBC Extensions project. The big changes for this release are:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;change to building with Java 7 or later&lt;/li&gt;
+  &lt;li&gt;upgrading the Oracle JDBC to version 12.1.0.2&lt;/li&gt;
+  &lt;li&gt;updating any dependencies to follow Spring IO Platform 2.0 including Spring Framework 4.2&lt;/li&gt;
+  &lt;li&gt;removing the Querydsl SQL support in this version (see below)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The upgrade to use the Oracle JDBC driver version 12.1.0.2 allows us to change our code to support deprecations and new features available in this version. You can still use older database versions compatible with this driver including Oracle Database 12c R1, 11g R2 and 11g R1.&lt;/p&gt;
+&lt;p&gt;See &lt;a href="http://docs.spring.io/spring-data/jdbc/docs/2.0.0.M1/changelog.txt"&gt;changelog for 2.0.0.M1&lt;/a&gt;.&lt;/p&gt;&lt;h2&gt;&lt;a href="#querydsl-support" class="anchor" name="querydsl-support"&gt;&lt;/a&gt;Querydsl support&lt;/h2&gt;
+&lt;p&gt;The Querydsl project has been undergoing some changes for their 4.0 version with a change of Maven group id, package names and also some API changes. This means that as of Querydsl version 4.0.0 the existing Spring Data JDBC Extension code that integrates with Querydsl no longer works.&lt;/p&gt;
+&lt;p&gt;We don&amp;rsquo;t plan to port our Querydsl SQL support to the new Querydsl version 4.0 or later. Instead we encourage users developing new projects to use the Querydsl SQL APIs directly and to use the integration with Spring that is available in the Querydsl project&amp;rsquo;s &lt;code&gt;querydsl-sql-spring&lt;/code&gt; sub-project. This means that we are removing the Querydsl SQL support from the new Spring Data JDBC Extensions 2.x version.&lt;/p&gt;
+&lt;p&gt;For the 1.x version of Spring Data JDBC Extensions we will continue to use the latest available version of the Querydsl 3.x release series. We are also marking the Querydsl SQL support as deprecated to indicate that it will not be available in version 2.0 of Spring Data JDBC Extensions.&lt;/p&gt;
+&lt;p&gt;For more project specific information please see the &lt;a href="http://projects.spring.io/spring-data-jdbc-ext/"&gt;project page&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring Social 1.1.4 Released</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/11/25/spring-social-1-1-4-released" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Craig Walls</name>
+    </author>
+    <id>tag:spring.io,2015-11-25:2308</id>
+    <updated>2015-11-25T14:27:53Z</updated>
+    <content type="html">&lt;p&gt;Dear Spring Community,&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m pleased to announce the availability of Spring Social 1.1.4.RELEASE. This includes the Spring Social Core, Web, Security, and Config modules.&lt;/p&gt;
+&lt;p&gt;This is a maintenance release, addressing a handful of bugs and introducing a few minor improvements (many of which were submitted as pull requests from our wonderful open-source community&amp;hellip;thanks!). View the &lt;a href="https://raw.githubusercontent.com/spring-projects/spring-social/master/src/dist/changelog.txt"&gt;changelog&lt;/a&gt; for full details.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://spring.io/projects/spring-social"&gt;Project Site&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-social/docs/1.1.4.RELEASE/reference/htmlsingle/"&gt;Reference&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-social/docs/1.1.4.RELEASE/apidocs/"&gt;JavaDoc&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Migrating Spring Cloud Apps from Spring Boot 1.2 to 1.3</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/11/25/migrating-spring-cloud-apps-from-spring-boot-1-2-to-1-3" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Dave Syer</name>
+    </author>
+    <id>tag:spring.io,2015-11-25:2307</id>
+    <updated>2015-11-25T12:18:00Z</updated>
+    <content type="html">&lt;p&gt;There are some interesting new features in &lt;a href="http://projects.spring.io/spring-boot/"&gt;Spring Boot&lt;/a&gt; 1.3 that are now available in Spring Cloud in the Brixton release train. The Angel release train of &lt;a href="http://projects.spring.io/spring-cloud/"&gt;Spring Cloud&lt;/a&gt; is partly incompatible with Spring Boot 1.3, so when you upgrade there are some important things to be aware of. This article helps you navigate the changes and update any existing apps to use the new features. It should also be helpful generally when trying to adopt new versions of Spring projects into existing codebases.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;TIP: You can use &lt;code&gt;mvn dependency:tree&lt;/code&gt; or &lt;code&gt;gradle dependencies&lt;/code&gt; to list the dependencies in your project and check the versions.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;h2&gt;&lt;a href="#dependency-management" class="anchor" name="dependency-management"&gt;&lt;/a&gt;Dependency Management&lt;/h2&gt;
+&lt;p&gt;If you are using the older versions of Spring Boot, you probably have something like this in your Maven POM:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;parent&amp;gt;&#xD;
+  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;&#xD;
+  &amp;lt;artifactId&amp;gt;spring-boot-starter-parent&amp;lt;/artifactId&amp;gt;&#xD;
+  &amp;lt;version&amp;gt;1.2.7.RELEASE&amp;lt;/version&amp;gt;&#xD;
+  &amp;lt;relativePath /&amp;gt; &amp;lt;!-- lookup parent from repository --&amp;gt;&#xD;
+&amp;lt;/parent&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;or&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;dependencyManagement&amp;gt;&#xD;
+  &amp;lt;dependencies&amp;gt;&#xD;
+    &amp;lt;dependency&amp;gt;&#xD;
+      &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;&#xD;
+      &amp;lt;artifactId&amp;gt;spring-boot-starter-parent&amp;lt;/artifactId&amp;gt;&#xD;
+      &amp;lt;version&amp;gt;1.2.7.RELEASE&amp;lt;/version&amp;gt;&#xD;
+      &amp;lt;type&amp;gt;pom&amp;lt;/type&amp;gt;&#xD;
+      &amp;lt;scope&amp;gt;import&amp;lt;/scope&amp;gt;&#xD;
+    &amp;lt;/dependency&amp;gt;&#xD;
+  &amp;lt;/dependencies&amp;gt;&#xD;
+&amp;lt;/dependencyManagement&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;or, if you are using Gradle,&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint groovy"&gt;buildscript {&#xD;
+	ext {&#xD;
+		springBootVersion = &amp;#39;1.2.7.RELEASE&amp;#39;&#xD;
+	}&#xD;
+	dependencies {&#xD;
+		classpath(&amp;quot;org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}&amp;quot;)&#xD;
+	}&#xD;
+}&#xD;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To upgrade to Spring Boot 1.3.0 you would change the &amp;lsquo;1.2.7&amp;rsquo; above to &amp;lsquo;1.3.0&amp;rsquo;. So far so simple.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;TIP: to see a &amp;ldquo;typical&amp;rdquo; Maven POM with the most recent version of Spring Boot you can &lt;code&gt;curl start.spring.io/pom.xml&lt;/code&gt;. To add Spring Cloud you can append &lt;code&gt;-d style=cloud-config-client&lt;/code&gt;. The Spring Boot version can be changed by adding &lt;code&gt;-d bootVersion=1.3.1.BUILD-SNAPSHOT&lt;/code&gt; (for instance). To do the same for Gradle use &lt;code&gt;build.gradle&lt;/code&gt; instead of &lt;code&gt;pom.xml&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;h2&gt;&lt;a href="#using-spring-cloud-with-spring-boot" class="anchor" name="using-spring-cloud-with-spring-boot"&gt;&lt;/a&gt;Using Spring Cloud with Spring Boot&lt;/h2&gt;
+&lt;p&gt;Since Spring Cloud builds on top of Spring Boot it can be confusing and difficult to find a combination that works together. In what follows we describe a few scenerios of upgrades and show what you can expect to be able to achieve with dependency management. &lt;/p&gt;&lt;h3&gt;&lt;a href="#the-big-upgrade" class="anchor" name="the-big-upgrade"&gt;&lt;/a&gt;The Big Upgrade&lt;/h3&gt;
+&lt;p&gt;In general the biggest change will be when you upgrade (Spring Boot 1.2 to 1.3, or Spring Cloud Angel to Brixton). If you downloaded a project from the &lt;a href="https://start.spring.io"&gt;Spring Initializr&lt;/a&gt; then it will be using the Spring Boot parent POM:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;parent&amp;gt;&#xD;
+  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;&#xD;
+  &amp;lt;artifactId&amp;gt;spring-boot-starter-parent&amp;lt;/artifactId&amp;gt;&#xD;
+  &amp;lt;version&amp;gt;1.2.7.RELEASE&amp;lt;/version&amp;gt;&#xD;
+  &amp;lt;relativePath/&amp;gt; &amp;lt;!-- lookup parent from repository --&amp;gt;&#xD;
+&amp;lt;/parent&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and a Spring Cloud BOM in the &lt;code&gt;&amp;lt;dependencyManagement&amp;gt;&lt;/code&gt; section:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;dependencyManagement&amp;gt;&#xD;
+  &amp;lt;dependencies&amp;gt;&#xD;
+    &amp;lt;dependency&amp;gt;&#xD;
+      &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;&#xD;
+      &amp;lt;artifactId&amp;gt;spring-cloud-starter-parent&amp;lt;/artifactId&amp;gt;&#xD;
+      &amp;lt;version&amp;gt;Angel.SR4&amp;lt;/version&amp;gt;&#xD;
+      &amp;lt;type&amp;gt;pom&amp;lt;/type&amp;gt;&#xD;
+      &amp;lt;scope&amp;gt;import&amp;lt;/scope&amp;gt;&#xD;
+    &amp;lt;/dependency&amp;gt;&#xD;
+  &amp;lt;/dependencies&amp;gt;&#xD;
+&amp;lt;/dependencyManagement&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In Gradle you would see something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint groovy"&gt;buildscript {&#xD;
+    ext {&#xD;
+        springBootVersion = &amp;#39;1.2.7.RELEASE&amp;#39;&#xD;
+    }&#xD;
+    repositories {&#xD;
+        mavenCentral()&#xD;
+    }&#xD;
+    dependencies {&#xD;
+        classpath(&amp;quot;org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}&amp;quot;) &#xD;
+    }&#xD;
+}&#xD;
+dependencyManagement {&#xD;
+  imports { &#xD;
+    mavenBom &amp;quot;org.springframework.cloud:spring-cloud-starter-parent:Angel.SR4&amp;quot; &#xD;
+  }&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Simply updating the Spring Boot version in either case isn&amp;rsquo;t going to work because the Spring Cloud Angel BOM has old versions of Spring Boot and Spring (amongst other things). Thus we really need to upgrade both Spring Boot and Spring Cloud. For example in Maven:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;parent&amp;gt;&#xD;
+  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;&#xD;
+  &amp;lt;artifactId&amp;gt;spring-boot-starter-parent&amp;lt;/artifactId&amp;gt;&#xD;
+  &amp;lt;version&amp;gt;1.3.0.RELEASE&amp;lt;/version&amp;gt;&#xD;
+  &amp;lt;relativePath/&amp;gt; &amp;lt;!-- lookup parent from repository --&amp;gt;&#xD;
+&amp;lt;/parent&amp;gt;&#xD;
+&amp;lt;dependencyManagement&amp;gt;&#xD;
+  &amp;lt;dependencies&amp;gt;&#xD;
+    &amp;lt;dependency&amp;gt;&#xD;
+      &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;&#xD;
+      &amp;lt;artifactId&amp;gt;spring-cloud-starter-parent&amp;lt;/artifactId&amp;gt;&#xD;
+      &amp;lt;version&amp;gt;Brixton.M3&amp;lt;/version&amp;gt;&#xD;
+      &amp;lt;type&amp;gt;pom&amp;lt;/type&amp;gt;&#xD;
+      &amp;lt;scope&amp;gt;import&amp;lt;/scope&amp;gt;&#xD;
+    &amp;lt;/dependency&amp;gt;&#xD;
+  &amp;lt;/dependencies&amp;gt;&#xD;
+&amp;lt;/dependencyManagement&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and in Gradle:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint groovy"&gt;buildscript {&#xD;
+    ext {&#xD;
+        springBootVersion = &amp;#39;1.3.0.RELEASE&amp;#39;&#xD;
+    }&#xD;
+    repositories {&#xD;
+        mavenCentral()&#xD;
+    }&#xD;
+    dependencies {&#xD;
+        classpath(&amp;quot;org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}&amp;quot;) &#xD;
+    }&#xD;
+}&#xD;
+dependencyManagement {&#xD;
+  imports { &#xD;
+    mavenBom &amp;quot;org.springframework.cloud:spring-cloud-starter-parent:Brixton.M3&amp;quot; &#xD;
+  }&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;NOTE: Brixton.M2 and all earlier releases of Spring Cloud are &lt;em&gt;not&lt;/em&gt; compatible with Spring Boot 1.3.0.RELEASE. You need at least Brixton.M3.&lt;/p&gt;&lt;h2&gt;&lt;a href="#upgrading-spring-boot-beyond-1-3-0" class="anchor" name="upgrading-spring-boot-beyond-1-3-0"&gt;&lt;/a&gt;Upgrading Spring Boot Beyond 1.3.0&lt;/h2&gt;
+&lt;p&gt;Suppose you want to use Spring Boot snapshots, or upgrade to 1.3.1 when it is released, but Spring Cloud doesn&amp;rsquo;t have a version that explicitly depends on the version of Boot you want.&lt;/p&gt;
+&lt;p&gt;In Maven, remember that if you use one of the off the shelf parent POMs they contain &lt;code&gt;&amp;lt;dependencyManagement&amp;gt;&lt;/code&gt; and will take precedence. With that in mind, if you use those parent POMs, be sure to use the parent with the closest dependency set to what you need (the Boot one in this scenario).&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;parent&amp;gt;&#xD;
+  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;&#xD;
+  &amp;lt;artifactId&amp;gt;spring-boot-starter-parent&amp;lt;/artifactId&amp;gt;&#xD;
+  &amp;lt;version&amp;gt;1.3.1.BUILD-SNAPSHOT&amp;lt;/version&amp;gt;&#xD;
+  &amp;lt;relativePath/&amp;gt; &amp;lt;!-- lookup parent from repository --&amp;gt;&#xD;
+&amp;lt;/parent&amp;gt;&#xD;
+&amp;lt;dependencyManagement&amp;gt;&#xD;
+  &amp;lt;dependencies&amp;gt;&#xD;
+    &amp;lt;dependency&amp;gt;&#xD;
+      &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;&#xD;
+      &amp;lt;artifactId&amp;gt;spring-cloud-starter-parent&amp;lt;/artifactId&amp;gt;&#xD;
+      &amp;lt;version&amp;gt;Brixton.M3&amp;lt;/version&amp;gt;&#xD;
+      &amp;lt;type&amp;gt;pom&amp;lt;/type&amp;gt;&#xD;
+      &amp;lt;scope&amp;gt;import&amp;lt;/scope&amp;gt;&#xD;
+    &amp;lt;/dependency&amp;gt;&#xD;
+  &amp;lt;/dependencies&amp;gt;&#xD;
+&amp;lt;/dependencyManagement&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In Gradle things are in principle simpler because there is no concept of a &amp;ldquo;parent&amp;rdquo;. In practice the Spring Boot plugin cannot be applied with a different version than the dependency management unless you also manually apply the dependency management plugin as well. So you have to do a little dance in the &lt;code&gt;build.gradle&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint groovy"&gt;buildscript {&#xD;
+    ext {&#xD;
+        springBootVersion = &amp;#39;1.3.0.RELEASE&amp;#39;&#xD;
+    }&#xD;
+    repositories {&#xD;
+        mavenCentral()&#xD;
+    }&#xD;
+    dependencies {&#xD;
+        classpath &amp;quot;io.spring.gradle:dependency-management-plugin:0.5.3.RELEASE&amp;quot;&#xD;
+        classpath(&amp;quot;org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}&amp;quot;) &#xD;
+    }&#xD;
+}&#xD;
+&#xD;
+apply plugin: &amp;quot;io.spring.dependency-management&amp;quot;&#xD;
+...&#xD;
+&#xD;
+dependencyManagement {&#xD;
+  imports { &#xD;
+    mavenBom &amp;quot;org.springframework.cloud:spring-cloud-starter-parent:Brixton.M3&amp;quot; &#xD;
+    mavenBom &amp;quot;org.springframework.bootspring-boot-starter-parent:1.3.1.BUILD-SNAPSHOT&amp;quot; &#xD;
+  }&#xD;
+}&#xD;
+&#xD;
+apply plugin: &amp;#39;spring-boot&amp;#39; &#xD;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The rule is you have to a) import the dependency management plugin manually and &lt;em&gt;before&lt;/em&gt; the Spring Boot one, b) declare the &lt;code&gt;dependencyManagement&lt;/code&gt; &lt;em&gt;before&lt;/em&gt; applying the Spring Boot plugin. Once you do that you can list dependencies in the &lt;code&gt;dependencyManagement&lt;/code&gt; declaration and the &lt;em&gt;last&lt;/em&gt; one wins (the opposite to Maven).&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;NOTE: This sensitivity to the order of the declarations is a &amp;ldquo;feature&amp;rdquo; of the current version of the tooling. It might be different in future versions. See &lt;a href="https://github.com/spring-gradle-plugins/dependency-management-plugin/issues/66"&gt;this issue in the Gradle tooling&lt;/a&gt; for more details.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;h2&gt;&lt;a href="#using-maven-with-a-custom-parent" class="anchor" name="using-maven-with-a-custom-parent"&gt;&lt;/a&gt;Using Maven with a Custom Parent&lt;/h2&gt;
+&lt;p&gt;If you don&amp;rsquo;t use the off the shelf parent POMs you have the freedom yo use one that does &lt;em&gt;not&lt;/em&gt; contain &lt;code&gt;&amp;lt;dependencyManagement&amp;gt;&lt;/code&gt;, and this makes things easier to control. In this case you need to put both Spring Boot and Spring Cloud in the &lt;code&gt;&amp;lt;dependencyManagement&amp;gt;&lt;/code&gt; and the order is significant: the first one wins (last one for Gradle). For example, to use Spring Boot 1.3.1.BUILD-SNAPSHOT and Spring Cloud Brixton.M3 in Maven:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;dependencyManagement&amp;gt;&#xD;
+  &amp;lt;dependencies&amp;gt;&#xD;
+    &amp;lt;dependency&amp;gt;&#xD;
+      &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;&#xD;
+      &amp;lt;artifactId&amp;gt;spring-boot-starter-parent&amp;lt;/artifactId&amp;gt;&#xD;
+      &amp;lt;version&amp;gt;1.3.1.BUILD-SNAPSHOT&amp;lt;/version&amp;gt;&#xD;
+      &amp;lt;type&amp;gt;pom&amp;lt;/type&amp;gt;&#xD;
+      &amp;lt;scope&amp;gt;import&amp;lt;/scope&amp;gt;&#xD;
+    &amp;lt;/dependency&amp;gt;&#xD;
+    &amp;lt;dependency&amp;gt;&#xD;
+      &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;&#xD;
+      &amp;lt;artifactId&amp;gt;spring-cloud-starter-parent&amp;lt;/artifactId&amp;gt;&#xD;
+      &amp;lt;version&amp;gt;Brixton.M3&amp;lt;/version&amp;gt;&#xD;
+      &amp;lt;type&amp;gt;pom&amp;lt;/type&amp;gt;&#xD;
+      &amp;lt;scope&amp;gt;import&amp;lt;/scope&amp;gt;&#xD;
+    &amp;lt;/dependency&amp;gt;&#xD;
+  &amp;lt;/dependencies&amp;gt;&#xD;
+&amp;lt;/dependencyManagement&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2&gt;&lt;a href="#order-of-the-boms" class="anchor" name="order-of-the-boms"&gt;&lt;/a&gt;Order of the BOMs&lt;/h2&gt;
+&lt;p&gt;Note that in both Maven and Gradle the order of the BOMs is significant: the one that is declared first generally wins in Maven (last one in Gradle) if there is a conflict at the top level (explicitly declared dependencies). A big difference with Maven is that the parent is special: if it contains &lt;code&gt;&amp;lt;dependencyManagement&amp;gt;&lt;/code&gt; it always wins.&lt;/p&gt;
+&lt;p&gt;To understand if a particular dependency version will resolve in the way you need is complicated. It depends on the order of the BOMs, &lt;em&gt;and&lt;/em&gt; the depth in the transitive dependency tree that your dependency is declared. For instance, the Spring Boot BOM declares an explicit (level 1) dependency management for &lt;code&gt;spring-core&lt;/code&gt; but not on any other Spring Framework jars (those are brought in via a reference to the Spring Framework BOM). The rule is that the first time it is declared wins, but the whole tree is included (including all BOMs), searching from the top, level by level.&lt;/p&gt;
+&lt;p&gt;NOTE: Gradle does not have this &amp;ldquo;last one wins&amp;rdquo; rule without the Spring Boot (or Spring Dependency Management) Plugin. To do the same thing with a &amp;ldquo;native&amp;rdquo; Gradle build often requires careful and tedious work manually fixing transitive dependency versions.&lt;/p&gt;&lt;h2&gt;&lt;a href="#further-manipulating-dependency-versions" class="anchor" name="further-manipulating-dependency-versions"&gt;&lt;/a&gt;Further Manipulating Dependency Versions&lt;/h2&gt;
+&lt;p&gt;If you want to bump the version of a dependency beyond what is specified in the Spring Boot and Spring Cloud BOMs, things can get complicated. Broadly speaking there are 2 options: properties and additional BOMs. The first (properties) works with the off the shelf parent POMs, and the other doesn&amp;rsquo;t. The second (more BOMs) only works if there &lt;em&gt;is&lt;/em&gt; a BOM available for the dependency you are interested in, and only if the transitive dependencies don&amp;rsquo;t conflict with your requirements. All of the Spring Cloud projects have their own BOM, for instance, as does Spring Framework, so that&amp;rsquo;s a start. &lt;/p&gt;&lt;h3&gt;&lt;a href="#properties" class="anchor" name="properties"&gt;&lt;/a&gt;Properties&lt;/h3&gt;
+&lt;p&gt;The Spring Boot parent POM (and the Spring Cloud one if you use that since it inherits from the Boot one) has all of its dependency versions extracted into &lt;code&gt;&amp;lt;properties/&amp;gt;&lt;/code&gt;. So you can often just change the property value. Example in Maven:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;parent&amp;gt;&#xD;
+  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;&#xD;
+  &amp;lt;artifactId&amp;gt;spring-boot-starter-parent&amp;lt;/artifactId&amp;gt;&#xD;
+  &amp;lt;version&amp;gt;1.3.0.RELEASE&amp;lt;/version&amp;gt;&#xD;
+  &amp;lt;relativePath/&amp;gt; &amp;lt;!-- lookup parent from repository --&amp;gt;&#xD;
+&amp;lt;/parent&amp;gt;&#xD;
+&amp;lt;properties&amp;gt;&#xD;
+  &amp;lt;spring.version&amp;gt;4.2.4.BUILD-SNAPSHOT&amp;lt;/spring.version&amp;gt;&#xD;
+&amp;lt;/properties&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There corresponding feature in Gradle is an &lt;code&gt;ext&lt;/code&gt; property, e.g.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint groovy"&gt;ext[&amp;#39;spring.version&amp;#39;] = &amp;#39;4.2.4.BUILD-SNAPSHOT&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;&lt;a href="#additional-boms" class="anchor" name="additional-boms"&gt;&lt;/a&gt;Additional BOMs&lt;/h3&gt;
+&lt;p&gt;The Spring Framework has its own BOM, so we can use that to manage the Spring versions instead. In Maven with a custom parent (containing no &lt;code&gt;&amp;lt;dependencyManagement&amp;gt;&lt;/code&gt;):&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;dependencyManagement&amp;gt;&#xD;
+  &amp;lt;dependencies&amp;gt;&#xD;
+    &amp;lt;dependency&amp;gt;&#xD;
+      &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt;&#xD;
+      &amp;lt;artifactId&amp;gt;spring-framework-bom&amp;lt;/artifactId&amp;gt;&#xD;
+      &amp;lt;version&amp;gt;4.2.4.BUILD-SNAPSHOT&amp;lt;/version&amp;gt;&#xD;
+      &amp;lt;type&amp;gt;pom&amp;lt;/type&amp;gt;&#xD;
+      &amp;lt;scope&amp;gt;import&amp;lt;/scope&amp;gt;&#xD;
+    &amp;lt;/dependency&amp;gt;&#xD;
+  &amp;lt;/dependencies&amp;gt;&#xD;
+&amp;lt;/dependencyManagement&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;NOTE: this example actually will &lt;em&gt;not&lt;/em&gt; work with the Spring Boot parent POM (unless it happens to have the same &lt;code&gt;&amp;lt;spring.version/&amp;gt;&lt;/code&gt;) because the Spring Framework version is fixed already by the parent. To use the Spring Boot parent with a Spring Framwork snapshot it is better to use the properties approach (above).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In Gradle it is simpler (because there is no parent to set conflicting versions):&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint groovy"&gt;dependencyManagement {&#xD;
+	imports { &#xD;
+      mavenBom &amp;quot;org.springframework:spring-framework-bom:4.2.4.BUILD-SNAPSHOT&amp;quot; &#xD;
+      mavenBom &amp;quot;org.springframework.boot:spring-boot-starter-parent:1.3.0.RELEASE&amp;quot; &#xD;
+	}&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h2&gt;&lt;a href="#conclusion" class="anchor" name="conclusion"&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Dependency management is hard, but hopefully we have softened the blow by outlining a few common scenarios when upgrading bits of Spring Boot and Spring Cloud. There are some slightly different behaviours depending on whether you choose Maven or Gradle, but at least if you choose Gradle and use the Spring Boot plugin the differences are minimized. At the end of the day, Spring projects have different release schedules, so there can always be conflicts, but they will generally always be moving towards convergence, so if you wait long enough things will equalize. Umbrella projects like Spring Cloud, Spring Boot and the Spring IO Platform also help to smooth out the bumps: if you can use one of those to manage all your dependencies things get a lot simpler.&lt;/p&gt;
+&lt;p&gt;The sample apps in the Spring Guides have all been updated to Spring Boot 1.3 now, even if that means they depend on a milestone of Spring Cloud (this only applies to the Zuul proxy sample). Many do not need Spring Cloud any more. If you need a GA version of Spring Cloud you need to stay with Spring Boot 1.2 right now. The samples for that combination can be lifted from git history.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>This Week in Spring - November 23, 2015</title>
     <link rel="alternate" href="https://spring.io/blog/2015/11/24/this-week-in-spring-november-23-2015" />
@@ -1132,81 +1413,5 @@ You updated the UI to show an employee&amp;#8217;s manager and also display erro
   &lt;li&gt;I thought this was a cool &lt;a href="http://www.haydonryan.com/category/cloudfoundry/"&gt;blog on using Cloud Watch with Cloud Foundry&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Roberto Venanzi of &lt;em&gt;The Spring Side blog&lt;/em&gt; has an interesting Italian-language post on &lt;a href="http://www.thespringside.com/?p=19"&gt;using Spring Boot with JSF&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Integration Maintenance Releases Available</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/10/27/spring-integration-maintenance-releases-available" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Gary Russell</name>
-    </author>
-    <id>tag:spring.io,2015-10-27:2286</id>
-    <updated>2015-10-27T21:03:28Z</updated>
-    <content type="html">&lt;p&gt;We are pleased to announce the following release versions are now available. These versions include important bug fixes and users should upgrade as soon as possible. Click the version to see the appropriate JIRA release notes.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://jira.spring.io/jira/secure/ReleaseNote.jspa?projectId=10121&amp;version=15324"&gt;4.2.1.RELEASE&lt;/a&gt;&lt;br/&gt;&lt;a href="https://jira.spring.io/jira/secure/ReleaseNote.jspa?projectId=10121&amp;version=15242"&gt;4.1.7.RELEASE&lt;/a&gt;&lt;br/&gt;&lt;a href="https://jira.spring.io/jira/secure/ReleaseNote.jspa?projectId=10121&amp;version=14991"&gt;4.0.8.RELEASE&lt;/a&gt;&lt;br/&gt;&lt;a href="https://jira.spring.io/jira/secure/ReleaseNote.jspa?projectId=10121&amp;version=14992"&gt;3.0.8.RELEASE&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Please note that, unless some compelling reason arises, it is anticipated that the 4.1.7 and 4.0.8 releases will be the last in those lines; 4.x users are encouraged to upgrade to 4.2.1, which is the current release for the 4.x line.&lt;/p&gt;
-&lt;p&gt;We expect to continue to make available further 3.0.x releases to address important bug fixes, as necessary, at least through the end of 2016.&lt;/p&gt;
-&lt;p&gt;Please refer to the &lt;a href="http://projects.spring.io/spring-integration/"&gt;project page&lt;/a&gt; for links to documentation, downloads etc.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2015 replay: Developer Experience with Spring Cloud</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/10/22/springone2gx-2015-replay-developer-experience-with-spring-cloud" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-10-22:2285</id>
-    <updated>2015-10-22T14:48:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2015.&lt;/p&gt;
-&lt;p&gt;Speakers: Dr. Dave Syer, Spencer Gibb&lt;/p&gt;
-&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/developer-experience-with-spring-cloud"&gt;http://www.slideshare.net/SpringCentral/developer-experience-with-spring-cloud&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;p&gt;So you&amp;rsquo;ve decided to go cloud native. You&amp;rsquo;ve got a number of microservices that your company builds and runs. They interact with each other in various ways. You&amp;rsquo;ve got testing and staging and production environments that may have taken a lot of effort to get right. How does an individual developer work on just one of those services without stomping on other developers using a shared environment? In this session we will explore a range of options for development, starting with deploying everything locally, through stubbing, to local development solution that allows a developer to run their service in their IDE and have the whole system interact on their local machine!&lt;br/&gt;&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/oqYzySDiLWI" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>The Spring Boot Dashboard in STS - Part 3:  Spring Boot Devtools reloaded</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/10/22/the-spring-boot-dashboard-in-sts-part-3-spring-boot-devtools-reloaded" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Martin Lippert</name>
-    </author>
-    <id>tag:spring.io,2015-10-08:2253</id>
-    <updated>2015-10-22T08:00:00Z</updated>
-    <content type="html">&lt;p&gt;Welcome back Spring community,&lt;/p&gt;
-&lt;div class="paragraph"&gt;&#xD;
-&lt;p&gt;to this final part of our series about the new Spring Boot Dashboard in the Spring Tool Suite. In this final part we will take a deeper look at using the &lt;a href="https://spring.io/blog/2015/06/17/devtools-in-spring-boot-1-3"&gt;Spring Boot Devtools&lt;/a&gt; in combination with the boot dashboard. Again, this feature is new with Spring Boot 1.3, so you need to be on that version in order to use the following features.&lt;/p&gt;&#xD;
-&lt;/div&gt;
-&lt;h2&gt;Quickly deploy code changes&lt;/h2&gt;
-&lt;div class="paragraph"&gt;&#xD;
-&lt;p&gt;For local apps, using the Spring Boot Devtools is extremely easy and straightforward. As soon as you add the Spring Boot Devtools to your project as a dependency (there is an easy menu option for that in the Spring category of your context menu) and start your app, it will listen for local changes to configuration and class files and kick a restart of the app for you automatically. You don¡¯t even need to restart the app yourself, the Spring Boot Devtools will do that for you automatically. Since STS/Eclipse produces and updates class files whenever you save a file, all this happens automatically for you when working within STS.&lt;/p&gt;&#xD;
-&lt;/div&gt;&lt;p&gt;&lt;img src="http://docs.spring.io/sts/nan/v371/img/blog-series/17-enable-devtools.png"/&gt;&lt;/p&gt;
-&lt;div class="paragraph"&gt;&#xD;
-&lt;p&gt;This story gets more interesting if you run your Spring Boot apps on a remote runtime like Cloud Foundry. In principle, you can use the Spring Boot Devtools in such a remote setting as well, but it requires a bit more work. The good news is that the Spring Boot Dashboard helps you with that.&lt;/p&gt;&#xD;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;&#xD;
-&lt;p&gt;As soon as you deploy or restart (and therefore update) a Spring Boot app on Cloud Foundry (using the boot dashboard) that has the Spring Boot Devtools on its classpath, the boot dashboard will configure the boot app on CF for the remote usage of the devtools automatically. This includes primarily the setting of a remote secret - to allow remote devtools access to it.&lt;/p&gt;&#xD;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;&#xD;
-&lt;p&gt;Once the devtools-enabled boot app is running on Cloud Foundry, you can easily start the boot devtools remote client application for it. This client application runs locally on your machine and connects to the remote application on Cloud Foundry. It watches for file changes, uploads them to the app on Cloud Foundry and triggers a restart of the app on Cloud Foundry.&lt;/p&gt;&#xD;
-&lt;/div&gt;&lt;p&gt;&lt;img src="http://docs.spring.io/sts/nan/v371/img/blog-series/18-devtools-client.png"/&gt;&lt;/p&gt;
-&lt;div class="paragraph"&gt;&#xD;
-&lt;p&gt;Since the remote client app will watch for file changes within the project on your local machine, you can continue to work within your IDE as usual. Changed files are automatically updated to the Cloud Foundry version of the app by the remote client app. The counterpart on Cloud Foundry will restart the boot app once those changed files are stored to the app on Cloud Foundry. This works for newly compiled source code as well as for changed resource files.&lt;/p&gt;&#xD;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;&#xD;
-&lt;p&gt;This allows you to achieve quick turnaround cycles when working on your project even if it is deployed to a remote cloud runtime.&lt;/p&gt;&#xD;
-&lt;/div&gt;
-&lt;h2&gt;Debugging in the cloud&lt;/h2&gt;
-&lt;div class="paragraph"&gt;&#xD;
-&lt;p&gt;In addition to the automatic restart feature, the Spring Boot Devtools also enable full debugging of remote apps on a cloud runtime. This is supported by the Spring Boot Dashboard in STS, too. If you have the Spring Boot Devtools on the classpath of your application, you can press the (re)debug button for the Cloud Foundry instance of the app. This will restart the app on Cloud Foundry in debug mode, automatically start the corresponding remote client app on your machine, and hook up the Eclipse debugger to it.&lt;/p&gt;&#xD;
-&lt;/div&gt;&lt;p&gt;&lt;img src="http://docs.spring.io/sts/nan/v371/img/blog-series/19-debugging.png"/&gt;&lt;/p&gt;
-&lt;div class="paragraph"&gt;&#xD;
-&lt;p&gt;You can debug the application that is running on the cloud runtime in the same way as local applications, including setting breakpoints, inspecting variables, or even hot-swapping code. However, the automatic restart feature is not available for apps running in debug mode (due to technical limitations of the boot devtools at the moment).&lt;/p&gt;&#xD;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;&#xD;
-&lt;p&gt;If you try the remote debugging of apps on Cloud Foundry, you will notice a significant slowdown in debugging. This is caused by the tunneling of the remote debug protocol of the JVM through a HTTP connection, something the remote debug protocol is not designed for. We are working on improving this by using a different transport mechanism. But the remote debugging of the app on Cloud Foundry should be something you rarely do. For more frequent debugging you might want to consider running and debugging the app locally and connecting it up with the rest of your application services via the ngrok tunneling feature that we described in the previous part of this blog series.&lt;/p&gt;&#xD;
-&lt;/div&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;div class="paragraph"&gt;&#xD;
-&lt;p&gt;This concludes the blog series on the Spring Boot Dashboard, a new feature in the Spring Tool Suite since its 3.7.1 release. Let us know about your experiences using the dashboard.&lt;/p&gt;&#xD;
-&lt;/div&gt;</content>
   </entry>
 </feed>

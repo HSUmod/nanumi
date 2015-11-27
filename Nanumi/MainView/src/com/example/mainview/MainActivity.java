@@ -9,13 +9,12 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -75,10 +74,16 @@ public class MainActivity extends Activity {
 			String selectionWay = jsonObj.getString("selectionWay");
 			String postingTime = jsonObj.getString("postingTime");
 			String imgBuf = jsonObj.getString("image");
-			byte[] imgByte = imgBuf.getBytes();
-			Bitmap imgBitmap = BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
+			// ¼öÁ¤
+			byte[] backToBytes = Base64.decodeBase64(imgBuf);
+
+			//
+
+			// byte[] imgByte = imgBuf.getBytes();
+			// Bitmap imgBitmap = BitmapFactory.decodeByteArray(imgByte, 0,
+			// imgByte.length);
 			GoodsDTO item = new GoodsDTO(articleNum, userid, city, district, major, sub, contents, hashtag,
-					selectionWay, postingTime, imgBitmap);
+					selectionWay, postingTime, backToBytes);
 
 			goodsList.add(item);
 		}
@@ -107,7 +112,6 @@ public class MainActivity extends Activity {
 				} else {
 					result = "fail";
 				}
-
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -161,6 +165,8 @@ public class MainActivity extends Activity {
 
 			view.setContentsText(curItem.getContents());
 			view.setHashText(curItem.getHashtag());
+
+			view.setImageView(curItem.getImg());
 			return view;
 		}
 

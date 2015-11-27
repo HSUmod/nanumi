@@ -1,8 +1,10 @@
 package com.example.mainview;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -10,6 +12,7 @@ import android.widget.TextView;
 public class MainItemView extends LinearLayout {
 
 	TextView contentsText, hashtagText;
+	ImageView imageView;
 
 	public MainItemView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -27,6 +30,7 @@ public class MainItemView extends LinearLayout {
 
 		contentsText = (TextView) findViewById(R.id.writtenText);
 		hashtagText = (TextView) findViewById(R.id.hashText);
+		imageView = (ImageView) findViewById(R.id.imageView);
 	}
 
 	public void setContentsText(String contentsText) {
@@ -35,6 +39,11 @@ public class MainItemView extends LinearLayout {
 
 	public void setHashText(String hashText) {
 		this.hashtagText.setText(hashText);
+	}
+
+	public void setImageView(Bitmap imageView) {
+
+		this.imageView.setImageBitmap(imageView);
 	}
 
 }

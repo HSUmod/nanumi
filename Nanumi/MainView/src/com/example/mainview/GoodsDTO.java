@@ -1,16 +1,19 @@
 package com.example.mainview;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.widget.ImageView;
 
 public class GoodsDTO {
 	private String articleNum, userid, city, district, major, sub, contents, hashtag, selectionWay, postingTime;
-	private ImageView img;
+	private Bitmap img;
 
 	public GoodsDTO() {
 		super();
 	}
-	public GoodsDTO(String articleNum, String userid, String city, String district, String major, String sub, String contents, String hashtag, String selectionWay, String postingTime, Bitmap img) {
+
+	public GoodsDTO(String articleNum, String userid, String city, String district, String major, String sub,
+			String contents, String hashtag, String selectionWay, String postingTime, byte[] img) {
 		this.articleNum = articleNum;
 		this.userid = userid;
 		this.city = city;
@@ -21,9 +24,9 @@ public class GoodsDTO {
 		this.hashtag = hashtag;
 		this.selectionWay = selectionWay;
 		this.postingTime = postingTime;
-	//	this.img.setImageBitmap(img);
+		this.img = BitmapFactory.decodeByteArray(img, 0, img.length);
 	}
-	
+
 	public GoodsDTO(String articleNum, String userid, String city, String district, String major, String sub,
 			String contents, String hashtag, String selectionWay, String postingTime) {
 		this.articleNum = articleNum;
@@ -124,11 +127,11 @@ public class GoodsDTO {
 		this.postingTime = postingTime;
 	}
 
-	public ImageView getImg() {
+	public Bitmap getImg() {
 		return img;
 	}
 
-	public void setImg(ImageView img) {
+	public void setImg(Bitmap img) {
 		this.img = img;
 	}
 

@@ -1,7 +1,0 @@
-package com.example.mainview;
-
-import android.widget.LinearLayout;
-
-public class MainView extends LinearLayou{
-
-}

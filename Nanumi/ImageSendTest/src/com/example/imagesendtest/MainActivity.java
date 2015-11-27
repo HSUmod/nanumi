@@ -38,8 +38,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	private static String imageName = null;// =
 	private static String imagePath = null;
 
-	ImageView imageToUpload, downloadedImage;
-	Button bUploadImage, bDownloadImage, sendBtn;
+	ImageView imageToUpload;
+	Button bUploadImage, sendBtn;
 	EditText uploadImageName, downloadImageName;
 	EditText userid, contents, city, district, major, sub, selectionWay, hashtag;
 
@@ -48,13 +48,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		imageToUpload = (ImageView) findViewById(R.id.imageToUpload);
-		downloadedImage = (ImageView) findViewById(R.id.downloadedImage);
 
 		bUploadImage = (Button) findViewById(R.id.bUploadImage);
-		bDownloadImage = (Button) findViewById(R.id.bDownloadImage);
-
-		uploadImageName = (EditText) findViewById(R.id.uploadImageName);
-		downloadImageName = (EditText) findViewById(R.id.downloadImageName);
 		sendBtn = (Button) findViewById(R.id.sendBtn);
 
 		////////////////////////////////////////////
@@ -69,7 +64,6 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		// imageToUpload.setOnClickListener(this);
 		bUploadImage.setOnClickListener(this);
-		bDownloadImage.setOnClickListener(this);
 
 		sendBtn.setOnClickListener(new OnClickListener() {
 			@Override
@@ -83,8 +77,6 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	private class UploadImage extends AsyncTask<String, Void, Void> {
-		// String name;
-
 		public UploadImage() {
 			super();
 		}
@@ -97,7 +89,6 @@ public class MainActivity extends Activity implements OnClickListener {
 
 			File file = new File(imagePath);
 			FileBody bin = new FileBody(file);
-			System.out.println("Ç® °æ·Î : " + imagePath);
 			MultipartEntityBuilder multipart = MultipartEntityBuilder.create();
 			multipart.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
 
@@ -141,36 +132,6 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	}
 
-	private class DownloadImage extends AsyncTask<Void, Void, String> {
-		public DownloadImage() {
-			super();
-
-		}
-
-		@Override
-		protected String doInBackground(Void... params) {
-			// TODO Auto-generated method stub
-			
-			
-			
-			
-			
-			
-			//
-			
-			
-
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(String result) {
-			// TODO Auto-generated method stub
-			super.onPostExecute(result);
-		}
-
-	}
-
 	private HttpParams getHttpRequestParams() {
 		HttpParams httpRequestParams = new BasicHttpParams();
 		HttpConnectionParams.setConnectionTimeout(httpRequestParams, 1000 * 30);
@@ -191,10 +152,6 @@ public class MainActivity extends Activity implements OnClickListener {
 			intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
 			intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 			startActivityForResult(intent, RESULT_LOAD_IMAGE);
-			break;
-		case R.id.bDownloadImage:
-			new DownloadImage().execute();
-
 			break;
 		default:
 			break;
