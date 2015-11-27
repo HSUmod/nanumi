@@ -140,14 +140,14 @@ public class CommonController {
 		json.append("\"value\": [");
 		for (CityDTO city : cityList) {
 			json.append("{\"city\": \"" + city.getCity() + "\", ");
-			json.append("\"district\": [");
+			json.append("\"district\": \"");
 			for (DistrictDTO district : districtList) {
 				if (city.getCitycode().equals(district.getCitycode())) {
-					json.append("\"" + district.getDistrict() + "\", ");
+					json.append(district.getDistrict() + "\", ");
 				}
 			}
 			json.delete(json.length() - 1, json.length());
-			json.append("]},");
+			json.append("\"},");
 		}
 		json.delete(json.length() - 1, json.length());
 		json.append("]}");
@@ -155,6 +155,9 @@ public class CommonController {
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = res.getWriter();
 		pw.write(json.toString());
+		log.info("============================");
+		log.info(json.toString());
+		log.info("============================");
 		pw.close();
 	}
 
