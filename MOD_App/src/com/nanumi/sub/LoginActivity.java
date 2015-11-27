@@ -20,7 +20,7 @@ import org.json.JSONObject;
 
 import com.nanumi.R;
 import com.nanumi.main.MainActivity;
-
+import android.accounts.OnAccountsUpdateListener;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,7 +33,7 @@ import android.widget.EditText;
 
 public class LoginActivity extends Activity {
 	private EditText etId, etPw;
-	private Button btLogin;
+	private Button btnLogin, btnSearchId, btnSignUp;
 	private boolean loginFlag = false;
 
 	@Override
@@ -51,8 +51,8 @@ public class LoginActivity extends Activity {
 	}
 
 	private void setButton() {
-		btLogin = (Button) findViewById(R.id.btLogin);
-		btLogin.setOnClickListener(new OnClickListener() {
+		btnLogin = (Button) findViewById(R.id.btnLogin);
+		btnLogin.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				String inputId = etId.getText().toString();
@@ -81,6 +81,24 @@ public class LoginActivity extends Activity {
 					startActivity(intent);
 					finish();
 				}
+			}
+		});
+
+		btnSearchId = (Button) findViewById(R.id.btnSearchID);
+		btnSearchId.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(LoginActivity.this, SearchIdActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		btnSignUp = (Button) findViewById(R.id.btnSignUp);
+		btnSignUp.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+				startActivity(intent);
 			}
 		});
 	}

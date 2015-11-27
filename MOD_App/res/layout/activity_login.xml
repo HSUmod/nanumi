@@ -44,10 +44,23 @@
                 android:inputType="textPassword" />
 
             <Button
-                android:id="@+id/btLogin"
+                android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Login" />
+
+            <Button
+                android:id="@+id/btnSearchID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ID 찾기" />
+
+            <Button
+                android:id="@+id/btnSignUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="가입" />
+
         </LinearLayout>
 
         <Space
