@@ -54,11 +54,6 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public UserDTO getUserAddress(String userid) {
-		return goodsDAO.getUserAddress(userid);
-	}
-
-	@Override
 	public List<GoodsDTO> readGoods() {
 		return goodsDAO.readGoods();
 	}

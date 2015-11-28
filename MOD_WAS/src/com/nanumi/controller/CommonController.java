@@ -161,6 +161,21 @@ public class CommonController {
 		pw.close();
 	}
 
+	@RequestMapping(value = "/getUserAddress.do", method = RequestMethod.POST)
+	public void getUserAddress(@RequestParam("userid") String userid, HttpServletResponse res) throws Exception {
+		res.setContentType("application/json; charset=utf-8");
+		PrintWriter pw = res.getWriter();
+
+		UserDTO user = service.getUserAddress(userid);
+		pw.write("{\"result\": \"READ_COMPLETE\", ");
+		pw.write("\"address\": [{");
+		pw.write("\"city\": \"" + user.getCity() + "\", ");
+		pw.write("\"district\": \"" + user.getDistrict() + "\"");
+		pw.write("}]}");
+
+		pw.close();
+	}
+
 	@RequestMapping(value = "/SearchUserID.do", method = RequestMethod.POST)
 	public void searchUserid(@RequestParam("email") String email, HttpServletResponse res) throws IOException {
 		String result = service.getUserIdByEmail(email);

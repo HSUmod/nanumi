@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.nanumi.dto.ApplicationDTO;
 import com.nanumi.dto.FileDTO;
 import com.nanumi.dto.GoodsDTO;
-import com.nanumi.dto.UserDTO;
 import com.nanumi.service.GoodsService;
 
 @Controller
@@ -40,21 +39,6 @@ public class GoodsController {
 
 		service.writingGoods(new GoodsDTO(userid, city, district, major, sub, contents, hashtag, selectionWay), request);
 		pw.write("{\"result\": \"WRITING_COMPLETE\"}");
-		pw.close();
-	}
-
-	@RequestMapping(value = "/getUserAddress.do", method = RequestMethod.POST)
-	public void getUserAddress(@RequestParam("userid") String userid, HttpServletResponse res) throws Exception {
-		res.setContentType("application/json; charset=utf-8");
-		PrintWriter pw = res.getWriter();
-
-		UserDTO user = service.getUserAddress(userid);
-		pw.write("{\"result\": \"READ_COMPLETE\", ");
-		pw.write("\"address\": [{");
-		pw.write("\"city\": \"" + user.getCity() + "\", ");
-		pw.write("\"district\": \"" + user.getDistrict() + "\"");
-		pw.write("}]}");
-
 		pw.close();
 	}
 

@@ -62,4 +62,9 @@ public class CommonServiceImpl implements CommonService {
 	public void modifyUserInfo(UserDTO user) {
 		userDAO.modifyInfo(user);
 	}
+
+	@Override
+	public UserDTO getUserAddress(String userid) {
+		return userDAO.getUserAddress(userid);
+	}
 }
