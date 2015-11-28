@@ -169,5 +169,17 @@ public class GoodsController {
 		pw.write(json);
 		pw.close();
 	}
+	
+	@RequestMapping(value = "/Choice.do", method = RequestMethod.POST)
+	public void choice(@RequestParam("articleNum") String articleNum, @RequestParam("userid") String userid, HttpServletResponse res) throws Exception {
+		String json = "{\"result\": \"ok\"}";
+
+		service.choice(articleNum, userid);
+
+		res.setContentType("application/json; charset=utf-8");
+		PrintWriter pw = res.getWriter();
+		pw.write(json);
+		pw.close();
+	}
 
 }

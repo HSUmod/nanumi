@@ -32,5 +32,11 @@ public class ApplicationDAO {
 
 		session.delete("applyCancle", obj);
 	}
+	
+	public void choice(String articleNum, String userid) {
+		ApplicationDTO obj = new ApplicationDTO(articleNum, userid, "1");
+
+		session.update("choice", obj);
+	}
 
 }

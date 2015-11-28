@@ -22,4 +22,6 @@ public interface GoodsService {
 	public void apply(String articleNum, String userid);
 
 	public void applyCancle(String articleNum, String userid);
+	
+	public void choice(String articleNum, String userid);
 }

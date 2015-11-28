@@ -121,4 +121,11 @@
 	     where articleNum = #{articleNum}
 	       and userid = #{userid}
 	</delete>
+	
+	<update id="choice" parameterType="Application">
+	    update application_list
+	       set state = #{state}
+	     where articleNum = #{articleNum}
+	       and userid = #{userid}
+	</update>
 </mapper>
