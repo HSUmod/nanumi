@@ -101,7 +101,8 @@ public class GoodsController {
 				json.append("{");
 				json.append("\"articleNum\": \"" + item.getArticleNum() + "\",");
 				json.append("\"userid\": \"" + item.getUserid() + "\",");
-				json.append("\"state\": \"" + item.getState() + "\"");
+				json.append("\"state\": \"" + item.getState() + "\",");
+				json.append("\"postingTime\": \"" + item.getPostingTime() + "\"");
 				json.append("},");
 			}
 			json.delete(json.length() - 1, json.length()); // last comma delete
@@ -133,7 +134,8 @@ public class GoodsController {
 				json.append("{");
 				json.append("\"articleNum\": \"" + item.getArticleNum() + "\",");
 				json.append("\"userid\": \"" + item.getUserid() + "\",");
-				json.append("\"state\": \"" + item.getState() + "\"");
+				json.append("\"state\": \"" + item.getState() + "\",");
+				json.append("\"postingTime\": \"" + item.getPostingTime() + "\"");
 				json.append("},");
 			}
 			json.delete(json.length() - 1, json.length()); // last comma delete
