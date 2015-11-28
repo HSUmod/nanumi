@@ -116,7 +116,7 @@
 		values (#{articleNum}, #{userid})
 	</insert>
 
-	<delete id="apply" parameterType="hashmap">
+	<delete id="applyCancle" parameterType="hashmap">
 	    delete from application_list
 	     where articleNum = #{articleNum}
 	       and userid = #{userid}
