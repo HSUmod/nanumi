@@ -60,14 +60,16 @@ public class GoodsFragment extends Fragment {
 		ReadReq readReq = new ReadReq();
 		ApplyReq applyReq = new ApplyReq();
 		try {
-			SharedPreferences pref = this.getActivity().getSharedPreferences("Login", 0);
+			SharedPreferences pref = this.getActivity().getSharedPreferences(
+					"Login", 0);
 			String result = readReq.execute(pref.getString("uuid", "")).get();
-			String applyResult = applyReq.execute(pref.getString("uuid", "").split("-")[0]).get();
-			
-			if(!result.equals("fail")) {
+			String applyResult = applyReq.execute(
+					pref.getString("uuid", "").split("-")[0]).get();
+
+			if (!result.equals("fail")) {
 				resultParse(result);
 			}
-			
+
 			if (!applyResult.equals("fail")) {
 				applyResultParse(applyResult);
 			}
@@ -97,7 +99,8 @@ public class GoodsFragment extends Fragment {
 			String userid = jsonObj.getString("userid");
 			String state = jsonObj.getString("state");
 			String time = jsonObj.getString("time");
-			ApplicationsDTO item = new ApplicationsDTO(articleNum, userid,state,time);
+			ApplicationsDTO item = new ApplicationsDTO(articleNum, userid,
+					state, time);
 			applicationList.add(item);
 		}
 	}

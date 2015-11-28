@@ -15,6 +15,8 @@ public interface CommonService {
 
 	public UserDTO checkEmail(String email);
 
+	public UserDTO getUserAddress(String userid);
+
 	public UserDTO login(String userid);
 
 	public List<CityDTO> getCities();

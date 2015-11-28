@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import com.nanumi.R;
 import com.nanumi.sub.LoginActivity;
+import com.nanumi.sub.RegisterActivity;
 import com.viewpagerindicator.UnderlinePageIndicator;
 
 import android.content.Intent;
@@ -62,7 +63,7 @@ public class MainActivity extends FragmentActivity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		getActionBar().setDisplayShowTitleEnabled(false);
 		getActionBar().setDisplayShowHomeEnabled(false);
-		
+
 		return true;
 	}
 
@@ -108,7 +109,9 @@ public class MainActivity extends FragmentActivity {
 					mPager.setCurrentItem(2);
 					break;
 				case R.id.fragBtn4:
-					mPager.setCurrentItem(3);
+
+					Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+					startActivity(intent);
 					break;
 				default:
 					break;
@@ -143,11 +146,12 @@ public class MainActivity extends FragmentActivity {
 	private void setRightNavi() {
 		rightNavi = (LinearLayout) findViewById(R.id.rightNavi);
 		logoutBtn = (Button) findViewById(R.id.btnLogout);
+
 		logoutBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				SharedPreferences pref = getSharedPreferences("Login", 0);
-				
+
 				LogoutReq logoutReq = new LogoutReq();
 				try {
 					String result = logoutReq.execute(pref.getString("uuid", "")).get();
@@ -157,7 +161,7 @@ public class MainActivity extends FragmentActivity {
 				} catch (ExecutionException e) {
 					e.printStackTrace();
 				}
-				
+
 				SharedPreferences.Editor edit = pref.edit();
 				edit.clear();
 				edit.commit();
@@ -167,6 +171,7 @@ public class MainActivity extends FragmentActivity {
 				finish();
 			}
 		});
+
 	}
 
 	class LogoutReq extends AsyncTask<String, Void, String> {
@@ -179,7 +184,7 @@ public class MainActivity extends FragmentActivity {
 				HttpClient client = new DefaultHttpClient();
 				String postURL = "http://113.198.80.223/MOD_WAS/Logout.do";
 				HttpPost post = new HttpPost(postURL);
-				
+
 				ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
 				params.add(new BasicNameValuePair("uuid", param[0]));
 

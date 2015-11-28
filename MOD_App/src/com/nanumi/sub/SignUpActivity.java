@@ -22,12 +22,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.nanumi.R;
+import com.nanumi.main.MainActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -35,6 +38,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SignUpActivity extends Activity {
 	EditText userid, password, repassword, nickname, email_address, phone_number;
@@ -78,9 +82,19 @@ public class SignUpActivity extends Activity {
 
 		signupBtn = (Button) findViewById(R.id.signupBtn);
 
-		AddressRequest request = new AddressRequest();
 		addresses = new HashMap<String, List<String>>();
 		cities = new ArrayList<String>();
+
+		userid.setOnFocusChangeListener(focusListener);
+		password.setOnFocusChangeListener(focusListener);
+		repassword.setOnFocusChangeListener(focusListener);
+		nickname.setOnFocusChangeListener(focusListener);
+		city.setOnFocusChangeListener(focusListener);
+		district.setOnFocusChangeListener(focusListener);
+		email_address.setOnFocusChangeListener(focusListener);
+		phone_number.setOnFocusChangeListener(focusListener);
+
+		AddressRequest request = new AddressRequest();
 
 		try {
 			resultParse(request.execute().get());
@@ -95,17 +109,7 @@ public class SignUpActivity extends Activity {
 			e.printStackTrace();
 		}
 
-		userid.setOnFocusChangeListener(focusListener);
-		password.setOnFocusChangeListener(focusListener);
-		repassword.setOnFocusChangeListener(focusListener);
-		nickname.setOnFocusChangeListener(focusListener);
-		city.setOnFocusChangeListener(focusListener);
-		district.setOnFocusChangeListener(focusListener);
-		email_address.setOnFocusChangeListener(focusListener);
-		phone_number.setOnFocusChangeListener(focusListener);
-
 		initCitis(cities);
-
 		city.setOnItemSelectedListener(new OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -136,10 +140,6 @@ public class SignUpActivity extends Activity {
 			String district = jsonObj.getString("district");
 
 			List<String> obj = Arrays.asList(district.split(","));
-
-			Log.d("city", city);
-			Log.d("district", district);
-
 			cities.add(city);
 			addresses.put(city, obj);
 		}
@@ -235,7 +235,7 @@ public class SignUpActivity extends Activity {
 			try {
 
 				info.execute("SignUp.do", userid.getText().toString(), password.getText().toString(),
-						nickname.getText().toString(), nickname.getText().toString(), city.getSelectedItem().toString(),
+						nickname.getText().toString(), city.getSelectedItem().toString(),
 						district.getSelectedItem().toString().toString(), email_address.getText().toString(),
 						phone_number.getText().toString()).get();
 			} catch (InterruptedException e) {
@@ -244,44 +244,17 @@ public class SignUpActivity extends Activity {
 			} catch (ExecutionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} finally {
+				Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+				startActivity(intent);
+				finish();
+				Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
 			}
 
 			break;
 
 		default:
 			break;
-
-		}
-
-	}
-
-	class AddressRequest extends AsyncTask<Void, Void, String> {
-		@Override
-		protected String doInBackground(Void... params) {
-			// TODO Auto-generated method stub
-			JSONObject json = null;
-			String result = null;
-
-			try {
-				HttpClient client = new DefaultHttpClient();
-				String postURL = "http://113.198.80.223/MOD_WAS/SearchAddress.do";
-				HttpPost post = new HttpPost(postURL);
-				HttpResponse responsePOST = client.execute(post);
-				HttpEntity resEntity = responsePOST.getEntity();
-
-				json = new JSONObject(EntityUtils.toString(resEntity));
-				if (json.getString("result").equals("ok")) {
-					result = json.getString("value");
-				} else {
-					result = "fail";
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			Log.d("result", result);
-			return result;
 
 		}
 
@@ -326,69 +299,69 @@ public class SignUpActivity extends Activity {
 	}
 
 	// ���̵�, �г���, �̸��� �ߺ� üũ, ���߿� ����!!(�����, ���߿� �ߺ�üũ �Ҷ� �� Ŭ����)
-//	class UserInfoCheckClass extends AsyncTask<String, Void, Boolean> {
-//		@Override
-//		protected Boolean doInBackground(String... param) {
-//			// TODO Auto-generated method stub
-//			JSONObject json = null;
-//			boolean flag = false;
-//			String str = "";
-//			if (param[0].equals("UserIDCheck.do")) {
-//				str = "userid";
-//			} else if (param[0].equals("UserNicknameCheck.do")) {
-//				str = "nickname";
-//			} else if (param[0].equals("UserEmailCheck.do")) {
-//				str = "email";
-//			}
-//
-//			try {
-//				HttpClient client = new DefaultHttpClient();
-//				String postURL = "http://223.194.141.168/MOD_WAS/" + param[0];
-//				HttpPost post = new HttpPost(postURL);
-//				ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
-//
-//				params.add(new BasicNameValuePair(str, param[1]));
-//				UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params, HTTP.UTF_8);
-//				post.setEntity(ent);
-//
-//				HttpResponse responsePOST = client.execute(post);
-//				HttpEntity resEntity = responsePOST.getEntity();
-//
-//				// result: SIGNUP_ERROR_01 or SIGNUP_COMPLETE
-//
-//				try {
-//					json = new JSONObject(EntityUtils.toString(resEntity));
-//				} catch (ParseException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				} catch (JSONException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
-//
-//				try {
-//					if (json.getString("result").equals("fail")) {
-//						// fail
-//						System.out.println("true");
-//						Log.d("MyCheck.class", "���̵� �ߺ���");
-//						flag = true;
-//					} else {
-//						// success
-//
-//						Log.d("MyCheck.calss", "���̵� ��� ����");
-//						flag = false;
-//					}
-//				} catch (JSONException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//			return flag;
-//
-//		}
-//	}
+	// class UserInfoCheckClass extends AsyncTask<String, Void, Boolean> {
+	// @Override
+	// protected Boolean doInBackground(String... param) {
+	// // TODO Auto-generated method stub
+	// JSONObject json = null;
+	// boolean flag = false;
+	// String str = "";
+	// if (param[0].equals("UserIDCheck.do")) {
+	// str = "userid";
+	// } else if (param[0].equals("UserNicknameCheck.do")) {
+	// str = "nickname";
+	// } else if (param[0].equals("UserEmailCheck.do")) {
+	// str = "email";
+	// }
+	//
+	// try {
+	// HttpClient client = new DefaultHttpClient();
+	// String postURL = "http://223.194.141.168/MOD_WAS/" + param[0];
+	// HttpPost post = new HttpPost(postURL);
+	// ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
+	//
+	// params.add(new BasicNameValuePair(str, param[1]));
+	// UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params, HTTP.UTF_8);
+	// post.setEntity(ent);
+	//
+	// HttpResponse responsePOST = client.execute(post);
+	// HttpEntity resEntity = responsePOST.getEntity();
+	//
+	// // result: SIGNUP_ERROR_01 or SIGNUP_COMPLETE
+	//
+	// try {
+	// json = new JSONObject(EntityUtils.toString(resEntity));
+	// } catch (ParseException e1) {
+	// // TODO Auto-generated catch block
+	// e1.printStackTrace();
+	// } catch (JSONException e1) {
+	// // TODO Auto-generated catch block
+	// e1.printStackTrace();
+	// }
+	//
+	// try {
+	// if (json.getString("result").equals("fail")) {
+	// // fail
+	// System.out.println("true");
+	// Log.d("MyCheck.class", "���̵� �ߺ���");
+	// flag = true;
+	// } else {
+	// // success
+	//
+	// Log.d("MyCheck.calss", "���̵� ��� ����");
+	// flag = false;
+	// }
+	// } catch (JSONException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	//
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// }
+	// return flag;
+	//
+	// }
+	// }
 
 }

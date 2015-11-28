@@ -19,7 +19,6 @@ import com.nanumi.dao.GoodsDAO;
 import com.nanumi.dto.ApplicationDTO;
 import com.nanumi.dto.FileDTO;
 import com.nanumi.dto.GoodsDTO;
-import com.nanumi.dto.UserDTO;
 
 @Service("GoodsService")
 public class GoodsServiceImpl implements GoodsService {
@@ -28,6 +27,7 @@ public class GoodsServiceImpl implements GoodsService {
 	private FileUtils fileUtils;
 	@Autowired
 	private GoodsDAO goodsDAO;
+	@Autowired
 	private ApplicationDAO applicationDAO;
 
 	@Override
@@ -54,11 +54,6 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public UserDTO getUserAddress(String userid) {
-		return goodsDAO.getUserAddress(userid);
-	}
-
-	@Override
 	public List<GoodsDTO> readGoods() {
 		return goodsDAO.readGoods();
 	}
@@ -81,5 +76,15 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public void apply(String articleNum, String userid) {
 		applicationDAO.apply(articleNum, userid);
+	}
+
+	@Override
+	public void applyCancle(String articleNum, String userid) {
+		applicationDAO.applyCancle(articleNum, userid);
+	}
+
+	@Override
+	public void choice(String articleNum, String userid) {
+		applicationDAO.choice(articleNum, userid);
 	}
 }
