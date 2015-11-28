@@ -1,0 +1,134 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context="com.example.imagesendtest.MainActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="5" >
+
+        <TextView
+            android:id="@+id/userid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="userid "
+            android:textSize="10dp" >
+        </TextView>
+
+        <Spinner
+            android:id="@+id/city"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_weight="2"
+            android:hint="city" />
+
+        <Spinner
+            android:id="@+id/district"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_weight="2"
+            android:hint="district" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/bUploadImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="22dp"
+            android:text="upload"
+            android:textSize="10dp" />
+
+        <requestFocus />
+
+        <ImageView
+            android:id="@+id/imageToUpload"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_launcher" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2" >
+
+        <Spinner
+            android:id="@+id/major"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:hint="major" />
+
+        <Spinner
+            android:id="@+id/sub"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:hint="sub" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/hashtag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="hashtag" />
+
+    <EditText
+        android:id="@+id/contents"
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        android:layout_weight="0.19"
+        android:ems="10"
+        android:hint="contents" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="right"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/selectionWay0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="선착순" />
+
+        <RadioButton
+            android:id="@+id/selectionWay1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="채택순" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal" >
+
+        <Button
+            android:id="@+id/registerBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="registerBtn" />
+    </LinearLayout>
+
+</LinearLayout>

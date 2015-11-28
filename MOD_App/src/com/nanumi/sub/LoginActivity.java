@@ -53,6 +53,7 @@ public class LoginActivity extends Activity {
 
 	private void setButton() {
 		btnLogin = (Button) findViewById(R.id.btnLogin);
+		
 		btnLogin.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -85,6 +86,7 @@ public class LoginActivity extends Activity {
 				}
 			}
 		});
+
 
 		btnSearchId = (Button) findViewById(R.id.btnSearchID);
 		btnSearchId.setOnClickListener(new OnClickListener() {
