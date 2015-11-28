@@ -31,4 +31,12 @@ public class ApplicationDAO {
 		session.insert("apply", map);
 	}
 
+	public void applyCancle(String articleNum, String userid) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("articleNum", articleNum);
+		map.put("userid", userid);
+
+		session.delete("applyCancle", map);
+	}
+
 }

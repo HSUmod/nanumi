@@ -130,7 +130,7 @@ public class GoodsController {
 		pw.write(json.toString());
 		pw.close();
 	}
-	
+
 	@RequestMapping(value = "/MyGoodsApplicationList.do", method = RequestMethod.POST)
 	public void getApplicationListByArticleNum(@RequestParam("articleNum") String articleNum, HttpServletResponse res) throws Exception {
 		List<ApplicationDTO> applicationList = null;
@@ -159,14 +159,21 @@ public class GoodsController {
 	}
 
 	@RequestMapping(value = "/Apply.do", method = RequestMethod.POST)
-	public void apply(@RequestParam("articleNum") String articleNum, @RequestParam("userid") String userid, HttpServletResponse res) throws Exception {
-		service.apply(articleNum, userid);
-		
+	public void apply(@RequestParam("articleNum") String articleNum, @RequestParam("userid") String userid, @RequestParam("currentState") String state, HttpServletResponse res) throws Exception {
+		String json = "{\"result\": \"ok\"}";
+
+		if (state.equals("apply")) {
+			service.apply(articleNum, userid);
+		} else if (state.equals("cancle")) {
+			service.applyCancle(articleNum, userid);
+		} else {
+			json = "{\"result\": \"fail\"}";
+		}
+
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = res.getWriter();
-		pw.write("{\"result\": \"ok\"}");
+		pw.write(json);
 		pw.close();
 	}
-	
 
 }

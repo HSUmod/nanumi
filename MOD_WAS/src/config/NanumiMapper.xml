@@ -3,110 +3,122 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="nanumiNS">
-    <!-- SignUp -->
-    <insert id="signUp" parameterType="User">
-	    insert into member(userid, pwd, nickname, city, district, phone, email)
-		values(#{userid}, #{pwd}, #{nickname}, #{city}, #{district}, #{phone}, #{email})
+	<!-- SignUp -->
+	<insert id="signUp" parameterType="User">
+		insert into member(userid, pwd, nickname, city, district, phone, email)
+		values(#{userid}, #{pwd}, #{nickname}, #{city}, #{district}, #{phone},
+		#{email})
 	</insert>
-	
-    <select id="checkUserId" parameterType="String" resultType="User">
+
+	<select id="checkUserId" parameterType="String" resultType="User">
 		select userid
-		  from member
-		 where userid = #{userid}
+		from member
+		where userid = #{userid}
 	</select>
-	
-	<select id="checkUserNickname" parameterType="String" resultType="User">
+
+	<select id="checkUserNickname" parameterType="String"
+		resultType="User">
 		select nickname
-		  from member
-		 where nickname = #{nickname}
+		from member
+		where nickname = #{nickname}
 	</select>
-	
+
 	<select id="checkUserEmail" parameterType="String" resultType="User">
 		select email
-		  from member
-		 where email = #{email}
+		from member
+		where email = #{email}
 	</select>
-	
+
 	<!-- Login -->
 	<select id="login" parameterType="String" resultType="User">
-		select userid, pwd
-		  from member
-		 where userid = #{userid}
+		select
+		userid, pwd
+		from member
+		where userid = #{userid}
 	</select>
-	
+
 	<!-- Search Address -->
 	<select id="cityList" resultType="City">
 		select *
-		  from city
-		 order by citycode
+		from city
+		order by citycode
 	</select>
 
 	<select id="districtList" resultType="District">
 		select *
-		  from district
-		 order by citycode
+		from district
+		order by citycode
 	</select>
-	
+
 	<select id="getUserIdByEmail" parameterType="String" resultType="String">
-	    select userid
-	      from member
-	     where email = #{email}
+		select userid
+		from member
+		where email = #{email}
 	</select>
-	
+
 	<update id="modifyUserInfo" parameterType="User">
-	    update member
-	       set pwd = #{pwd},
-	           nickname = #{nickname},
-	           address = #{address},
-	           email = #{email}
-	     where userid = #{userid}
+		update member
+		set pwd = #{pwd},
+		nickname = #{nickname},
+		address = #{address},
+		email = #{email}
+		where userid = #{userid}
 	</update>
-	
+
 	<insert id="writingGoods">
-	    insert into GOODS(articleNum, userid, city, district, major, sub,
-	                      contents, hashtag, selectionWay, postingTime)
-		values(SEQ_GOODS.NEXTVAL, #{userid}, #{city}, #{district}, #{major}, #{sub},
-		       #{contents}, #{hashtag}, #{selectionWay}, sysdate)
+		insert into GOODS(articleNum, userid, city, district, major, sub,
+		contents, hashtag, selectionWay, postingTime)
+		values(SEQ_GOODS.NEXTVAL,
+		#{userid}, #{city}, #{district}, #{major}, #{sub},
+		#{contents}, #{hashtag}, #{selectionWay}, sysdate)
 	</insert>
-	
+
 	<select id="getUserAddress">
-	    select city, district
-	      from member
-	     where userid = #{userid}
+		select city, district
+		from member
+		where userid = #{userid}
 	</select>
-	
+
 	<insert id="insertFile" parameterType="hashmap">
-        insert into GOODS_FILE(idx, articleNum, original_file_name, stored_file_name, file_size, postingTime)
-        values(SEQ_GOODS_FILE.NEXTVAL, SEQ_GOODS.CURRVAL, #{original_file_name}, #{stored_file_name}, #{file_size}, sysdate)
+		insert into GOODS_FILE(idx, articleNum, original_file_name,
+		stored_file_name, file_size, postingTime)
+		values(SEQ_GOODS_FILE.NEXTVAL, SEQ_GOODS.CURRVAL,
+		#{original_file_name}, #{stored_file_name}, #{file_size}, sysdate)
 	</insert>
-	
+
 	<select id="selectAllGoods" resultType="Goods">
-	    select *
-	      from goods
+		select *
+		from goods
 	</select>
-	
+
 	<select id="selectFileInfo" resultType="File">
-        select stored_file_name, original_file_name
-          from goods_file
-         where articleNum = #{articleNum}
+		select stored_file_name, original_file_name
+		from goods_file
+		where articleNum = #{articleNum}
 	</select>
-	
+
 	<!-- 신청자 입장 -->
 	<select id="getMyApplicationList" resultType="Application">
-	    select *
-	      from application_list
-	     where  userid = #{userid}
+		select *
+		from application_list
+		where userid = #{userid}
 	</select>
-	
+
 	<!-- 등록자 입장 -->
 	<select id="getMyGoodsApplicationList" resultType="Application">
-	    select *
-	      from application_list
-	     where articleNum = #{articleNum}
+		select *
+		from application_list
+		where articleNum = #{articleNum}
 	</select>
-	
+
 	<insert id="apply" parameterType="hashmap">
-	    insert into application_list(articleNum, userid)
-	    values (#{articleNum}, #{userid})
+		insert into application_list(articleNum, userid)
+		values (#{articleNum}, #{userid})
+	</insert>
+
+	<insert id="apply" parameterType="hashmap">
+	    delete from application_list
+	     where articleNum = #{articleNum}
+	       and userid = #{userid}
 	</insert>
 </mapper>

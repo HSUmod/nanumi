@@ -82,4 +82,9 @@ public class GoodsServiceImpl implements GoodsService {
 	public void apply(String articleNum, String userid) {
 		applicationDAO.apply(articleNum, userid);
 	}
+
+	@Override
+	public void applyCancle(String articleNum, String userid) {
+		applicationDAO.applyCancle(articleNum, userid);
+	}
 }
