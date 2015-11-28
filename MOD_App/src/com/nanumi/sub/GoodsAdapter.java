@@ -20,8 +20,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import sj.ApplicationsDTO;
-import sj.ChooseActivity;
+import com.nanumi.R;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,10 +33,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.nanumi.R;
-import com.nanumi.main.MainActivity;
-import com.nanumi.splash.SplashActivity;
+import sj.ApplicationsDTO;
+import sj.ChooseActivity;
 
 public class GoodsAdapter extends BaseAdapter {
 	List<GoodsDTO> goodsList;
@@ -67,31 +65,23 @@ public class GoodsAdapter extends BaseAdapter {
 		final Context context = parent.getContext();
 
 		if (convertView == null) {
-			LayoutInflater inflater = (LayoutInflater) context
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView = inflater.inflate(R.layout.fragment_goods_list_item,
-					parent, false);
+			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			convertView = inflater.inflate(R.layout.fragment_goods_list_item, parent, false);
 
-			TextView userid = (TextView) convertView
-					.findViewById(R.id.tvGoodsUserid);
+			TextView userid = (TextView) convertView.findViewById(R.id.tvGoodsUserid);
 			// TextView distance = (TextView)
 			// convertView.findViewById(R.id.tvDistance);
-			TextView postingTime = (TextView) convertView
-					.findViewById(R.id.tvPostingTime);
-			ImageView img = (ImageView) convertView
-					.findViewById(R.id.ivGoodsImg);
-			TextView contents = (TextView) convertView
-					.findViewById(R.id.tvContents);
-			TextView hashtag = (TextView) convertView
-					.findViewById(R.id.tvHashtag);
+			TextView postingTime = (TextView) convertView.findViewById(R.id.tvPostingTime);
+			ImageView img = (ImageView) convertView.findViewById(R.id.ivGoodsImg);
+			TextView contents = (TextView) convertView.findViewById(R.id.tvContents);
+			TextView hashtag = (TextView) convertView.findViewById(R.id.tvHashtag);
 			Button apply = (Button) convertView.findViewById(R.id.btnApply);
 			String articleNum = goodsList.get(position).getArticleNum();
 
 			// final String articleNum =
 			// goodsList.get(position).getArticleNum();
 			String userId = goodsList.get(position).getUserid();
-			final int state = Integer.parseInt(goodsList.get(position)
-					.getState());
+			final int state = Integer.parseInt(goodsList.get(position).getState());
 			userid.setText(userId);
 			// distance
 			postingTime.setText(goodsList.get(position).getPostingTime());
@@ -131,10 +121,8 @@ public class GoodsAdapter extends BaseAdapter {
 						public void onClick(View v) {
 							if (state == GoodsDTO.NO_CHOOSE) { // state == 0
 								//채택하기 액티비티
-								Intent intent = new Intent(context,
-										ChooseActivity.class);
-								intent.putExtra("articleNum",
-										goodsList.get(position).getArticleNum());
+								Intent intent = new Intent(context, ChooseActivity.class);
+								intent.putExtra("articleNum", goodsList.get(position).getArticleNum());
 
 								context.startActivity(intent);
 
@@ -152,10 +140,7 @@ public class GoodsAdapter extends BaseAdapter {
 					} else {
 						apply.setText("신청");
 						for (int i = 0; i < applicationList.size(); i++) {
-							if (applicationList.get(i).getArticleNum()
-									.equals(articleNum)
-									&& applicationList.get(i).getUserid()
-											.equals(uuid))
+							if (applicationList.get(i).getArticleNum().equals(articleNum) && applicationList.get(i).getUserid().equals(uuid))
 								apply.setText("신청 취소");
 						}
 					}
@@ -173,31 +158,31 @@ public class GoodsAdapter extends BaseAdapter {
 								btn.setText("신청");
 
 							} else if (btn.getText().toString().equals("나눔 진행중")) {
-								if(goodsList.get(position).getRuserid().equals(uuid)) {
+								if (goodsList.get(position).getRuserid().equals(uuid)) {
 									// TODO 나눔 진행 상태 보기 페이지 ?
 								}
 							} else if (btn.getText().toString().equals("나눔 완료")) {
 								// TODO 할꺼 없음..?
 							}
-//							SendReq sendReq = new SendReq();
-//							try {
-//								String result = sendReq
-//										.execute(
-//												uuid,
-//												goodsList.get(position)
-//														.getArticleNum()).get();
-//								if (!result.equals("fail")) {
-//
-//								} else {
-//									// TODO 서버 전송 실패
-//								}
-//							} catch (InterruptedException e) {
-//
-//								e.printStackTrace();
-//							} catch (ExecutionException e) {
-//
-//								e.printStackTrace();
-//							} //함수로 빼던가 하던가
+							//							SendReq sendReq = new SendReq();
+							//							try {
+							//								String result = sendReq
+							//										.execute(
+							//												uuid,
+							//												goodsList.get(position)
+							//														.getArticleNum()).get();
+							//								if (!result.equals("fail")) {
+							//
+							//								} else {
+							//									// TODO 서버 전송 실패
+							//								}
+							//							} catch (InterruptedException e) {
+							//
+							//								e.printStackTrace();
+							//							} catch (ExecutionException e) {
+							//
+							//								e.printStackTrace();
+							//							} //함수로 빼던가 하던가
 						}
 					});
 
@@ -233,8 +218,7 @@ public class GoodsAdapter extends BaseAdapter {
 
 			System.out.println("===========start=============");
 			System.out.println("===========end=============");
-			ApplicationsDTO item = new ApplicationsDTO(articleNum, userid,
-					state);
+			ApplicationsDTO item = new ApplicationsDTO(articleNum, userid, state);
 			applicationList.add(item);
 		}
 	}
@@ -254,8 +238,7 @@ public class GoodsAdapter extends BaseAdapter {
 				params.add(new BasicNameValuePair("userid", param[0]));
 				params.add(new BasicNameValuePair("articleNum", param[1]));
 
-				UrlEncodedFormEntity encodeEntity = new UrlEncodedFormEntity(
-						params, HTTP.UTF_8);
+				UrlEncodedFormEntity encodeEntity = new UrlEncodedFormEntity(params, HTTP.UTF_8);
 				post.setEntity(encodeEntity);
 
 				HttpResponse resPost = client.execute(post);
@@ -300,8 +283,7 @@ public class GoodsAdapter extends BaseAdapter {
 				ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
 				params.add(new BasicNameValuePair("userid", param[0]));
 
-				UrlEncodedFormEntity encodeEntity = new UrlEncodedFormEntity(
-						params, HTTP.UTF_8);
+				UrlEncodedFormEntity encodeEntity = new UrlEncodedFormEntity(params, HTTP.UTF_8);
 				post.setEntity(encodeEntity);
 
 				HttpResponse resPost = client.execute(post);

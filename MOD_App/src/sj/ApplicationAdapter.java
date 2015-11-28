@@ -2,17 +2,15 @@ package sj;
 
 import java.util.List;
 
-import android.app.AlertDialog;
+import com.nanumi.R;
+import com.nanumi.sub.GoodsDTO;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.TextView;
-
-import com.nanumi.R;
-import com.nanumi.sub.GoodsDTO;
 
 public class ApplicationAdapter extends BaseAdapter {
 	List<ApplicationsDTO> applicationList;

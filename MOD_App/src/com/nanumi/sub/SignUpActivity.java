@@ -10,7 +10,6 @@ import java.util.concurrent.ExecutionException;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.ParseException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -288,7 +287,7 @@ public class SignUpActivity extends Activity {
 
 	}
 
-	// °¡ÀÔ AS.class
+	// ï¿½ï¿½ï¿½ï¿½ AS.class
 	class UserInfo extends AsyncTask<String, Void, Void> {
 		@Override
 		protected Void doInBackground(String... param) {
@@ -326,7 +325,7 @@ public class SignUpActivity extends Activity {
 		}
 	}
 
-	// ¾ÆÀÌµð, ´Ð³×ÀÓ, ÀÌ¸ÞÀÏ Áßº¹ Ã¼Å©, ³ªÁß¿¡ ¾´´Ù!!(±è¸íÁØ, ³ªÁß¿¡ Áßº¹Ã¼Å© ÇÒ¶§ ¾µ Å¬·¡½º)
+	// ï¿½ï¿½ï¿½Ìµï¿½, ï¿½Ð³ï¿½ï¿½ï¿½, ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ßºï¿½ Ã¼Å©, ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½!!(ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ßºï¿½Ã¼Å© ï¿½Ò¶ï¿½ ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½)
 //	class UserInfoCheckClass extends AsyncTask<String, Void, Boolean> {
 //		@Override
 //		protected Boolean doInBackground(String... param) {
@@ -371,12 +370,12 @@ public class SignUpActivity extends Activity {
 //					if (json.getString("result").equals("fail")) {
 //						// fail
 //						System.out.println("true");
-//						Log.d("MyCheck.class", "¾ÆÀÌµð Áßº¹µÊ");
+//						Log.d("MyCheck.class", "ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½ï¿½ï¿½");
 //						flag = true;
 //					} else {
 //						// success
 //
-//						Log.d("MyCheck.calss", "¾ÆÀÌµð »ç¿ë °¡´É");
+//						Log.d("MyCheck.calss", "ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 //						flag = false;
 //					}
 //				} catch (JSONException e) {

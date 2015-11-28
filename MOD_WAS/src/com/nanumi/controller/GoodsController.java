@@ -78,7 +78,8 @@ public class GoodsController {
 			json.append("\"selectionWay\": \"" + item.getSelectionWay() + "\",");
 			json.append("\"state\": \"" + item.getState() + "\",");
 			json.append("\"postingTime\": \"" + item.getPostingTime() + "\",");
-			json.append("\"image\": \"" + getImgData(item.getArticleNum(), item.getUserid()) + "\"");
+			json.append("\"image\": \"" + getImgData(item.getArticleNum(), item.getUserid()) + "\",");
+			json.append("\"ruserid\": \"" + item.getRuserid() + "\"");
 			json.append("},");
 		}
 		json.delete(json.length() - 1, json.length()); // last comma delete

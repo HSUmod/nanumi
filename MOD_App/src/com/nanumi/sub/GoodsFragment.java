@@ -48,16 +48,13 @@ public class GoodsFragment extends Fragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_goods_list, container,
-				false);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_goods_list, container, false);
 
 		goodsList = new ArrayList<GoodsDTO>();
 		ReadReq readReq = new ReadReq();
 		try {
-			SharedPreferences pref = this.getActivity().getSharedPreferences(
-					"Login", 0);
+			SharedPreferences pref = this.getActivity().getSharedPreferences("Login", 0);
 			String result = readReq.execute(pref.getString("uuid", "")).get();
 
 			resultParse(result);
@@ -76,43 +73,33 @@ public class GoodsFragment extends Fragment {
 		return view;
 	}
 
-	private void resultParse(String result) throws Exception {
-		JSONArray jsonArr = new JSONArray(result);
+	private void resultParse(String result) {
+		JSONArray jsonArr;
+		try {
+			jsonArr = new JSONArray(result);
+			for (int i = 0; i < jsonArr.length(); i++) {
+				JSONObject jsonObj = jsonArr.getJSONObject(i);
 
-		for (int i = 0; i < jsonArr.length(); i++) {
-			JSONObject jsonObj = jsonArr.getJSONObject(i);
+				String articleNum = jsonObj.getString("articleNum");
+				String userid = jsonObj.getString("userid");
+				String city = jsonObj.getString("city");
+				String district = jsonObj.getString("district");
+				String major = jsonObj.getString("major");
+				String sub = jsonObj.getString("sub");
+				String contents = jsonObj.getString("contents");
+				String hashtag = jsonObj.getString("hashtag");
+				String selectionWay = jsonObj.getString("selectionWay");
+				String postingTime = jsonObj.getString("postingTime");
+				String image = jsonObj.getString("image");
+				byte[] backToBytes = Base64.decodeBase64(image);
+				String state = jsonObj.getString("state");
+				String ruserid = jsonObj.getString("ruserid");
 
-			String articleNum = jsonObj.getString("articleNum");
-			String userid = jsonObj.getString("userid");
-			String city = jsonObj.getString("city");
-			String district = jsonObj.getString("district");
-			String major = jsonObj.getString("major");
-			String sub = jsonObj.getString("sub");
-			String contents = jsonObj.getString("contents");
-			String hashtag = jsonObj.getString("hashtag");
-			String selectionWay = jsonObj.getString("selectionWay");
-			String postingTime = jsonObj.getString("postingTime");
-			String image = jsonObj.getString("image");
-			byte[] backToBytes = Base64.decodeBase64(image);
-			String state = jsonObj.getString("state");
-			String ruserid = jsonObj.getString("ruserid");
-
-			System.out.println("===========start=============");
-			System.out.println("=============================");
-			System.out.println(backToBytes);
-			System.out.println("=============================");
-			System.out.println("===========end=============");
-			GoodsDTO item;
-			if (ruserid.equals("")) { //TODO 수정필요 ruserid 초기값 혹은 널값 암튼 없을경우 필요
-				item = new GoodsDTO(articleNum, userid, city,
-						district, major, sub, contents, hashtag, selectionWay,
-						postingTime, backToBytes, state);
-			} else {
-				item = new GoodsDTO(articleNum, userid, city,
-						district, major, sub, contents, hashtag, selectionWay,
-						postingTime, backToBytes, state, ruserid);
+				GoodsDTO item = new GoodsDTO(articleNum, userid, city, district, major, sub, contents, hashtag, selectionWay, postingTime, backToBytes, state, ruserid);
+				goodsList.add(item);
 			}
-			goodsList.add(item);
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -130,8 +117,7 @@ public class GoodsFragment extends Fragment {
 				ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
 				params.add(new BasicNameValuePair("uuid", param[0]));
 
-				UrlEncodedFormEntity encodeEntity = new UrlEncodedFormEntity(
-						params, HTTP.UTF_8);
+				UrlEncodedFormEntity encodeEntity = new UrlEncodedFormEntity(params, HTTP.UTF_8);
 				post.setEntity(encodeEntity);
 
 				HttpResponse resPost = client.execute(post);
@@ -146,7 +132,7 @@ public class GoodsFragment extends Fragment {
 				}
 
 				try {
-					if (json.getString("result").equals("READ_OK")) {
+					if (json.getString("result").equals("ok")) {
 						result = json.getString("goods");
 					} else {
 						result = "fail";

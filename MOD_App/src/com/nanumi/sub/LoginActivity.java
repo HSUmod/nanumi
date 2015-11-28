@@ -21,7 +21,6 @@ import org.json.JSONObject;
 import com.nanumi.R;
 import com.nanumi.main.MainActivity;
 
-import android.accounts.OnAccountsUpdateListener;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
