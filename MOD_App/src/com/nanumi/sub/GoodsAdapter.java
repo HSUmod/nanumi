@@ -253,7 +253,7 @@ public class GoodsAdapter extends BaseAdapter {
 				}
 
 				try {
-					if (json.getString("result").equals("Success")) {
+					if (json.getString("result").equals("ok")) {
 						result = json.getString("value");
 					} else {
 						result = "fail";

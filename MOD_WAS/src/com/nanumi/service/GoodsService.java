@@ -21,4 +21,6 @@ public interface GoodsService {
 	public List<ApplicationDTO> getMyApplicationList(String userid);
 
 	public List<ApplicationDTO> getMyGoodsApplicationList(String aritcleNum);
+
+	public void apply(String articleNum, String userid);
 }

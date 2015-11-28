@@ -104,4 +104,9 @@
 	      from application_list
 	     where articleNum = #{articleNum}
 	</select>
+	
+	<insert id="apply" parameterType="hashmap">
+	    insert into application_list(articleNum, userid)
+	    values (#{articleNum}, #{userid})
+	</insert>
 </mapper>

@@ -77,4 +77,9 @@ public class GoodsServiceImpl implements GoodsService {
 	public List<ApplicationDTO> getMyGoodsApplicationList(String aritcleNum) {
 		return applicationDAO.getMyGoodsApplicationList(aritcleNum);
 	}
+
+	@Override
+	public void apply(String articleNum, String userid) {
+		applicationDAO.apply(articleNum, userid);
+	}
 }
