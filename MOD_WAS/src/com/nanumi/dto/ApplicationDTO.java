@@ -1,7 +1,7 @@
 package com.nanumi.dto;
 
 public class ApplicationDTO {
-	private String articleNum, userid, state;
+	private String articleNum, userid, state, postingTime;
 
 	public ApplicationDTO() {
 
@@ -35,6 +35,14 @@ public class ApplicationDTO {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public String getPostingTime() {
+		return postingTime;
+	}
+
+	public void setPostingTime(String postingTime) {
+		this.postingTime = postingTime;
 	}
 
 }

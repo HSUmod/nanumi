@@ -112,8 +112,8 @@
 	</select>
 
 	<insert id="apply" parameterType="Application">
-		insert into application_list(articleNum, userid, state)
-		values (#{articleNum}, #{userid}, #{state})
+		insert into application_list(articleNum, userid, state, postingTime)
+		values (#{articleNum}, #{userid}, #{state}, sysdate)
 	</insert>
 
 	<delete id="applyCancle" parameterType="Application">
