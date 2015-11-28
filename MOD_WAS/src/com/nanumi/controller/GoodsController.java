@@ -124,8 +124,9 @@ public class GoodsController {
 	public void getApplicationListByArticleNum(@RequestParam("articleNum") String articleNum, HttpServletResponse res) throws Exception {
 		List<ApplicationDTO> applicationList = null;
 		StringBuilder json = new StringBuilder();
-		try {
-			applicationList = service.getMyGoodsApplicationList(articleNum);
+
+		applicationList = service.getMyGoodsApplicationList(articleNum);
+		if (applicationList.size() > 0) {
 			json.append("{\"result\": \"ok\", ");
 			json.append("\"value\": [");
 			for (ApplicationDTO item : applicationList) {
@@ -137,9 +138,13 @@ public class GoodsController {
 			}
 			json.delete(json.length() - 1, json.length()); // last comma delete
 			json.append("]}");
-		} catch (NullPointerException e) {
+		} else {
 			json.append("{\"result\": \"fail\"}");
 		}
+		
+		log.info("===========================");
+		log.info(json);
+		log.info("===========================");
 
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = res.getWriter();
