@@ -19,7 +19,6 @@ import com.nanumi.dao.GoodsDAO;
 import com.nanumi.dto.ApplicationDTO;
 import com.nanumi.dto.FileDTO;
 import com.nanumi.dto.GoodsDTO;
-import com.nanumi.dto.UserDTO;
 
 @Service("GoodsService")
 public class GoodsServiceImpl implements GoodsService {

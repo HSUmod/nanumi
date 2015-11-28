@@ -1,8 +1,6 @@
 package com.nanumi.dao;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,19 +22,15 @@ public class ApplicationDAO {
 	}
 
 	public void apply(String articleNum, String userid) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("articleNum", articleNum);
-		map.put("userid", userid);
+		ApplicationDTO obj = new ApplicationDTO(articleNum, userid, "0");
 
-		session.insert("apply", map);
+		session.insert("apply", obj);
 	}
 
 	public void applyCancle(String articleNum, String userid) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("articleNum", articleNum);
-		map.put("userid", userid);
+		ApplicationDTO obj = new ApplicationDTO(articleNum, userid, "0");
 
-		session.delete("applyCancle", map);
+		session.delete("applyCancle", obj);
 	}
 
 }

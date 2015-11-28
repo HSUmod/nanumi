@@ -111,12 +111,12 @@
 		where articleNum = #{articleNum}
 	</select>
 
-	<insert id="apply" parameterType="hashmap">
-		insert into application_list(articleNum, userid)
-		values (#{articleNum}, #{userid})
+	<insert id="apply" parameterType="Application">
+		insert into application_list(articleNum, userid, state)
+		values (#{articleNum}, #{userid}, #{state})
 	</insert>
 
-	<delete id="applyCancle" parameterType="hashmap">
+	<delete id="applyCancle" parameterType="Application">
 	    delete from application_list
 	     where articleNum = #{articleNum}
 	       and userid = #{userid}
