@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.nanumi.dto.ApplicationDTO;
 import com.nanumi.dto.FileDTO;
 import com.nanumi.dto.GoodsDTO;
-import com.nanumi.dto.UserDTO;
 import com.nanumi.service.GoodsService;
 
 @Controller
@@ -40,21 +39,6 @@ public class GoodsController {
 
 		service.writingGoods(new GoodsDTO(userid, city, district, major, sub, contents, hashtag, selectionWay), request);
 		pw.write("{\"result\": \"WRITING_COMPLETE\"}");
-		pw.close();
-	}
-
-	@RequestMapping(value = "/getUserAddress.do", method = RequestMethod.POST)
-	public void getUserAddress(@RequestParam("userid") String userid, HttpServletResponse res) throws Exception {
-		res.setContentType("application/json; charset=utf-8");
-		PrintWriter pw = res.getWriter();
-
-		UserDTO user = service.getUserAddress(userid);
-		pw.write("{\"result\": \"READ_COMPLETE\", ");
-		pw.write("\"address\": [{");
-		pw.write("\"city\": \"" + user.getCity() + "\", ");
-		pw.write("\"district\": \"" + user.getDistrict() + "\"");
-		pw.write("}]}");
-
 		pw.close();
 	}
 
@@ -108,8 +92,9 @@ public class GoodsController {
 	public void getApplicationListByUserid(@RequestParam("userid") String userid, HttpServletResponse res) throws Exception {
 		List<ApplicationDTO> applicationList = null;
 		StringBuilder json = new StringBuilder();
-		try {
-			applicationList = service.getMyApplicationList(userid);
+		applicationList = service.getMyApplicationList(userid);
+
+		if (applicationList.size() > 0) {
 			json.append("{\"result\": \"ok\", ");
 			json.append("\"value\": [");
 			for (ApplicationDTO item : applicationList) {
@@ -121,9 +106,45 @@ public class GoodsController {
 			}
 			json.delete(json.length() - 1, json.length()); // last comma delete
 			json.append("]}");
-		} catch (NullPointerException e) {
+		} else {
 			json.append("{\"result\": \"fail\"}");
 		}
+
+		log.info("===========================");
+		log.info(json);
+		log.info("===========================");
+
+		res.setContentType("application/json; charset=utf-8");
+		PrintWriter pw = res.getWriter();
+		pw.write(json.toString());
+		pw.close();
+	}
+
+	@RequestMapping(value = "/MyGoodsApplicationList.do", method = RequestMethod.POST)
+	public void getApplicationListByArticleNum(@RequestParam("articleNum") String articleNum, HttpServletResponse res) throws Exception {
+		List<ApplicationDTO> applicationList = null;
+		StringBuilder json = new StringBuilder();
+
+		applicationList = service.getMyGoodsApplicationList(articleNum);
+		if (applicationList.size() > 0) {
+			json.append("{\"result\": \"ok\", ");
+			json.append("\"value\": [");
+			for (ApplicationDTO item : applicationList) {
+				json.append("{");
+				json.append("\"articleNum\": \"" + item.getArticleNum() + "\",");
+				json.append("\"userid\": \"" + item.getUserid() + "\",");
+				json.append("\"state\": \"" + item.getState() + "\"");
+				json.append("},");
+			}
+			json.delete(json.length() - 1, json.length()); // last comma delete
+			json.append("]}");
+		} else {
+			json.append("{\"result\": \"fail\"}");
+		}
+		
+		log.info("===========================");
+		log.info(json);
+		log.info("===========================");
 
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = res.getWriter();
@@ -132,12 +153,32 @@ public class GoodsController {
 	}
 
 	@RequestMapping(value = "/Apply.do", method = RequestMethod.POST)
-	public void apply(@RequestParam("articleNum") String articleNum, @RequestParam("userid") String userid, HttpServletResponse res) throws Exception {
-		service.apply(articleNum, userid);
-		
+	public void apply(@RequestParam("articleNum") String articleNum, @RequestParam("userid") String userid, @RequestParam("currentState") String state, HttpServletResponse res) throws Exception {
+		String json = "{\"result\": \"ok\"}";
+
+		if (state.equals("apply")) {
+			service.apply(articleNum, userid);
+		} else if (state.equals("cancle")) {
+			service.applyCancle(articleNum, userid);
+		} else {
+			json = "{\"result\": \"fail\"}";
+		}
+
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = res.getWriter();
-		pw.write("{\"result\": \"ok\"}");
+		pw.write(json);
+		pw.close();
+	}
+	
+	@RequestMapping(value = "/Choice.do", method = RequestMethod.POST)
+	public void choice(@RequestParam("articleNum") String articleNum, @RequestParam("userid") String userid, HttpServletResponse res) throws Exception {
+		String json = "{\"result\": \"ok\"}";
+
+		service.choice(articleNum, userid);
+
+		res.setContentType("application/json; charset=utf-8");
+		PrintWriter pw = res.getWriter();
+		pw.write(json);
 		pw.close();
 	}
 

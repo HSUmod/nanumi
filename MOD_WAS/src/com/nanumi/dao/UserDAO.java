@@ -38,4 +38,8 @@ public class UserDAO {
 	public void modifyInfo(UserDTO user) {
 		session.update("nanumiNS.modifyUserInfo", user);
 	}
+
+	public UserDTO getUserAddress(String userid) {
+		return session.selectOne("nanumiNS.getUserAddress", userid);
+	}
 }

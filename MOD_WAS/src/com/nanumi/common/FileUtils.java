@@ -33,6 +33,7 @@ public class FileUtils {
 
 		String articleNum = goods.getArticleNum();
 
+		filePath = "C:\\dev\\file\\";
 		filePath += goods.getUserid() + "\\";
 		File file = new File(filePath);
 		if (file.exists() == false) {
