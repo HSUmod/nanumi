@@ -76,7 +76,7 @@
 	</select>
 	
 	<insert id="insertFile" parameterType="hashmap">
-        insert into GOODS_FILE(idx, articleNum, original_file_name, stored_file_name, file_size, crea_dtm)
+        insert into GOODS_FILE(idx, articleNum, original_file_name, stored_file_name, file_size, postingTime)
         values(SEQ_GOODS_FILE.NEXTVAL, SEQ_GOODS.CURRVAL, #{original_file_name}, #{stored_file_name}, #{file_size}, sysdate)
 	</insert>
 	
