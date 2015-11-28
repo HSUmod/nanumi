@@ -27,6 +27,7 @@ public class GoodsServiceImpl implements GoodsService {
 	private FileUtils fileUtils;
 	@Autowired
 	private GoodsDAO goodsDAO;
+	@Autowired
 	private ApplicationDAO applicationDAO;
 
 	@Override
