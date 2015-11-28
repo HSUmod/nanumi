@@ -106,20 +106,24 @@ public class GoodsController {
 
 	@RequestMapping(value = "/ApplicationList.do", method = RequestMethod.POST)
 	public void getApplicationListByUserid(@RequestParam("userid") String userid, HttpServletResponse res) throws Exception {
-		List<ApplicationDTO> applicationList = service.getMyApplicationList(userid);
+		List<ApplicationDTO> applicationList = null;
 		StringBuilder json = new StringBuilder();
-
-		json.append("{\"result\": \"ok\", ");
-		json.append("\"value\": [");
-		for (ApplicationDTO item : applicationList) {
-			json.append("{");
-			json.append("\"articleNum\": \"" + item.getArticleNum() + "\",");
-			json.append("\"userid\": \"" + item.getUserid() + "\",");
-			json.append("\"state\": \"" + item.getState() + "\"");
-			json.append("},");
+		try {
+			applicationList = service.getMyApplicationList(userid);
+			json.append("{\"result\": \"ok\", ");
+			json.append("\"value\": [");
+			for (ApplicationDTO item : applicationList) {
+				json.append("{");
+				json.append("\"articleNum\": \"" + item.getArticleNum() + "\",");
+				json.append("\"userid\": \"" + item.getUserid() + "\",");
+				json.append("\"state\": \"" + item.getState() + "\"");
+				json.append("},");
+			}
+			json.delete(json.length() - 1, json.length()); // last comma delete
+			json.append("]}");
+		} catch (NullPointerException e) {
+			json.append("{\"result\": \"fail\"}");
 		}
-		json.delete(json.length() - 1, json.length()); // last comma delete
-		json.append("]}");
 
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = res.getWriter();

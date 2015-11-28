@@ -27,6 +27,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,33 +74,28 @@ public class GoodsFragment extends Fragment {
 		return view;
 	}
 
-	private void resultParse(String result) {
-		JSONArray jsonArr;
-		try {
-			jsonArr = new JSONArray(result);
-			for (int i = 0; i < jsonArr.length(); i++) {
-				JSONObject jsonObj = jsonArr.getJSONObject(i);
+	private void resultParse(String result) throws Exception {
+		JSONArray jsonArr = new JSONArray(result);
+		for (int i = 0; i < jsonArr.length(); i++) {
+			JSONObject jsonObj = jsonArr.getJSONObject(i);
 
-				String articleNum = jsonObj.getString("articleNum");
-				String userid = jsonObj.getString("userid");
-				String city = jsonObj.getString("city");
-				String district = jsonObj.getString("district");
-				String major = jsonObj.getString("major");
-				String sub = jsonObj.getString("sub");
-				String contents = jsonObj.getString("contents");
-				String hashtag = jsonObj.getString("hashtag");
-				String selectionWay = jsonObj.getString("selectionWay");
-				String postingTime = jsonObj.getString("postingTime");
-				String image = jsonObj.getString("image");
-				byte[] backToBytes = Base64.decodeBase64(image);
-				String state = jsonObj.getString("state");
-				String ruserid = jsonObj.getString("ruserid");
+			String articleNum = jsonObj.getString("articleNum");
+			String userid = jsonObj.getString("userid");
+			String city = jsonObj.getString("city");
+			String district = jsonObj.getString("district");
+			String major = jsonObj.getString("major");
+			String sub = jsonObj.getString("sub");
+			String contents = jsonObj.getString("contents");
+			String hashtag = jsonObj.getString("hashtag");
+			String selectionWay = jsonObj.getString("selectionWay");
+			String state = jsonObj.getString("state");
+			String postingTime = jsonObj.getString("postingTime");
+			String image = jsonObj.getString("image");
+			byte[] backToBytes = Base64.decodeBase64(image);
+			String ruserid = jsonObj.getString("ruserid");
 
-				GoodsDTO item = new GoodsDTO(articleNum, userid, city, district, major, sub, contents, hashtag, selectionWay, postingTime, backToBytes, state, ruserid);
-				goodsList.add(item);
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
+			GoodsDTO item = new GoodsDTO(articleNum, userid, city, district, major, sub, contents, hashtag, selectionWay, postingTime, backToBytes, state, ruserid);
+			goodsList.add(item);
 		}
 	}
 

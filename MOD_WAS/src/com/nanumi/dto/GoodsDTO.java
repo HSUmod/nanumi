@@ -20,6 +20,23 @@ public class GoodsDTO {
 		this.selectionWay = selectionWay;
 	}
 
+	public GoodsDTO(String articleNum, String userid, String city, String district, String major, String sub, String contents, String hashtag, String selectionWay, String state, String postingTime,
+			String ruserid) {
+		super();
+		this.articleNum = articleNum;
+		this.userid = userid;
+		this.city = city;
+		this.district = district;
+		this.major = major;
+		this.sub = sub;
+		this.contents = contents;
+		this.hashtag = hashtag;
+		this.selectionWay = selectionWay;
+		this.state = state;
+		this.postingTime = postingTime;
+		this.ruserid = ruserid;
+	}
+
 	public String getArticleNum() {
 		return articleNum;
 	}

@@ -277,7 +277,7 @@ public class GoodsAdapter extends BaseAdapter {
 
 			try {
 				HttpClient client = new DefaultHttpClient();
-				String postURL = "http://113.198.80.223/MOD_WAS/Applications.do";
+				String postURL = "http://113.198.80.223/MOD_WAS/ApplicationList.do";
 				HttpPost post = new HttpPost(postURL);
 
 				ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -298,8 +298,8 @@ public class GoodsAdapter extends BaseAdapter {
 				}
 
 				try {
-					if (json.getString("result").equals("READ_OK")) {
-						result = json.getString("applications");
+					if (json.getString("result").equals("ok")) {
+						result = json.getString("value");
 					} else {
 						result = "fail";
 					}
