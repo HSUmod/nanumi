@@ -29,6 +29,8 @@
         <activity android:name=".sub.LoginActivity"></activity>
        <!--  <activity android:name=".sub.SignUpActivity"></activity> --> 
         <activity android:name=".sub.SearchIdActivity"></activity>
+        <activity android:name=".sj.ChooseActivity"></activity>
+       
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

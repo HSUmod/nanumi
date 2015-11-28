@@ -1,4 +1,4 @@
-package com.nanumi.sub;
+package sj;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,50 +16,39 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.nanumi.R;
-
-import android.content.SharedPreferences;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 
-public class GoodsFragment extends Fragment {
-	List<GoodsDTO> goodsList;
-	private ListView mListView;
-	private GoodsAdapter mAdapter;
+import com.nanumi.R;
+import com.nanumi.R.layout;
 
-	public static GoodsFragment newInstance() {
-		GoodsFragment fragment = new GoodsFragment();
-		return fragment;
-	}
-
+public class ChooseActivity extends Activity{
+	List<ApplicationsDTO> applicationList;
+	ApplicationAdapter adapter;
+	String articleNum;
+	ListView listView;
+	
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_goods_list, container,
-				false);
-
-		goodsList = new ArrayList<GoodsDTO>();
+		setContentView(layout.activity_application_list);
+		listView = (ListView) findViewById(R.id.applicationsListView);
+		
+		Intent intent = getIntent();		
+		articleNum = intent.getStringExtra("articleNum");
+		
+		applicationList = new ArrayList<ApplicationsDTO>();
+		
 		ReadReq readReq = new ReadReq();
-		try {
-			SharedPreferences pref = this.getActivity().getSharedPreferences(
-					"Login", 0);
-			String result = readReq.execute(pref.getString("uuid", "")).get();
-
+		try {			
+			String result = readReq.execute(articleNum).get();
 			resultParse(result);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -68,14 +57,10 @@ public class GoodsFragment extends Fragment {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		mListView = (ListView) view.findViewById(R.id.goodsListView);
-		mAdapter = new GoodsAdapter(goodsList);
-		mListView.setAdapter(mAdapter);
-
-		return view;
+		adapter = new ApplicationAdapter(applicationList);
+		listView.setAdapter(adapter);		
 	}
-
+	
 	private void resultParse(String result) throws Exception {
 		JSONArray jsonArr = new JSONArray(result);
 
@@ -83,39 +68,22 @@ public class GoodsFragment extends Fragment {
 			JSONObject jsonObj = jsonArr.getJSONObject(i);
 
 			String articleNum = jsonObj.getString("articleNum");
+			
+			if(!this.articleNum.equals(articleNum)) continue;
+			
 			String userid = jsonObj.getString("userid");
-			String city = jsonObj.getString("city");
-			String district = jsonObj.getString("district");
-			String major = jsonObj.getString("major");
-			String sub = jsonObj.getString("sub");
-			String contents = jsonObj.getString("contents");
-			String hashtag = jsonObj.getString("hashtag");
-			String selectionWay = jsonObj.getString("selectionWay");
-			String postingTime = jsonObj.getString("postingTime");
-			String image = jsonObj.getString("image");
-			byte[] backToBytes = Base64.decodeBase64(image);
 			String state = jsonObj.getString("state");
-			String ruserid = jsonObj.getString("ruserid");
-
+			
 			System.out.println("===========start=============");
 			System.out.println("=============================");
-			System.out.println(backToBytes);
+			
 			System.out.println("=============================");
 			System.out.println("===========end=============");
-			GoodsDTO item;
-			if (ruserid.equals("")) { //TODO 수정필요 ruserid 초기값 혹은 널값 암튼 없을경우 필요
-				item = new GoodsDTO(articleNum, userid, city,
-						district, major, sub, contents, hashtag, selectionWay,
-						postingTime, backToBytes, state);
-			} else {
-				item = new GoodsDTO(articleNum, userid, city,
-						district, major, sub, contents, hashtag, selectionWay,
-						postingTime, backToBytes, state, ruserid);
-			}
-			goodsList.add(item);
+			ApplicationsDTO item = new ApplicationsDTO(articleNum,userid,state);
+			applicationList.add(item);
 		}
 	}
-
+	
 	class ReadReq extends AsyncTask<String, Void, String> {
 		@Override
 		protected String doInBackground(String... param) {
@@ -124,14 +92,13 @@ public class GoodsFragment extends Fragment {
 
 			try {
 				HttpClient client = new DefaultHttpClient();
-				String postURL = "http://113.198.80.223/MOD_WAS/ReadGoods.do";
+				String postURL = "http://113.198.80.223/MOD_WAS/Applications.do";
 				HttpPost post = new HttpPost(postURL);
 
 				ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
-				params.add(new BasicNameValuePair("uuid", param[0]));
+				params.add(new BasicNameValuePair("articleNum", param[0]));
 
-				UrlEncodedFormEntity encodeEntity = new UrlEncodedFormEntity(
-						params, HTTP.UTF_8);
+				UrlEncodedFormEntity encodeEntity = new UrlEncodedFormEntity(params, HTTP.UTF_8);
 				post.setEntity(encodeEntity);
 
 				HttpResponse resPost = client.execute(post);
@@ -147,7 +114,7 @@ public class GoodsFragment extends Fragment {
 
 				try {
 					if (json.getString("result").equals("READ_OK")) {
-						result = json.getString("goods");
+						result = json.getString("applications");
 					} else {
 						result = "fail";
 					}
@@ -161,5 +128,4 @@ public class GoodsFragment extends Fragment {
 			return result;
 		}
 	}
-
 }

@@ -177,7 +177,7 @@ public class MainActivity extends FragmentActivity {
 
 			try {
 				HttpClient client = new DefaultHttpClient();
-				String postURL = "http://223.194.141.168/MOD_WAS/Logout.do";
+				String postURL = "http://113.198.80.223/MOD_WAS/Logout.do";
 				HttpPost post = new HttpPost(postURL);
 				
 				ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();

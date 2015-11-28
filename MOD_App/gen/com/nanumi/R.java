@@ -369,9 +369,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int vpi__tab_unselected_pressed_holo=0x7f020007;
     }
     public static final class id {
-        public static final int EditText01=0x7f0c001e;
-        public static final int Spinner01=0x7f0c001f;
+        public static final int EditText01=0x7f0c0022;
+        public static final int Spinner01=0x7f0c0023;
+        public static final int applicationsListView=0x7f0c0009;
         public static final int bottom=0x7f0c0003;
+<<<<<<< HEAD
         public static final int btnApply=0x7f0c003c;
         public static final int btnLeftNavi=0x7f0c003e;
         public static final int btnLogin=0x7f0c000b;
@@ -433,6 +435,59 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int userid=0x7f0c0024;
         public static final int userid_hint=0x7f0c0025;
         public static final int viewPagerArea=0x7f0c0015;
+=======
+        public static final int btnApply=0x7f0c0033;
+        public static final int btnLeftNavi=0x7f0c0035;
+        public static final int btnLogin=0x7f0c000f;
+        public static final int btnLogout=0x7f0c0020;
+        public static final int btnRightNavi=0x7f0c0036;
+        public static final int btnSearchID=0x7f0c0010;
+        public static final int btnSearchPw=0x7f0c0027;
+        public static final int btnSignUp=0x7f0c0011;
+        public static final int button1=0x7f0c0005;
+        public static final int button2=0x7f0c0007;
+        public static final int button3=0x7f0c0008;
+        public static final int drawerLayout=0x7f0c0012;
+        public static final int editText1=0x7f0c0006;
+        public static final int editText2=0x7f0c0028;
+        public static final int editText3=0x7f0c0029;
+        public static final int editText4=0x7f0c002a;
+        public static final int editText5=0x7f0c002b;
+        public static final int editText6=0x7f0c0025;
+        public static final int etId=0x7f0c000d;
+        public static final int etPw=0x7f0c000e;
+        public static final int fragBtn1=0x7f0c0014;
+        public static final int fragBtn2=0x7f0c0015;
+        public static final int fragBtn3=0x7f0c0016;
+        public static final int fragBtn4=0x7f0c0017;
+        public static final int fragSelectorArea=0x7f0c0013;
+        public static final int goodsListView=0x7f0c002c;
+        public static final int indicator=0x7f0c0018;
+        public static final int ivGoodsImg=0x7f0c0030;
+        public static final int leftNavi=0x7f0c001a;
+        public static final int naviStudyType=0x7f0c001b;
+        public static final int none=0x7f0c0000;
+        public static final int radio0=0x7f0c001d;
+        public static final int radio1=0x7f0c001e;
+        public static final int radioGroup1=0x7f0c001c;
+        public static final int rightNavi=0x7f0c001f;
+        public static final int spinner1=0x7f0c0026;
+        public static final int textView1=0x7f0c0034;
+        public static final int top=0x7f0c0004;
+        public static final int triangle=0x7f0c0001;
+        public static final int tvApplicantDistance=0x7f0c000b;
+        public static final int tvApplicantTime=0x7f0c000c;
+        public static final int tvApplicantUserId=0x7f0c000a;
+        public static final int tvContents=0x7f0c0031;
+        public static final int tvDistance=0x7f0c002e;
+        public static final int tvGoodsUserid=0x7f0c002d;
+        public static final int tvHashtag=0x7f0c0032;
+        public static final int tvPostingTime=0x7f0c002f;
+        public static final int tvSearchId=0x7f0c0021;
+        public static final int tvSearchPwd=0x7f0c0024;
+        public static final int underline=0x7f0c0002;
+        public static final int viewPagerArea=0x7f0c0019;
+>>>>>>> origin/sj
     }
     public static final class integer {
         public static final int default_circle_indicator_orientation=0x7f070000;
@@ -443,14 +498,16 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class layout {
         public static final int actionbar=0x7f030000;
-        public static final int activity_login=0x7f030001;
-        public static final int activity_main=0x7f030002;
-        public static final int activity_search_id=0x7f030003;
-        public static final int activity_signup=0x7f030004;
-        public static final int activity_splash=0x7f030005;
-        public static final int fragment_goods_list=0x7f030006;
-        public static final int fragment_goods_list_item=0x7f030007;
-        public static final int frament_sub=0x7f030008;
+        public static final int activity_application_list=0x7f030001;
+        public static final int activity_application_list_item=0x7f030002;
+        public static final int activity_login=0x7f030003;
+        public static final int activity_main=0x7f030004;
+        public static final int activity_search_id=0x7f030005;
+        public static final int activity_signup=0x7f030006;
+        public static final int activity_splash=0x7f030007;
+        public static final int fragment_goods_list=0x7f030008;
+        public static final int fragment_goods_list_item=0x7f030009;
+        public static final int frament_sub=0x7f03000a;
     }
     public static final class menu {
         public static final int main=0x7f0b0000;

@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import com.nanumi.R;
 import com.nanumi.main.MainActivity;
+
 import android.accounts.OnAccountsUpdateListener;
 import android.app.Activity;
 import android.content.Intent;
@@ -30,6 +31,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 	private EditText etId, etPw;
@@ -69,6 +71,7 @@ public class LoginActivity extends Activity {
 						loginFlag = !loginFlag;
 					} else {
 						// 예외 처리
+						Toast.makeText(getApplicationContext(), "gg", Toast.LENGTH_SHORT).show();
 					}
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -117,7 +120,7 @@ public class LoginActivity extends Activity {
 
 			try {
 				HttpClient client = new DefaultHttpClient();
-				String postURL = "http://223.194.141.168/MOD_WAS/Login.do";
+				String postURL = "http://113.198.80.223/MOD_WAS/Login.do";
 				HttpPost post = new HttpPost(postURL);
 
 				ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -139,7 +142,7 @@ public class LoginActivity extends Activity {
 				}
 
 				try {
-					if (json.getString("result").equals("Success")) {
+					if (json.getString("result").equals("ok")) {
 						result = json.getString("value");
 					} else {
 						result = "fail";

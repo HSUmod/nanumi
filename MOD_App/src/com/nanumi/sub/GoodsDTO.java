@@ -4,10 +4,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 public class GoodsDTO {
-	private String articleNum, userid, city, district, major, sub, contents, hashtag, selectionWay, postingTime;
+	private String articleNum, userid, city, district, major, sub, contents, hashtag, selectionWay, postingTime,state,ruserid;
 	private Bitmap img;
+	public static int NO_CHOOSE = 0;
+	public static int CHOOSE = 1;
+	public static int SHARE_FINISH = 2;
 
-	public GoodsDTO(String articleNum, String userid, String city, String district, String major, String sub, String contents, String hashtag, String selectionWay, String postingTime, byte[] img) {
+	public GoodsDTO(String articleNum, String userid, String city, String district, String major, String sub, String contents, String hashtag, String selectionWay, String postingTime, byte[] img, String state) {
 		this.articleNum = articleNum;
 		this.userid = userid;
 		this.city = city;
@@ -19,6 +22,40 @@ public class GoodsDTO {
 		this.selectionWay = selectionWay;
 		this.postingTime = postingTime;
 		this.img = BitmapFactory.decodeByteArray(img, 0, img.length);
+		this.state = state;
+		
+	}
+	public GoodsDTO(String articleNum, String userid, String city, String district, String major, String sub, String contents, String hashtag, String selectionWay, String postingTime, byte[] img, String state,String ruserid) {
+		this.articleNum = articleNum;
+		this.userid = userid;
+		this.city = city;
+		this.district = district;
+		this.major = major;
+		this.sub = sub;
+		this.contents = contents;
+		this.hashtag = hashtag;
+		this.selectionWay = selectionWay;
+		this.postingTime = postingTime;
+		this.img = BitmapFactory.decodeByteArray(img, 0, img.length);
+		this.state = state;
+		this.ruserid = ruserid;
+		
+	}
+	
+	public String getRuserid() {
+		return ruserid;
+	}
+	
+	public void setRuserid(String ruserid) {
+		this.ruserid = ruserid;
+	}
+	
+	public String getState() {
+		return state;
+	}
+	
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	public String getArticleNum() {
