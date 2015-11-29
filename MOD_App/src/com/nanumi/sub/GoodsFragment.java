@@ -30,6 +30,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.nanumi.R;
 
@@ -63,8 +64,7 @@ public class GoodsFragment extends Fragment {
 			SharedPreferences pref = this.getActivity().getSharedPreferences(
 					"Login", 0);
 			String result = readReq.execute(pref.getString("uuid", "")).get();
-			String applyResult = applyReq.execute(
-					pref.getString("uuid", "").split("-")[0]).get();
+			String applyResult = applyReq.execute().get();
 
 			if (!result.equals("fail")) {
 				resultParse(result);
@@ -85,6 +85,7 @@ public class GoodsFragment extends Fragment {
 		mListView = (ListView) view.findViewById(R.id.goodsListView);
 		mAdapter = new GoodsAdapter(goodsList, applicationList);
 		mListView.setAdapter(mAdapter);
+		mAdapter.notifyDataSetChanged();
 
 		return view;
 	}
@@ -98,9 +99,8 @@ public class GoodsFragment extends Fragment {
 			String articleNum = jsonObj.getString("articleNum");
 			String userid = jsonObj.getString("userid");
 			String state = jsonObj.getString("state");
-			String time = jsonObj.getString("time");
-			ApplicationsDTO item = new ApplicationsDTO(articleNum, userid,
-					state, time);
+			String time = jsonObj.getString("postingTime");
+			ApplicationsDTO item = new ApplicationsDTO(articleNum,state,userid,time);
 			applicationList.add(item);
 		}
 	}
@@ -190,10 +190,7 @@ public class GoodsFragment extends Fragment {
 				HttpPost post = new HttpPost(postURL);
 
 				ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
-				params.add(new BasicNameValuePair("userid", param[0]));
-
-				UrlEncodedFormEntity encodeEntity = new UrlEncodedFormEntity(
-						params, HTTP.UTF_8);
+				UrlEncodedFormEntity encodeEntity = new UrlEncodedFormEntity(params, HTTP.UTF_8);
 				post.setEntity(encodeEntity);
 
 				HttpResponse resPost = client.execute(post);
