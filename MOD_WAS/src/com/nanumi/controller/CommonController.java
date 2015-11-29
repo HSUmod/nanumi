@@ -167,8 +167,8 @@ public class CommonController {
 		PrintWriter pw = res.getWriter();
 
 		UserDTO user = service.getUserAddress(userid);
-		pw.write("{\"result\": \"READ_COMPLETE\", ");
-		pw.write("\"address\": [{");
+		pw.write("{\"result\": \"ok\", ");
+		pw.write("\"value\": [{");
 		pw.write("\"city\": \"" + user.getCity() + "\", ");
 		pw.write("\"district\": \"" + user.getDistrict() + "\"");
 		pw.write("}]}");
