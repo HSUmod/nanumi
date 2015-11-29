@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.nanumi.dao.AddressDAO;
 import com.nanumi.dao.UserDAO;
+import com.nanumi.dto.AddressDTO;
 import com.nanumi.dto.CityDTO;
 import com.nanumi.dto.DistrictDTO;
 import com.nanumi.dto.UserDTO;
@@ -64,7 +65,7 @@ public class CommonServiceImpl implements CommonService {
 	}
 
 	@Override
-	public UserDTO getUserAddress(String userid) {
-		return userDAO.getUserAddress(userid);
+	public AddressDTO getUserAddress(String userid) {
+		return addressDAO.getUserAddress(userid);
 	}
 }
