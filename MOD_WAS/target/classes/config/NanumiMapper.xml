@@ -117,10 +117,9 @@
 	</select>
 
 	<!-- 신청자 입장 -->
-	<select id="getMyApplicationList" resultType="Application">
+	<select id="getApplicationList" resultType="Application">
 		select *
-		from application_list
-		where userid = #{userid}
+		  from application_list
 	</select>
 
 	<!-- 등록자 입장 -->

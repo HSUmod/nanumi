@@ -134,10 +134,10 @@ public class GoodsController {
 	}
 
 	@RequestMapping(value = "/ApplicationList.do", method = RequestMethod.POST)
-	public void getApplicationListByUserid(@RequestParam("userid") String userid, HttpServletResponse res) throws Exception {
+	public void getApplicationList(HttpServletResponse res) throws Exception {
 		List<ApplicationDTO> applicationList = null;
 		StringBuilder json = new StringBuilder();
-		applicationList = service.getMyApplicationList(userid);
+		applicationList = service.getApplicationList();
 
 		if (applicationList.size() > 0) {
 			json.append("{\"result\": \"ok\", ");

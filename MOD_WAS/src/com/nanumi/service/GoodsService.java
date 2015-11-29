@@ -21,7 +21,7 @@ public interface GoodsService {
 
 	public FileDTO selectFileInfo(String articleNum);
 
-	public List<ApplicationDTO> getMyApplicationList(String userid);
+	public List<ApplicationDTO> getApplicationList();
 
 	public List<ApplicationDTO> getMyGoodsApplicationList(String aritcleNum);
 

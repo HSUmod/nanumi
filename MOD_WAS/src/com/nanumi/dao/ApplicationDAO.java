@@ -13,8 +13,8 @@ public class ApplicationDAO {
 	@Autowired
 	private SqlSession session;
 
-	public List<ApplicationDTO> getMyApplicationList(String userid) {
-		return session.selectList("getMyApplicationList", userid);
+	public List<ApplicationDTO> getApplicationList() {
+		return session.selectList("getApplicationList");
 	}
 
 	public List<ApplicationDTO> getMyGoodsApplicationList(String aritcleNum) {
