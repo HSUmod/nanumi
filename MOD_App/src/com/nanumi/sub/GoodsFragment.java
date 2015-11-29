@@ -34,13 +34,17 @@ import android.widget.ListView;
 import com.nanumi.R;
 
 public class GoodsFragment extends Fragment {
+	private static GoodsFragment fragment;
 	List<GoodsDTO> goodsList;
 	private ListView mListView;
 	private GoodsAdapter mAdapter;
 	List<ApplicationsDTO> applicationList;
 
 	public static GoodsFragment newInstance() {
-		GoodsFragment fragment = new GoodsFragment();
+		if (fragment == null) {
+			fragment = new GoodsFragment();
+		}
+
 		return fragment;
 	}
 
@@ -50,21 +54,17 @@ public class GoodsFragment extends Fragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_goods_list, container,
-				false);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_goods_list, container, false);
 
 		goodsList = new ArrayList<GoodsDTO>();
 		applicationList = new ArrayList<ApplicationsDTO>();
 		ReadReq readReq = new ReadReq();
 		ApplyReq applyReq = new ApplyReq();
 		try {
-			SharedPreferences pref = this.getActivity().getSharedPreferences(
-					"Login", 0);
+			SharedPreferences pref = this.getActivity().getSharedPreferences("Login", 0);
 			String result = readReq.execute(pref.getString("uuid", "")).get();
-			String applyResult = applyReq.execute(
-					pref.getString("uuid", "").split("-")[0]).get();
+			String applyResult = applyReq.execute(pref.getString("uuid", "").split("-")[0]).get();
 
 			if (!result.equals("fail")) {
 				resultParse(result);
@@ -99,8 +99,7 @@ public class GoodsFragment extends Fragment {
 			String userid = jsonObj.getString("userid");
 			String state = jsonObj.getString("state");
 			String time = jsonObj.getString("time");
-			ApplicationsDTO item = new ApplicationsDTO(articleNum, userid,
-					state, time);
+			ApplicationsDTO item = new ApplicationsDTO(articleNum, userid, state, time);
 			applicationList.add(item);
 		}
 	}
@@ -125,11 +124,18 @@ public class GoodsFragment extends Fragment {
 			byte[] backToBytes = Base64.decodeBase64(image);
 			String ruserid = jsonObj.getString("ruserid");
 
-			GoodsDTO item = new GoodsDTO(articleNum, userid, city, district,
-					major, sub, contents, hashtag, selectionWay, postingTime,
-					backToBytes, state, ruserid);
+			GoodsDTO item = new GoodsDTO(articleNum, userid, city, district, major, sub, contents, hashtag, selectionWay, postingTime, backToBytes, state, ruserid);
 			goodsList.add(item);
 		}
+	}
+
+	public void searchResult(String result) throws Exception {
+		goodsList = new ArrayList<GoodsDTO>();
+
+		resultParse(result);
+
+		mAdapter = new GoodsAdapter(goodsList, applicationList);
+		mListView.setAdapter(mAdapter);
 	}
 
 	class ReadReq extends AsyncTask<String, Void, String> {
@@ -146,8 +152,7 @@ public class GoodsFragment extends Fragment {
 				ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
 				params.add(new BasicNameValuePair("uuid", param[0]));
 
-				UrlEncodedFormEntity encodeEntity = new UrlEncodedFormEntity(
-						params, HTTP.UTF_8);
+				UrlEncodedFormEntity encodeEntity = new UrlEncodedFormEntity(params, HTTP.UTF_8);
 				post.setEntity(encodeEntity);
 
 				HttpResponse resPost = client.execute(post);
@@ -192,8 +197,7 @@ public class GoodsFragment extends Fragment {
 				ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
 				params.add(new BasicNameValuePair("userid", param[0]));
 
-				UrlEncodedFormEntity encodeEntity = new UrlEncodedFormEntity(
-						params, HTTP.UTF_8);
+				UrlEncodedFormEntity encodeEntity = new UrlEncodedFormEntity(params, HTTP.UTF_8);
 				post.setEntity(encodeEntity);
 
 				HttpResponse resPost = client.execute(post);

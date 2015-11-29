@@ -10,7 +10,7 @@ import org.json.JSONObject;
 
 import android.os.AsyncTask;
 
-class AddressRequest extends AsyncTask<Void, Void, String> {
+public class AddressRequest extends AsyncTask<Void, Void, String> {
 	@Override
 	protected String doInBackground(Void... params) {
 		// TODO Auto-generated method stub

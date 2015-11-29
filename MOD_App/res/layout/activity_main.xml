@@ -15,8 +15,7 @@
             android:layout_width="fill_parent"
             android:layout_height="@dimen/main_seletor_height"
             android:orientation="horizontal" >
-          
-            
+
             <Button
                 android:id="@+id/fragBtn1"
                 android:layout_width="0dp"
@@ -41,6 +40,7 @@
                 android:layout_height="@dimen/main_btn_height"
                 android:layout_weight="1" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -70,31 +70,22 @@
         android:orientation="vertical" >
 
         <Spinner
-            android:id="@+id/naviStudyType"
+            android:id="@+id/naviOrderByCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:spinnerMode="dropdown" />
 
-        <RadioGroup
-            android:id="@+id/radioGroup1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+        <Spinner
+            android:id="@+id/naviOrderByDistrict"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown" />
 
-            <RadioButton
-                android:id="@+id/radio0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="자동"
-                android:textColor="#000000" />
-
-            <RadioButton
-                android:id="@+id/radio1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="수동"
-                android:textColor="#000000" />
-        </RadioGroup>
+        <Button
+            android:id="@+id/btnOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Order" />
     </LinearLayout>
 
     <LinearLayout

@@ -3,10 +3,14 @@
     tools:context="com.nanumi.MainActivity" >
 
     <item
+        android:id="@+id/actionWrite"
+        android:icon="@drawable/btn_write"
+        android:showAsAction="ifRoom"
+        android:title="write"/>
+    <item
         android:id="@+id/btnLeftNavi"
         android:showAsAction="always"
         android:title="@string/menuLeftNavi"/>
-    
     <item
         android:id="@+id/btnRightNavi"
         android:showAsAction="always"
