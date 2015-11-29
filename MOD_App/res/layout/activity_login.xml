@@ -33,6 +33,7 @@
                 android:id="@+id/etId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:hint="id" >
             </EditText>
 
@@ -47,20 +48,25 @@
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="80dp"
+                android:background="@drawable/button"
                 android:text="Login" />
 
             <Button
                 android:id="@+id/btnSearchID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ID 찾기" />
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/button"
+                android:text="ID Search" />
 
             <Button
                 android:id="@+id/btnSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="가입" />
-
+                android:background="@drawable/button"
+                android:text="Join" />
         </LinearLayout>
 
         <Space

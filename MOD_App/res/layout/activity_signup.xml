@@ -18,7 +18,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:orientation="vertical" >
 
@@ -44,7 +43,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:orientation="vertical" >
 
@@ -70,7 +68,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:orientation="vertical" >
 
@@ -95,7 +92,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:orientation="vertical" >
 
@@ -161,7 +157,6 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:orientation="vertical" >
@@ -195,7 +190,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:orientation="vertical" >
 
@@ -245,10 +239,12 @@
 
         <Button
             android:id="@+id/signupBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="77dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
             android:onClick="onClickSignUpBtn"
             android:text="Sign Up" />
+
     </LinearLayout>
 
 </LinearLayout>
