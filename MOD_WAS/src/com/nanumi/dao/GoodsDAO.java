@@ -36,4 +36,10 @@ public class GoodsDAO {
 	public FileDTO selectFileInfo(String articleNum) {
 		return session.selectOne("nanumiNS.selectFileInfo", articleNum);
 	}
+
+	public void choice(String articleNum) {
+		GoodsDTO obj = new GoodsDTO(articleNum, "1");
+		
+		session.update("choice_goods", obj);
+	}
 }

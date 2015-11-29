@@ -86,5 +86,6 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public void choice(String articleNum, String userid) {
 		applicationDAO.choice(articleNum, userid);
+		goodsDAO.choice(articleNum);
 	}
 }

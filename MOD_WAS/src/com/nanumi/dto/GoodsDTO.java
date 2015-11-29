@@ -9,6 +9,11 @@ public class GoodsDTO {
 
 	}
 
+	public GoodsDTO(String articleNum, String state) {
+		this.articleNum = articleNum;
+		this.state = state;
+	}
+
 	public GoodsDTO(String userid, String city, String district, String major, String sub, String contents, String hashtag, String selectionWay) {
 		this.userid = userid;
 		this.city = city;
@@ -22,7 +27,6 @@ public class GoodsDTO {
 
 	public GoodsDTO(String articleNum, String userid, String city, String district, String major, String sub, String contents, String hashtag, String selectionWay, String state, String postingTime,
 			String ruserid) {
-		super();
 		this.articleNum = articleNum;
 		this.userid = userid;
 		this.city = city;

@@ -36,7 +36,7 @@ public class ApplicationDAO {
 	public void choice(String articleNum, String userid) {
 		ApplicationDTO obj = new ApplicationDTO(articleNum, userid, "1");
 
-		session.update("choice", obj);
+		session.update("choice_apply", obj);
 	}
 
 }

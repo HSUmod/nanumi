@@ -122,10 +122,16 @@
 	       and userid = #{userid}
 	</delete>
 	
-	<update id="choice" parameterType="Application">
+	<update id="choice_apply" parameterType="Application">
 	    update application_list
 	       set state = #{state}
 	     where articleNum = #{articleNum}
 	       and userid = #{userid}
+	</update>
+	
+	<update id="choice_goods" parameterType="Goods">
+	    update goods
+	       set state = #{state}
+	     where articleNum = #{articleNum};
 	</update>
 </mapper>
