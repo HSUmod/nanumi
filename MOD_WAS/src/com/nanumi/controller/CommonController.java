@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nanumi.common.CommonUtils;
-import com.nanumi.dto.AddressDTO;
 import com.nanumi.dto.CityDTO;
 import com.nanumi.dto.DistrictDTO;
 import com.nanumi.dto.UserDTO;
@@ -167,7 +166,7 @@ public class CommonController {
 		res.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = res.getWriter();
 
-		AddressDTO user = service.getUserAddress(userid);
+		UserDTO user = service.getUserAddress(userid);
 		pw.write("{\"result\": \"ok\", ");
 		pw.write("\"value\": [{");
 		pw.write("\"city\": \"" + user.getCity() + "\", ");

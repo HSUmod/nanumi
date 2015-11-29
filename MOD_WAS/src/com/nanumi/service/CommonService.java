@@ -2,7 +2,6 @@ package com.nanumi.service;
 
 import java.util.List;
 
-import com.nanumi.dto.AddressDTO;
 import com.nanumi.dto.CityDTO;
 import com.nanumi.dto.DistrictDTO;
 import com.nanumi.dto.UserDTO;
@@ -16,7 +15,7 @@ public interface CommonService {
 
 	public UserDTO checkEmail(String email);
 
-	public AddressDTO getUserAddress(String userid);
+	public UserDTO getUserAddress(String userid);
 
 	public UserDTO login(String userid);
 

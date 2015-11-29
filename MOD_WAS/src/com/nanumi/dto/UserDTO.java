@@ -7,6 +7,11 @@ public class UserDTO {
 
 	}
 
+	public UserDTO(String city, String district) {
+		this.city = city;
+		this.district = district;
+	}
+
 	public UserDTO(String userid, String pwd, String nickname, String city, String district, String phone, String email) {
 		this.userid = userid;
 		this.pwd = pwd;

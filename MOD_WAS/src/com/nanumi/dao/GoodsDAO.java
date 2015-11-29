@@ -8,9 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.nanumi.dto.AddressDTO;
 import com.nanumi.dto.FileDTO;
 import com.nanumi.dto.GoodsDTO;
+import com.nanumi.dto.UserDTO;
 
 @Repository("GoodsDAO")
 public class GoodsDAO {
@@ -52,7 +52,7 @@ public class GoodsDAO {
 
 	public List<GoodsDTO> searchGoodsByAddress(String city, String district) {
 		List<GoodsDTO> goodsList = new ArrayList<GoodsDTO>();
-		AddressDTO obj = new AddressDTO(city, district);
+		UserDTO obj = new UserDTO(city, district);
 
 		goodsList = session.selectList("searchGoodsByAddress", obj);
 

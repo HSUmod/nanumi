@@ -73,10 +73,10 @@
 		#{contents}, #{hashtag}, #{selectionWay}, sysdate)
 	</insert>
 
-	<select id="getUserAddress" resultType="Address">
+	<select id="getUserAddress" resultType="User">
 		select city, district
-		from member
-		where userid = #{userid}
+		  from member
+		 where userid = #{userid}
 	</select>
 
 	<insert id="insertFile" parameterType="hashmap">
@@ -103,7 +103,7 @@
 	     where district = #{district}
 	</select>
 	
-	<select id="searchGoodsByAddress" parameterType="Address" resultType="Goods">
+	<select id="searchGoodsByAddress" parameterType="User" resultType="Goods">
 	    select *
 	      from goods
 	     where city = #{city}
