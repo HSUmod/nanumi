@@ -13,8 +13,10 @@
 
     <TextView
         android:id="@+id/tvApplicantUserId"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_weight="1"
         android:text="ID" />
 
     <Space
@@ -24,8 +26,10 @@
 
     <TextView
         android:id="@+id/tvApplicantDistance"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_weight="1"
         android:text="Distance" />
 
     <Space
@@ -35,8 +39,10 @@
 
     <TextView
         android:id="@+id/tvApplicantTime"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_weight="1"
         android:text="Time" />
 
     <Space

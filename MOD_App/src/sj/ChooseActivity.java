@@ -21,35 +21,44 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.nanumi.R;
 import com.nanumi.R.layout;
 
-public class ChooseActivity extends Activity{
+public class ChooseActivity extends Activity {
 	List<ApplicationsDTO> applicationList;
 	ApplicationAdapter adapter;
 	String articleNum;
 	ListView listView;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(layout.activity_application_list);
 		listView = (ListView) findViewById(R.id.applicationsListView);
-		
-		Intent intent = getIntent();		
+
+		Intent intent = getIntent();
 		articleNum = intent.getStringExtra("articleNum");
-		
+
 		applicationList = new ArrayList<ApplicationsDTO>();
-		
+
 		ReadReq readReq = new ReadReq();
-		try {			
+		try {
 			String result = readReq.execute(articleNum).get();
-			resultParse(result);
+
+			if (!result.equals("fail")) {
+				resultParse(result);
+			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (ExecutionException e) {
@@ -57,10 +66,33 @@ public class ChooseActivity extends Activity{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		adapter = new ApplicationAdapter(applicationList);
-		listView.setAdapter(adapter);		
+		adapter = new ApplicationAdapter(applicationList, articleNum);
+//		listView.setOnItemClickListener(new OnItemClickListener() {
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
+//				AlertDialog.Builder dlg = new AlertDialog.Builder(getApplicationContext());
+//				dlg.setTitle( + " 님을 채택하시겠습니까?"); //요기요
+//				dlg.setPositiveButton("네",
+//						new DialogInterface.OnClickListener() {
+//							@Override
+//							public void onClick(DialogInterface dialog,
+//									int which) {
+//								SendReq sendReq = new SendReq();
+//								if (!sendReq.execute(applicationList.get(position).getUserid(), articleNum).equals("fail")) {
+//									finish();
+//								}else {
+//									//채택을 했는데 서버에 어떠한 오류가 발생해서 fail이 왔을 경우 예외처리
+//								}
+//							}
+//						});
+//				dlg.setNegativeButton("아니요", null);
+//				dlg.show();
+//
+//			}
+//		}); //TODO
+		listView.setAdapter(adapter);
 	}
-	
+
 	private void resultParse(String result) throws Exception {
 		JSONArray jsonArr = new JSONArray(result);
 
@@ -68,22 +100,21 @@ public class ChooseActivity extends Activity{
 			JSONObject jsonObj = jsonArr.getJSONObject(i);
 
 			String articleNum = jsonObj.getString("articleNum");
-			
-			if(!this.articleNum.equals(articleNum)) continue;
-			
+
+			if (!this.articleNum.equals(articleNum))
+				continue;
+
 			String userid = jsonObj.getString("userid");
 			String state = jsonObj.getString("state");
-			
-			System.out.println("===========start=============");
-			System.out.println("=============================");
-			
-			System.out.println("=============================");
-			System.out.println("===========end=============");
-			ApplicationsDTO item = new ApplicationsDTO(articleNum,userid,state);
+			String time = jsonObj.getString("postingTime");
+
+
+			ApplicationsDTO item = new ApplicationsDTO(articleNum, state,
+					userid, time);
 			applicationList.add(item);
 		}
 	}
-	
+
 	class ReadReq extends AsyncTask<String, Void, String> {
 		@Override
 		protected String doInBackground(String... param) {
@@ -92,13 +123,14 @@ public class ChooseActivity extends Activity{
 
 			try {
 				HttpClient client = new DefaultHttpClient();
-				String postURL = "http://113.198.80.223/MOD_WAS/Applications.do";
+				String postURL = "http://113.198.80.223/MOD_WAS/MyGoodsApplicationList.do";
 				HttpPost post = new HttpPost(postURL);
 
 				ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
 				params.add(new BasicNameValuePair("articleNum", param[0]));
 
-				UrlEncodedFormEntity encodeEntity = new UrlEncodedFormEntity(params, HTTP.UTF_8);
+				UrlEncodedFormEntity encodeEntity = new UrlEncodedFormEntity(
+						params, HTTP.UTF_8);
 				post.setEntity(encodeEntity);
 
 				HttpResponse resPost = client.execute(post);
@@ -113,8 +145,8 @@ public class ChooseActivity extends Activity{
 				}
 
 				try {
-					if (json.getString("result").equals("READ_OK")) {
-						result = json.getString("applications");
+					if (json.getString("result").equals("ok")) {
+						result = json.getString("value");
 					} else {
 						result = "fail";
 					}
@@ -125,6 +157,52 @@ public class ChooseActivity extends Activity{
 				e.printStackTrace();
 			}
 
+			return result;
+		}
+	}
+	class SendReq extends AsyncTask<String, Void, String> {
+		@Override
+		protected String doInBackground(String... param) {
+			JSONObject json = null;
+			String result = null;
+
+			try {
+				HttpClient client = new DefaultHttpClient();
+				String postURL = "http://113.198.80.223/MOD_WAS/Choice.do";
+				HttpPost post = new HttpPost(postURL);
+
+				ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
+				params.add(new BasicNameValuePair("userid", param[0]));
+				params.add(new BasicNameValuePair("articleNum", param[1]));
+
+				UrlEncodedFormEntity encodeEntity = new UrlEncodedFormEntity(
+						params, HTTP.UTF_8);
+				post.setEntity(encodeEntity);
+
+				HttpResponse resPost = client.execute(post);
+				HttpEntity resEntity = resPost.getEntity();
+
+				try {
+					json = new JSONObject(EntityUtils.toString(resEntity));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+
+				try {
+					Log.d("sj", json.toString());
+					if (json.getString("result").equals("ok")) {
+						result = "ok";
+					} else {
+						result = "fail";
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			return result;
 		}
 	}

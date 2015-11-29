@@ -15,6 +15,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".splash.SplashActivity"
@@ -33,7 +34,9 @@
         </activity>
         <activity android:name=".sub.SearchIdActivity" >
         </activity>
-        <activity android:name=".sj.ChooseActivity" >
+        <activity android:name="sj.ChooseActivity" >
+        </activity>
+        <activity android:name="sj.ProgressOfDonationActivity" >
         </activity>
         <activity android:name=".sub.RegisterActivity" >
         </activity>

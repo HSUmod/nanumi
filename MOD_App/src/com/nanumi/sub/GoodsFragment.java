@@ -21,8 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.nanumi.R;
-
+import sj.ApplicationsDTO;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -32,10 +31,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.nanumi.R;
+
 public class GoodsFragment extends Fragment {
 	List<GoodsDTO> goodsList;
 	private ListView mListView;
 	private GoodsAdapter mAdapter;
+	List<ApplicationsDTO> applicationList;
 
 	public static GoodsFragment newInstance() {
 		GoodsFragment fragment = new GoodsFragment();
@@ -48,29 +50,59 @@ public class GoodsFragment extends Fragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_goods_list, container, false);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_goods_list, container,
+				false);
 
 		goodsList = new ArrayList<GoodsDTO>();
+		applicationList = new ArrayList<ApplicationsDTO>();
 		ReadReq readReq = new ReadReq();
+		ApplyReq applyReq = new ApplyReq();
 		try {
-			SharedPreferences pref = this.getActivity().getSharedPreferences("Login", 0);
+			SharedPreferences pref = this.getActivity().getSharedPreferences(
+					"Login", 0);
 			String result = readReq.execute(pref.getString("uuid", "")).get();
+			String applyResult = applyReq.execute(
+					pref.getString("uuid", "").split("-")[0]).get();
 
-			resultParse(result);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
+			if (!result.equals("fail")) {
+				resultParse(result);
+			}
+
+			if (!applyResult.equals("fail")) {
+				applyResultParse(applyResult);
+			}
+
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		} catch (ExecutionException e1) {
+			e1.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		mListView = (ListView) view.findViewById(R.id.goodsListView);
-		mAdapter = new GoodsAdapter(goodsList);
+		mAdapter = new GoodsAdapter(goodsList, applicationList);
 		mListView.setAdapter(mAdapter);
 
 		return view;
+	}
+
+	private void applyResultParse(String result) throws Exception {
+		JSONArray jsonArr = new JSONArray(result);
+
+		for (int i = 0; i < jsonArr.length(); i++) {
+			JSONObject jsonObj = jsonArr.getJSONObject(i);
+
+			String articleNum = jsonObj.getString("articleNum");
+			String userid = jsonObj.getString("userid");
+			String state = jsonObj.getString("state");
+			String time = jsonObj.getString("time");
+			ApplicationsDTO item = new ApplicationsDTO(articleNum, userid,
+					state, time);
+			applicationList.add(item);
+		}
 	}
 
 	private void resultParse(String result) throws Exception {
@@ -93,7 +125,9 @@ public class GoodsFragment extends Fragment {
 			byte[] backToBytes = Base64.decodeBase64(image);
 			String ruserid = jsonObj.getString("ruserid");
 
-			GoodsDTO item = new GoodsDTO(articleNum, userid, city, district, major, sub, contents, hashtag, selectionWay, postingTime, backToBytes, state, ruserid);
+			GoodsDTO item = new GoodsDTO(articleNum, userid, city, district,
+					major, sub, contents, hashtag, selectionWay, postingTime,
+					backToBytes, state, ruserid);
 			goodsList.add(item);
 		}
 	}
@@ -112,7 +146,8 @@ public class GoodsFragment extends Fragment {
 				ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
 				params.add(new BasicNameValuePair("uuid", param[0]));
 
-				UrlEncodedFormEntity encodeEntity = new UrlEncodedFormEntity(params, HTTP.UTF_8);
+				UrlEncodedFormEntity encodeEntity = new UrlEncodedFormEntity(
+						params, HTTP.UTF_8);
 				post.setEntity(encodeEntity);
 
 				HttpResponse resPost = client.execute(post);
@@ -129,6 +164,52 @@ public class GoodsFragment extends Fragment {
 				try {
 					if (json.getString("result").equals("ok")) {
 						result = json.getString("goods");
+					} else {
+						result = "fail";
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			return result;
+		}
+	}
+
+	class ApplyReq extends AsyncTask<String, Void, String> {
+		@Override
+		protected String doInBackground(String... param) {
+			JSONObject json = null;
+			String result = null;
+
+			try {
+				HttpClient client = new DefaultHttpClient();
+				String postURL = "http://113.198.80.223/MOD_WAS/ApplicationList.do";
+				HttpPost post = new HttpPost(postURL);
+
+				ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
+				params.add(new BasicNameValuePair("userid", param[0]));
+
+				UrlEncodedFormEntity encodeEntity = new UrlEncodedFormEntity(
+						params, HTTP.UTF_8);
+				post.setEntity(encodeEntity);
+
+				HttpResponse resPost = client.execute(post);
+				HttpEntity resEntity = resPost.getEntity();
+
+				try {
+					json = new JSONObject(EntityUtils.toString(resEntity));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+
+				try {
+					if (json.getString("result").equals("ok")) {
+						result = json.getString("value");
 					} else {
 						result = "fail";
 					}

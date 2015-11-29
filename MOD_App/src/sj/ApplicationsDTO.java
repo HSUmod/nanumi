@@ -1,11 +1,12 @@
 package sj;
 
 public class ApplicationsDTO {
-	private String articleNum, state, userid;	
-	public ApplicationsDTO(String articleNum, String state, String userid) {
+	private String articleNum, state, userid, time;	
+	public ApplicationsDTO(String articleNum, String state, String userid, String time) {
 		this.articleNum = articleNum;
 		this.state = state;
 		this.userid = userid;
+		this.time = time;
 	}
 	public String getArticleNum() {
 		return articleNum;
@@ -26,5 +27,12 @@ public class ApplicationsDTO {
 		this.userid = userid;
 	}
 	
+	public String getTime() {
+		return time;
+	}
+	
+	public void setTime(String time) {
+		this.time = time;	
+	}
 	
 }
