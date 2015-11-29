@@ -359,26 +359,37 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int main_seletor_margin_bottom=0x7f080010;
     }
     public static final class drawable {
-        public static final int chat=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int vpi__tab_indicator=0x7f020002;
-        public static final int vpi__tab_selected_focused_holo=0x7f020003;
-        public static final int vpi__tab_selected_holo=0x7f020004;
-        public static final int vpi__tab_selected_pressed_holo=0x7f020005;
-        public static final int vpi__tab_unselected_focused_holo=0x7f020006;
-        public static final int vpi__tab_unselected_holo=0x7f020007;
-        public static final int vpi__tab_unselected_pressed_holo=0x7f020008;
+        public static final int button=0x7f020000;
+        public static final int camera=0x7f020001;
+        public static final int chat=0x7f020002;
+        public static final int donate=0x7f020003;
+        public static final int gallery=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int join=0x7f020006;
+        public static final int key=0x7f020007;
+        public static final int notice=0x7f020008;
+        public static final int question_mark=0x7f020009;
+        public static final int search=0x7f02000a;
+        public static final int setting=0x7f02000b;
+        public static final int vpi__tab_indicator=0x7f02000c;
+        public static final int vpi__tab_selected_focused_holo=0x7f02000d;
+        public static final int vpi__tab_selected_holo=0x7f02000e;
+        public static final int vpi__tab_selected_pressed_holo=0x7f02000f;
+        public static final int vpi__tab_unselected_focused_holo=0x7f020010;
+        public static final int vpi__tab_unselected_holo=0x7f020011;
+        public static final int vpi__tab_unselected_pressed_holo=0x7f020012;
+        public static final int write=0x7f020013;
     }
     public static final class id {
         public static final int EditText01=0x7f0c0038;
         public static final int Spinner01=0x7f0c0039;
         public static final int applicationsListView=0x7f0c0009;
         public static final int bottom=0x7f0c0003;
-        public static final int btnApply=0x7f0c0053;
-        public static final int btnLeftNavi=0x7f0c0054;
+        public static final int btnApply=0x7f0c0052;
+        public static final int btnLeftNavi=0x7f0c0053;
         public static final int btnLogin=0x7f0c000f;
         public static final int btnLogout=0x7f0c0020;
-        public static final int btnRightNavi=0x7f0c0055;
+        public static final int btnRightNavi=0x7f0c0054;
         public static final int btnSearchID=0x7f0c0010;
         public static final int btnSearchPw=0x7f0c003d;
         public static final int btnSignUp=0x7f0c0011;
@@ -411,7 +422,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int imageToUpload=0x7f0c002c;
         public static final int img_chat=0x7f0c0026;
         public static final int indicator=0x7f0c0018;
-        public static final int ivGoodsImg=0x7f0c0050;
+        public static final int ivGoodsImg=0x7f0c004f;
         public static final int leftNavi=0x7f0c001a;
         public static final int major=0x7f0c002f;
         public static final int naviStudyType=0x7f0c001b;
@@ -442,11 +453,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int tvApplicantDistance=0x7f0c000b;
         public static final int tvApplicantTime=0x7f0c000c;
         public static final int tvApplicantUserId=0x7f0c000a;
-        public static final int tvContents=0x7f0c0051;
-        public static final int tvDistance=0x7f0c004e;
+        public static final int tvContents=0x7f0c0050;
         public static final int tvGoodsUserid=0x7f0c004d;
-        public static final int tvHashtag=0x7f0c0052;
-        public static final int tvPostingTime=0x7f0c004f;
+        public static final int tvHashtag=0x7f0c0051;
+        public static final int tvPostingTime=0x7f0c004e;
         public static final int tvSearchId=0x7f0c0037;
         public static final int tvSearchPwd=0x7f0c003a;
         public static final int tv_contents=0x7f0c0023;

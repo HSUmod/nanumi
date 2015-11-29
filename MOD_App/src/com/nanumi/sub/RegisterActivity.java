@@ -25,6 +25,7 @@ import org.json.JSONObject;
 import com.nanumi.R;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -327,19 +328,29 @@ public class RegisterActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 		if (requestCode == PICK_FROM_CAMERA) {
-			Bundle extras = data.getExtras();
-			if (extras != null) {
-				Bitmap photo = extras.getParcelable("data");
-				imageToUpload.setImageBitmap(photo);
+			try {
+				Bundle extras = data.getExtras();
+				if (extras != null) {
+					Bitmap photo = extras.getParcelable("data");
+					imageToUpload.setImageBitmap(photo);
+
+				}
+
+			} catch (NullPointerException e) {
 
 			}
+
 		}
 
 		if (requestCode == PICK_FROM_GALLERY) {
-			Bundle extras2 = data.getExtras();
-			if (extras2 != null) {
-				Bitmap photo = extras2.getParcelable("data");
-				imageToUpload.setImageBitmap(photo);
+			try {
+				Bundle extras2 = data.getExtras();
+				if (extras2 != null) {
+					Bitmap photo = extras2.getParcelable("data");
+					imageToUpload.setImageBitmap(photo);
+
+				}
+			} catch (NullPointerException e) {
 
 			}
 		}
@@ -393,5 +404,7 @@ public class RegisterActivity extends Activity {
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		subSpin.setAdapter(adapter);
 	}
+
+
 
 }
