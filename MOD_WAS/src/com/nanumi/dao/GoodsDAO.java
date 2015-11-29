@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.nanumi.dto.AddressDTO;
 import com.nanumi.dto.FileDTO;
 import com.nanumi.dto.GoodsDTO;
 
@@ -33,13 +34,38 @@ public class GoodsDAO {
 		return goodsList;
 	}
 
+	public List<GoodsDTO> searchGoodsByCity(String city) {
+		List<GoodsDTO> goodsList = new ArrayList<GoodsDTO>();
+
+		goodsList = session.selectList("searchGoodsByCity", city);
+
+		return goodsList;
+	}
+
+	public List<GoodsDTO> searchGoodsByDistrict(String district) {
+		List<GoodsDTO> goodsList = new ArrayList<GoodsDTO>();
+
+		goodsList = session.selectList("searchGoodsByDistrict", district);
+
+		return goodsList;
+	}
+
+	public List<GoodsDTO> searchGoodsByAddress(String city, String district) {
+		List<GoodsDTO> goodsList = new ArrayList<GoodsDTO>();
+		AddressDTO obj = new AddressDTO(city, district);
+
+		goodsList = session.selectList("searchGoodsByAddress", obj);
+
+		return goodsList;
+	}
+
 	public FileDTO selectFileInfo(String articleNum) {
 		return session.selectOne("nanumiNS.selectFileInfo", articleNum);
 	}
 
 	public void choice(String articleNum) {
 		GoodsDTO obj = new GoodsDTO(articleNum, "1");
-		
+
 		session.update("choice_goods", obj);
 	}
 }

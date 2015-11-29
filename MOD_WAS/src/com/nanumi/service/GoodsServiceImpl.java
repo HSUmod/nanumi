@@ -59,6 +59,21 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
+	public List<GoodsDTO> searchGoodsByCity(String city) {
+		return goodsDAO.searchGoodsByCity(city);
+	}
+
+	@Override
+	public List<GoodsDTO> searchGoodsByDistrict(String district) {
+		return goodsDAO.searchGoodsByDistrict(district);
+	}
+
+	@Override
+	public List<GoodsDTO> searchGoodsByAddress(String city, String district) {
+		return goodsDAO.searchGoodsByAddress(city, district);
+	}
+
+	@Override
 	public FileDTO selectFileInfo(String articleNum) {
 		return goodsDAO.selectFileInfo(articleNum);
 	}

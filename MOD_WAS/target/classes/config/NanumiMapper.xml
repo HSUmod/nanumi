@@ -88,7 +88,26 @@
 
 	<select id="selectAllGoods" resultType="Goods">
 		select *
-		from goods
+		  from goods
+	</select>
+	
+	<select id="searchGoodsByCity" resultType="Goods">
+	    select *
+	      from goods
+	     where city = #{city}
+	</select>
+	
+	<select id="searchGoodsByDistrict" resultType="Goods">
+	    select *
+	      from goods
+	     where district = #{district}
+	</select>
+	
+	<select id="searchGoodsByAddress" parameterType="Address" resultType="Goods">
+	    select *
+	      from goods
+	     where city = #{city}
+	       and district = #{district}
 	</select>
 
 	<select id="selectFileInfo" resultType="File">

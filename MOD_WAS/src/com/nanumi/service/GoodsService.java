@@ -13,6 +13,12 @@ public interface GoodsService {
 
 	public List<GoodsDTO> readGoods();
 
+	public List<GoodsDTO> searchGoodsByCity(String city);
+
+	public List<GoodsDTO> searchGoodsByDistrict(String district);
+
+	public List<GoodsDTO> searchGoodsByAddress(String city, String district);
+
 	public FileDTO selectFileInfo(String articleNum);
 
 	public List<ApplicationDTO> getMyApplicationList(String userid);
@@ -22,6 +28,6 @@ public interface GoodsService {
 	public void apply(String articleNum, String userid);
 
 	public void applyCancle(String articleNum, String userid);
-	
+
 	public void choice(String articleNum, String userid);
 }

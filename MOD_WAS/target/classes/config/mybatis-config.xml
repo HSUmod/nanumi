@@ -7,6 +7,7 @@
 		<typeAlias alias="User" type="com.nanumi.dto.UserDTO" />
 		<typeAlias alias="City" type="com.nanumi.dto.CityDTO" />
 		<typeAlias alias="District" type="com.nanumi.dto.DistrictDTO" />
+		<typeAlias alias="Address" type="com.nanumi.dto.AddressDTO" />
 		<typeAlias alias="Goods" type="com.nanumi.dto.GoodsDTO" />
 		<typeAlias alias="File" type="com.nanumi.dto.FileDTO" />
 		<typeAlias alias="Application" type="com.nanumi.dto.ApplicationDTO" />

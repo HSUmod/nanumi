@@ -75,6 +75,51 @@ public class GoodsController {
 		pw.close();
 	}
 
+	@RequestMapping(value = "/SearchGoods.do", method = RequestMethod.POST)
+	public void searchGoods(@RequestParam("type") String type, @RequestParam("city") String city, @RequestParam("district") String district, HttpServletResponse res) throws Exception {
+		List<GoodsDTO> goodsList = null;
+		StringBuilder json = new StringBuilder();
+
+		if (type.equals("city")) {
+			goodsList = service.searchGoodsByCity(city);
+		} else if (type.equals("district")) {
+			goodsList = service.searchGoodsByDistrict(district);
+		} else {
+			goodsList = service.searchGoodsByAddress(city, district);
+		}
+
+		if (goodsList.size() > 0) {
+			json.append("{\"result\": \"ok\", ");
+			json.append("\"goods\": [");
+			for (GoodsDTO item : goodsList) {
+				json.append("{");
+				json.append("\"articleNum\": \"" + item.getArticleNum() + "\",");
+				json.append("\"userid\": \"" + item.getUserid() + "\",");
+				json.append("\"city\": \"" + item.getCity() + "\",");
+				json.append("\"district\": \"" + item.getDistrict() + "\",");
+				json.append("\"major\": \"" + item.getMajor() + "\",");
+				json.append("\"sub\": \"" + item.getSub() + "\",");
+				json.append("\"contents\": \"" + item.getContents() + "\",");
+				json.append("\"hashtag\": \"" + item.getHashtag() + "\",");
+				json.append("\"selectionWay\": \"" + item.getSelectionWay() + "\",");
+				json.append("\"state\": \"" + item.getState() + "\",");
+				json.append("\"postingTime\": \"" + item.getPostingTime() + "\",");
+				json.append("\"image\": \"" + getImgData(item.getArticleNum(), item.getUserid()) + "\",");
+				json.append("\"ruserid\": \"" + item.getRuserid() + "\"");
+				json.append("},");
+			}
+			json.delete(json.length() - 1, json.length()); // last comma delete
+			json.append("]}");
+		} else {
+			json.append("{\"result\": \"fail\"}");
+		}
+
+		res.setContentType("application/json; charset=utf-8");
+		PrintWriter pw = res.getWriter();
+		pw.write(json.toString());
+		pw.close();
+	}
+
 	private String getImgData(String articleNum, String userid) throws IOException {
 		FileDTO file = service.selectFileInfo(articleNum);
 		BufferedImage bufferedImage = ImageIO.read(new File("C:\\dev\\file\\" + userid + "\\" + file.getStored_file_name()));
@@ -143,7 +188,7 @@ public class GoodsController {
 		} else {
 			json.append("{\"result\": \"fail\"}");
 		}
-		
+
 		log.info("===========================");
 		log.info(json);
 		log.info("===========================");
@@ -171,7 +216,7 @@ public class GoodsController {
 		pw.write(json);
 		pw.close();
 	}
-	
+
 	@RequestMapping(value = "/Choice.do", method = RequestMethod.POST)
 	public void choice(@RequestParam("articleNum") String articleNum, @RequestParam("userid") String userid, HttpServletResponse res) throws Exception {
 		String json = "{\"result\": \"ok\"}";
