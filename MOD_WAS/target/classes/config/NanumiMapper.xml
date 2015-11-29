@@ -150,7 +150,7 @@
 	<update id="choice_goods" parameterType="Goods">
 	    update goods
 	       set state = #{state}
-	     where articleNum = #{articleNum};
+	     where articleNum = #{articleNum}
 	</update>
 	
 	<update id="choiceCancle_apply" parameterType="Application">
