@@ -44,5 +44,9 @@ public class ApplicationDAO {
 
 		session.update("choiceCancle_apply", obj);
 	}
+	
+	public void donateComplete(String articleNum) {
+		session.delete("donateComplete_apply", articleNum);
+	}
 
 }

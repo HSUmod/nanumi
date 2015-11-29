@@ -32,4 +32,6 @@ public interface GoodsService {
 	public void choice(String articleNum, String userid);
 	
 	public void choiceCancle(String articleNum);
+	
+	public void donateComplete(String articleNum);
 }

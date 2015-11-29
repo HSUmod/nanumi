@@ -74,4 +74,8 @@ public class GoodsDAO {
 
 		session.update("choiceCancle_goods", obj);
 	}
+	
+	public void donateComplete(String articleNum) {
+		session.delete("donateComplete_goods", articleNum);
+	}
 }

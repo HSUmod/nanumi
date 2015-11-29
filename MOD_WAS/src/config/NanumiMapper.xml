@@ -163,6 +163,18 @@
 	<update id="choiceCancle_goods" parameterType="Goods">
 	    update goods
 	       set state = #{state}
-	     where articleNum = #{articleNum};
+	     where articleNum = #{articleNum}
 	</update>
+	
+	<delete id="donateComplete_apply">
+	    delete 
+	      from application_list
+	     where articleNum = #{articleNum}
+	</delete>
+	
+	<delete id="donateComplete_goods">
+	    delete 
+	      from goods
+	     where articleNum = #{articleNum}
+	</delete>
 </mapper>
