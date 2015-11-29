@@ -25,9 +25,11 @@ import org.json.JSONObject;
 import com.nanumi.R;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -48,68 +50,60 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class RegisterActivity extends Activity {
-	private static final int RESULT_LOAD_IMAGE = 1;
-	private static final String SERVER_ADDRESS = "http://113.198.80.223/MOD_WAS/";
+	private static final int PICK_FROM_CAMERA = 1;
+	private static final int PICK_FROM_GALLERY = 2;
 	private String imagePath = null;
 
 	ImageView imageToUpload;
-	Button bUploadImage, registerBtn;
+	Button buttonCamera, buttonGallery, registerBtn;
 	EditText contents, hashtag;
-	Spinner city, district, major, sub;
+	Spinner citySpin, districtSpin, majorSpin, subSpin;
 	String selectionWay = null;
-	TextView userid;
-
+	TextView useridTextView;
 	RadioGroup radioGroup;
 
 	HashMap<String, List<String>> addresses = null;
 	List<String> cities = null;
-
 	HashMap<String, List<String>> categorize = null;
 	ArrayList<String> majors = null;
+	String initCity, initDistrict = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
+
 		imageToUpload = (ImageView) findViewById(R.id.imageToUpload);
-		bUploadImage = (Button) findViewById(R.id.bUploadImage);
+		buttonCamera = (Button) findViewById(R.id.buttonCamera);
+		buttonGallery = (Button) findViewById(R.id.buttonGallery);
 		registerBtn = (Button) findViewById(R.id.registerBtn);
-		userid = (TextView) findViewById(R.id.userid);
+		useridTextView = (TextView) findViewById(R.id.userid);
 		contents = (EditText) findViewById(R.id.contents);
 		hashtag = (EditText) findViewById(R.id.hashtag);
-		city = (Spinner) findViewById(R.id.city);
-		district = (Spinner) findViewById(R.id.district);
-		major = (Spinner) findViewById(R.id.major);
-		sub = (Spinner) findViewById(R.id.sub);
+		citySpin = (Spinner) findViewById(R.id.city);
+		districtSpin = (Spinner) findViewById(R.id.district);
+		majorSpin = (Spinner) findViewById(R.id.major);
+		subSpin = (Spinner) findViewById(R.id.sub);
 
 		radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
 
 		addresses = new HashMap<String, List<String>>();
 		cities = new ArrayList<String>();
-
 		categorize = new HashMap<String, List<String>>();
 		majors = new ArrayList<String>();
 
+		// id_초기화!
 		SharedPreferences pref = getSharedPreferences("Login", 0);
 		String id = pref.getString("uuid", "").split("-")[0];
-		userid.setText(id);
+		useridTextView.setText(id);
 
-		bUploadImage.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(Intent.ACTION_PICK);
-				intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
-				intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-				startActivityForResult(intent, RESULT_LOAD_IMAGE);
-			}
-		});
-
-		AddressRequest request = new AddressRequest();
-
+		// address_초기화
+		AddressRequest address = new AddressRequest();
+		InitAddressRequest initAddress = new InitAddressRequest();
 		try {
-			resultParse(request.execute().get());
+			resultParse(address.execute().get());
+			initAddressParse(initAddress.execute(id).get());
+
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -124,13 +118,14 @@ public class RegisterActivity extends Activity {
 		initCitis(cities);
 		initMajors(majors);
 
-		city.setOnItemSelectedListener(new OnItemSelectedListener() {
+		citySpin.setOnItemSelectedListener(new OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				TextView text = (TextView) view;
 				String city = text.getText().toString();
 
 				initDistricts(addresses.get(city));
+
 			}
 
 			@Override
@@ -140,7 +135,7 @@ public class RegisterActivity extends Activity {
 			}
 		});
 
-		major.setOnItemSelectedListener(new OnItemSelectedListener() {
+		majorSpin.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -159,10 +154,10 @@ public class RegisterActivity extends Activity {
 		registerBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				new UploadImage().execute(userid.getText().toString(), contents.getText().toString(),
-						city.getSelectedItem().toString(), district.getSelectedItem().toString(),
-						major.getSelectedItem().toString(), sub.getSelectedItem().toString(), selectionWay.toString(),
-						hashtag.getText().toString());
+				new UploadImage().execute(useridTextView.getText().toString(), contents.getText().toString(),
+						citySpin.getSelectedItem().toString(), districtSpin.getSelectedItem().toString(),
+						majorSpin.getSelectedItem().toString(), subSpin.getSelectedItem().toString(),
+						selectionWay.toString(), hashtag.getText().toString());
 
 				//
 
@@ -188,6 +183,20 @@ public class RegisterActivity extends Activity {
 				}
 			}
 		});
+
+	}
+
+	private void initAddressParse(String result) throws JSONException {
+		JSONArray jsonArr = new JSONArray(result);
+		for (int i = 0; i < jsonArr.length(); i++) {
+			JSONObject jsonObj = jsonArr.getJSONObject(i);
+
+			initCity = jsonObj.getString("city").toString().trim();
+			initDistrict = jsonObj.getString("district").toString().trim();
+
+			Log.d("start", initCity);
+			Log.d("start", initDistrict);
+		}
 	}
 
 	private void resultParse(String result) throws JSONException {
@@ -213,6 +222,56 @@ public class RegisterActivity extends Activity {
 		}
 	}
 
+	public void CameraAndGallery(View v) {
+		switch (v.getId()) {
+		case R.id.buttonCamera:
+
+			Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+			intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI.toString());
+			// ******** code for crop image
+			intentCamera.putExtra("crop", "true");
+			intentCamera.putExtra("aspectX", 0);
+			intentCamera.putExtra("aspectY", 0);
+			intentCamera.putExtra("outputX", 200);
+			intentCamera.putExtra("outputY", 150);
+
+			try {
+
+				intentCamera.putExtra("return-data", true);
+				startActivityForResult(intentCamera, PICK_FROM_CAMERA);
+
+			} catch (ActivityNotFoundException e) {
+				// Do nothing for now
+			}
+
+			break;
+		case R.id.buttonGallery:
+			Intent intentGallery = new Intent();
+			// call android default gallery
+			intentGallery.setType("image/*");
+			intentGallery.setAction(Intent.ACTION_GET_CONTENT);
+			// ******** code for crop image
+			intentGallery.putExtra("crop", "true");
+			intentGallery.putExtra("aspectX", 0);
+			intentGallery.putExtra("aspectY", 0);
+			intentGallery.putExtra("outputX", 200);
+			intentGallery.putExtra("outputY", 150);
+
+			try {
+
+				intentGallery.putExtra("return-data", true);
+				startActivityForResult(Intent.createChooser(intentGallery, "Complete action using"), PICK_FROM_GALLERY);
+
+			} catch (ActivityNotFoundException e) {
+				// Do nothing for now
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
 	private class UploadImage extends AsyncTask<String, Void, Void> {
 		public UploadImage() {
 			super();
@@ -221,11 +280,8 @@ public class RegisterActivity extends Activity {
 		@Override
 		protected Void doInBackground(String... params) {
 			HttpClient client = new DefaultHttpClient();
-			String url = SERVER_ADDRESS + "WritingGoods.do";
+			String url = "http://113.198.80.223/MOD_WAS/WritingGoods.do";
 			HttpPost post = new HttpPost(url);
-			Log.d("===================", "==========================");
-			Log.d("imagePath", imagePath);
-			Log.d("===================", "==========================");
 			File file = new File(imagePath);
 			FileBody bin = new FileBody(file);
 			MultipartEntityBuilder multipart = MultipartEntityBuilder.create();
@@ -268,15 +324,24 @@ public class RegisterActivity extends Activity {
 
 	}
 
-	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
-		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
-			Uri selectedImage = data.getData();
-			imagePath = getImagePath(data.getData());
-			imageToUpload.setImageURI(selectedImage);
 
+		if (requestCode == PICK_FROM_CAMERA) {
+			Bundle extras = data.getExtras();
+			if (extras != null) {
+				Bitmap photo = extras.getParcelable("data");
+				imageToUpload.setImageBitmap(photo);
+
+			}
+		}
+
+		if (requestCode == PICK_FROM_GALLERY) {
+			Bundle extras2 = data.getExtras();
+			if (extras2 != null) {
+				Bitmap photo = extras2.getParcelable("data");
+				imageToUpload.setImageBitmap(photo);
+
+			}
 		}
 	}
 
@@ -289,32 +354,44 @@ public class RegisterActivity extends Activity {
 	}
 
 	public void initCitis(List<String> obj) {
+
 		ArrayAdapter<String> adapter;
 		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, obj);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		city.setAdapter(adapter);
+		citySpin.setAdapter(adapter);
 
+		for (int i = 0; i < obj.size(); i++) {
+			if (obj.get(i).equals(initCity)) {
+				citySpin.setSelection(i);
+			}
+		}
 	}
 
 	public void initDistricts(List<String> districts) {
+
 		ArrayAdapter<String> adapter;
 		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, districts);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		district.setAdapter(adapter);
+		districtSpin.setAdapter(adapter);
+		for (int i = 0; i < districts.size(); i++) {
+			if (districts.get(i).equals(initDistrict)) {
+				districtSpin.setSelection(i);
+			}
+		}
 	}
 
 	public void initMajors(List<String> obj) {
 		ArrayAdapter<String> adapter;
 		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, obj);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		major.setAdapter(adapter);
+		majorSpin.setAdapter(adapter);
 	}
 
 	public void initSubs(List<String> subs) {
 		ArrayAdapter<String> adapter;
 		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, subs);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		sub.setAdapter(adapter);
+		subSpin.setAdapter(adapter);
 	}
 
 }
