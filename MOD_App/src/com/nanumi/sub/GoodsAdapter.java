@@ -20,10 +20,12 @@ import org.json.JSONObject;
 
 import sj.ApplicationsDTO;
 import sj.ChooseActivity;
+import sj.ProgressOfDonationActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,11 +105,11 @@ public class GoodsAdapter extends BaseAdapter {
 		if (!uuid.equals("empty")) {
 			String myId = uuid.split("-")[0];
 			if (userId.equals(myId)) { // 내가 올린 글
-				if (state == GoodsDTO.NO_CHOOSE) { // state == 0
+				if (state == 0) { // state == 0
 					apply.setText("채택하기");
-				} else if (state == GoodsDTO.CHOOSE) { // state == 1
+				} else if (state == 1) { // state == 1
 					apply.setText("나눔 진행중");
-				} else if (state == GoodsDTO.SHARE_FINISH) { // state == 2
+				} else if (state == 2) { // state == 2
 					apply.setText("나눔 완료");
 				}
 				apply.setOnClickListener(new View.OnClickListener() {
@@ -122,17 +124,26 @@ public class GoodsAdapter extends BaseAdapter {
 							context.startActivity(intent);
 						} else {
 							// TODO 나눔 진행 상태 보기 페이지 ?
-							Intent intent = new Intent();
-							intent.putExtra("flag",0); //주는 사람
-							intent.putExtra("senderId", goodsList.get(position).getUserid());
-							intent.putExtra("contents", goodsList.get(position).getContents());
-							for(int i = 0 ; i < applicationList.size() ; i++){
-								if(applicationList.get(i).getArticleNum().equals(articleNum)&&applicationList.get(i).getState().equals("1")) {
-									intent.putExtra("receiverId",applicationList.get(i).getUserid());
+							Intent intent = new Intent(context,
+									ProgressOfDonationActivity.class);
+							intent.putExtra("flag", 0); // 주는 사람
+							intent.putExtra("senderId", goodsList.get(position)
+									.getUserid());
+							intent.putExtra("contents", goodsList.get(position)
+									.getContents());
+							intent.putExtra("articleNum",
+									goodsList.get(position).getArticleNum());
+							for (int i = 0; i < applicationList.size(); i++) {
+								if (applicationList.get(i).getArticleNum()
+										.equals(articleNum)
+										&& applicationList.get(i).getState()
+												.equals("1")) {
+									intent.putExtra("receiverId",
+											applicationList.get(i).getUserid());
+									break;
 								}
-							}//여기서 예외 발생할 가능성은 없긴 한데 혹시 있을지도 모름
-							
-							
+							}// 여기서 예외 발생할 가능성은 없긴 한데 혹시 있을지도 모름
+
 							context.startActivity(intent);
 						}
 					}
@@ -175,23 +186,34 @@ public class GoodsAdapter extends BaseAdapter {
 							}
 
 						} else if (btn.getText().toString().equals("나눔 진행중")) {
-							if (goodsList.get(position).getRuserid()
-									.equals(uuid.split("-")[0])) { 
-								// 내가 나눔 대상자인 경우
-								Intent intent = new Intent();
-								intent.putExtra("flag",1); //받는 사람
-								intent.putExtra("senderId", goodsList.get(position).getUserid());
-								intent.putExtra("contents", goodsList.get(position).getContents());
-								for(int i = 0 ; i < applicationList.size() ; i++){
-									if(applicationList.get(i).getArticleNum().equals(articleNum)&&applicationList.get(i).getState().equals("1")) {
-										intent.putExtra("receiverId",applicationList.get(i).getUserid());
-									}
-								}//여기서 예외 발생할 가능성은 없긴 한데 혹시 있을지도 모름
-								
-								context.startActivity(intent);
-							}else {
-								//btn.setEnabled(false);
+
+							for (int i = 0; i < applicationList.size(); i++) {
+								if (applicationList.get(i).getArticleNum()
+										.equals(articleNum)
+										&& applicationList.get(i).getUserid()
+												.equals(uuid.split("-")[0])) {
+									// 내가 나눔 대상자인 경우
+									Intent intent = new Intent(context,
+											ProgressOfDonationActivity.class);
+									intent.putExtra("flag", 1); // 받는 사람
+									intent.putExtra("senderId",
+											goodsList.get(position).getUserid());
+									intent.putExtra("contents",
+											goodsList.get(position)
+													.getContents());
+									intent.putExtra("articleNum", goodsList
+											.get(position).getArticleNum());
+
+									intent.putExtra("receiverId",
+											uuid.split("-")[0]);
+
+									context.startActivity(intent);
+
+								} else {
+									// btn.setEnabled(false);
+								}
 							}
+
 						} else if (btn.getText().toString().equals("나눔 완료")) {
 
 						}

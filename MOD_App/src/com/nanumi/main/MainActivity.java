@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 import org.apache.http.HttpEntity;
@@ -20,15 +19,12 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.nanumi.R;
 import com.nanumi.sub.AddressRequest;
-import com.nanumi.sub.GoodsDTO;
-import com.nanumi.sub.GoodsFragment;
 import com.nanumi.sub.LoginActivity;
 import com.nanumi.sub.RegisterActivity;
 import com.viewpagerindicator.UnderlinePageIndicator;

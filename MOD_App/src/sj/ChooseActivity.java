@@ -67,30 +67,31 @@ public class ChooseActivity extends Activity {
 			e.printStackTrace();
 		}
 		adapter = new ApplicationAdapter(applicationList, articleNum);
-//		listView.setOnItemClickListener(new OnItemClickListener() {
-//			@Override
-//			public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
-//				AlertDialog.Builder dlg = new AlertDialog.Builder(getApplicationContext());
-//				dlg.setTitle( + " 님을 채택하시겠습니까?"); //요기요
-//				dlg.setPositiveButton("네",
-//						new DialogInterface.OnClickListener() {
-//							@Override
-//							public void onClick(DialogInterface dialog,
-//									int which) {
-//								SendReq sendReq = new SendReq();
-//								if (!sendReq.execute(applicationList.get(position).getUserid(), articleNum).equals("fail")) {
-//									finish();
-//								}else {
-//									//채택을 했는데 서버에 어떠한 오류가 발생해서 fail이 왔을 경우 예외처리
-//								}
-//							}
-//						});
-//				dlg.setNegativeButton("아니요", null);
-//				dlg.show();
-//
-//			}
-//		}); //TODO
 		listView.setAdapter(adapter);
+		
+		listView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
+				AlertDialog.Builder dlg = new AlertDialog.Builder(ChooseActivity.this);
+				dlg.setTitle(applicationList.get(position).getUserid() + " 님을 채택하시겠습니까?");
+				dlg.setPositiveButton("네",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) 
+							{
+								SendReq sendReq = new SendReq();
+								if (!sendReq.execute(applicationList.get(position).getUserid(), articleNum).equals("fail")) {
+									finish();
+								}else {
+									//채택을 했는데 서버에 어떠한 오류가 발생해서 fail이 왔을 경우 예외처리
+								}
+							}
+						});
+				dlg.setNegativeButton("아니요", null);
+				dlg.show();
+			}
+		}); //TODO
 	}
 
 	private void resultParse(String result) throws Exception {
@@ -191,7 +192,6 @@ public class ChooseActivity extends Activity {
 				}
 
 				try {
-					Log.d("sj", json.toString());
 					if (json.getString("result").equals("ok")) {
 						result = "ok";
 					} else {
