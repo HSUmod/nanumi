@@ -30,4 +30,6 @@ public interface GoodsService {
 	public void applyCancle(String articleNum, String userid);
 
 	public void choice(String articleNum, String userid);
+	
+	public void choiceCancle(String articleNum);
 }

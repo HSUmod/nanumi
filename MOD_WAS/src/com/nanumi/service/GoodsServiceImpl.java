@@ -103,4 +103,10 @@ public class GoodsServiceImpl implements GoodsService {
 		applicationDAO.choice(articleNum, userid);
 		goodsDAO.choice(articleNum);
 	}
+	
+	@Override
+	public void choiceCancle(String articleNum) {
+		applicationDAO.choiceCancle(articleNum);
+		goodsDAO.choiceCancle(articleNum);
+	}
 }

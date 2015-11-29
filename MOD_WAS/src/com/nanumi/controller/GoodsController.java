@@ -229,4 +229,16 @@ public class GoodsController {
 		pw.close();
 	}
 
+	@RequestMapping(value = "/CancleChoice.do", method = RequestMethod.POST)
+	public void choiceCancle(@RequestParam("articleNum") String articleNum, HttpServletResponse res) throws Exception {
+		String json = "{\"result\": \"ok\"}";
+
+		service.choiceCancle(articleNum);
+
+		res.setContentType("application/json; charset=utf-8");
+		PrintWriter pw = res.getWriter();
+		pw.write(json);
+		pw.close();
+	}
+
 }

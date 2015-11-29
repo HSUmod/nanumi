@@ -152,4 +152,17 @@
 	       set state = #{state}
 	     where articleNum = #{articleNum};
 	</update>
+	
+	<update id="choiceCancle_apply" parameterType="Application">
+	    update application_list
+	       set state = #{state}
+	     where articleNum = #{articleNum}
+	       and state != 0
+	</update>
+	
+	<update id="choiceCancle_goods" parameterType="Goods">
+	    update goods
+	       set state = #{state}
+	     where articleNum = #{articleNum};
+	</update>
 </mapper>

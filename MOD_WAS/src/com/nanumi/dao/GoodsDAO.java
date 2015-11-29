@@ -68,4 +68,10 @@ public class GoodsDAO {
 
 		session.update("choice_goods", obj);
 	}
+	
+	public void choiceCancle(String articleNum) {
+		GoodsDTO obj = new GoodsDTO(articleNum, "0");
+
+		session.update("choiceCancle_goods", obj);
+	}
 }

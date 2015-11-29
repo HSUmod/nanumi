@@ -7,6 +7,11 @@ public class ApplicationDTO {
 
 	}
 
+	public ApplicationDTO(String articleNum, String state) {
+		this.articleNum = articleNum;
+		this.state = state;
+	}
+
 	public ApplicationDTO(String articleNum, String userid, String state) {
 		this.articleNum = articleNum;
 		this.userid = userid;
