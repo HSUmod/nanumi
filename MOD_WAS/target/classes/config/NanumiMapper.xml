@@ -73,7 +73,7 @@
 		#{contents}, #{hashtag}, #{selectionWay}, sysdate)
 	</insert>
 
-	<select id="getUserAddress">
+	<select id="getUserAddress" resultType="Address">
 		select city, district
 		from member
 		where userid = #{userid}
